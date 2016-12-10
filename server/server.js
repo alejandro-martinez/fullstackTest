@@ -1,11 +1,21 @@
 "use strict";
 
-const http = require("http");
+var express = require('express');
+var app = express();
+var routes = require('./controllers/index');
+var bodyParser = require('body-parser');
 
-const server = http.createServer(function(request, res) {
-	res.statusCode = 200;
-	res.setHeader('Content-Type', 'text/plain');
-	res.end('Hello World\n');
-}).listen(8000, function() {
+// Express config
+app.use( express.static( __dirname + '/../client'));
+app.use( bodyParser.json() );
+app.use( bodyParser.urlencoded({ extended: false }) );
+
+// Server 
+app.listen( 8000, function() {
 	console.log("Running server on localhost:8000")	
 });
+
+// REST ROUTES
+require('./controllers/index')( app );
+require('./controllers/client')( app );
+require('./controllers/provider')( app );
