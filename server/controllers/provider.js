@@ -8,11 +8,15 @@ module.exports = function( app ) {
 	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
 	});
 
-	app.post('/providers/delete/:id', function(req, res, next) {
+	app.delete('/providers/:id', function(req, res, next) {
 	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
 	});
 
-	app.post('/providers/save/:id', function(req, res, next) {
+	app.post('/providers/:id', function(req, res, next) {
+	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
+	});
+
+	app.put('/providers/:id', function(req, res, next) {
 	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
 	});
 }
