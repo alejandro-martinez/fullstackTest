@@ -6,7 +6,7 @@ var routes = require('./controllers/index');
 var bodyParser = require('body-parser');
 
 // Express config
-app.use( express.static( __dirname + '/../client'));
+app.use( express.static( __dirname + '/../frontend'));
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded({ extended: false }) );
 

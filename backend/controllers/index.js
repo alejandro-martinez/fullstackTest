@@ -1,6 +1,6 @@
 module.exports = function( app ) {
 	
 	app.get('/', function(req, res, next) {
-	  res.render('index.html', { title: 'Fullstack test' });
+	  res.sendFile('index.html');
 	});
 }

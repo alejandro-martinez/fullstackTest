@@ -1,7 +1,10 @@
 "use strict";
 
 angular.module('FullstackApp', [
-  'FullstackApp.clients',
-  'FullstackApp.providers',
+  'FullstackApp.Client',
+  'FullstackApp.Provider',
   'ngRoute'
-]);
+])
+.controller('MainCtrl', ['$scope', function( $scope ) {
+
+}])
