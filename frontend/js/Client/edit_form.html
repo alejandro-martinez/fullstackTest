@@ -1,4 +1,4 @@
-<h2>{{ vm.formTitle }}</h2>
+<h2>{{ ( vm.client.id ) ? 'Edit' : 'New' }} Client</h2>
 
 <form novalidate>
 	<label>Name:
@@ -8,14 +8,14 @@
 	<input type="email" ng-model="vm.client.email" />
 	</label>
 	<label>Phone:
-	<input type="phone" />
+	<input type="phone" ng-model="vm.client.phone" />
 	</label>
 </form>
 
 <div class="formActions">
-	<button ng-if="vm.client.id" class="red">Delete client</button>
+	<button ng-if="vm.client.id" ng-click="vm.deleteClient()" class="red">Delete client</button>
 	<button ng-click="vm.toggleModal()">Cancel</button>
-	<button ng-click="vm.updateClient()">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
+	<button ng-click="vm.saveClient()">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
 </div>
 
 

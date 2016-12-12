@@ -12,14 +12,31 @@ angular.module('FullstackApp.Client', ['ngRoute'])
 		}).
 		otherwise({ redirectTo: '/clients' });
 }])
+.factory('ClientFct', function() {
+	
+	var clientFct = {
+		new: function() {
+
+			var model = {
+				id: null,
+				name: "",
+				phone:"",
+				providers:[]
+			}
+
+			return model;	
+		}
+	}
+
+	return clientFct;
+})
 .service('ClientSvc', [ '$http', function( $http ) {
 	
 	this.getAll = function() { return $http.get('/clients')	}
-	this.delete = function() { return $http.delete('/clients/:id') }
-	this.update = function() { return $http.put('/client/:id') }
-	this.create = function() { return $http.post('/clients') }
+	this.delete = function( client ) { return $http.delete('/clients/:id', client) }
+	this.save = function( client ) { return $http.post('/clients/:id', client) }
 }])
-.controller('ClientCtrl', [ '$scope', 'ClientSvc', function( $scope, ClientSvc ) {
+.controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct', function( $scope, ClientSvc, ClientFct ) {
 	
 	var vm = this;
 	vm.clients = [];
@@ -31,14 +48,11 @@ angular.module('FullstackApp.Client', ['ngRoute'])
 
 	vm.addClient = function() {
 		vm.toggleModal();
-		vm.modalShown = !vm.modalShown;
-		vm.formTitle = "New Client";
+		vm.client = ClientFct.new();
 	}
 
 	vm.editClient = function( client ) {
 		vm.toggleModal();
-		vm.formTitle = "Edit Client";
-
 		vm.client = client;
 	}
 
@@ -48,9 +62,11 @@ angular.module('FullstackApp.Client', ['ngRoute'])
 		});
 	}
 
-	vm.updateClient = function() {
-		ClientSvc.update( vm.client ).then(function( response ) {
-			console.log(response.data)
+	vm.saveClient = function() {
+		ClientSvc.save( vm.client ).then(function( response ) {
+			if ( response.data.created ) vm.clients.push( response.data.model );
+
+			vm.toggleModal();
 		});
 	}
 

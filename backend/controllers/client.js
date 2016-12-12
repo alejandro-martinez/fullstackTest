@@ -15,14 +15,17 @@ module.exports = function( app ) {
 	});
 
 	app.delete('/clients/:id', function(req, res, next) {
-	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
+		models.client.destroy({where: {}}).then(function () {
+			res.json(true)
+		});
 	});
 
+	// current
 	app.post('/clients/:id', function(req, res, next) {
-	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
-	});
-
-	app.put('/clients/:id', function(req, res, next) {
-	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
+		models.client
+			.findOrCreate({ where: { id: req.body.id }, defaults: req.body })
+			.spread( function( client, created ) {
+				res.json({ created: created, model: client.get({ plain: true }) })
+		});
 	});
 }
