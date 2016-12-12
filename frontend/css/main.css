@@ -1,3 +1,9 @@
+label {
+	display:block;
+}
+form label {
+	margin-bottom:20px;
+}
 .absoluteCenter {
 	position: absolute;
 	width: 50%;

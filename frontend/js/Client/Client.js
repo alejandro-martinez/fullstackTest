@@ -15,21 +15,46 @@ angular.module('FullstackApp.Client', ['ngRoute'])
 .service('ClientSvc', [ '$http', function( $http ) {
 	
 	this.getAll = function() { return $http.get('/clients')	}
-	this.getById = function() { return $http.get('/clients')	}
+	this.delete = function() { return $http.delete('/clients/:id') }
+	this.update = function() { return $http.put('/client/:id') }
+	this.create = function() { return $http.post('/clients') }
 }])
 .controller('ClientCtrl', [ '$scope', 'ClientSvc', function( $scope, ClientSvc ) {
 	
 	var vm = this;
-	vm.modalShown = false;
 	vm.clients = [];
 
+	// Modal wiwndow config
+	vm.modalShown = false;
+	vm.modalContent = "js/Client/edit_form.html"
+	vm.toggleModal = function() { vm.modalShown = !vm.modalShown }
+
 	vm.addClient = function() {
-		console.log("adding")
+		vm.toggleModal();
 		vm.modalShown = !vm.modalShown;
+		vm.formTitle = "New Client";
+	}
+
+	vm.editClient = function( client ) {
+		vm.toggleModal();
+		vm.formTitle = "Edit Client";
+
+		vm.client = client;
+	}
+
+	vm.deleteClient = function() {
+		ClientSvc.delete( vm.client ).then(function( response ) {
+			console.log(response.data)
+		});
+	}
+
+	vm.updateClient = function() {
+		ClientSvc.update( vm.client ).then(function( response ) {
+			console.log(response.data)
+		});
 	}
 
 	ClientSvc.getAll().then( function( clients ) {
-		console.log(clients.data)
 		vm.clients = clients.data;
 	});
 }]);

@@ -17,10 +17,12 @@
 			<td> {{ c.email }} </td>
 			<td> {{ c.phone }} </td>
 			<td> {{ c.phone }} </td>
-			<td> <a href="clients/{{ c.id }}"> Edit </a></td>
+			<td> <button ng-click="vm.editClient( c )"> Edit </button> </td>
 		</tr>
 		</table>
 	</div>
 
-	<modal-window show='vm.modalShown'></modal-window>
+	<modal-window show='vm.modalShown' title="vm.modalTitle">
+		<div ng-include="vm.modalContent">
+	</modal-window>
 </div>
