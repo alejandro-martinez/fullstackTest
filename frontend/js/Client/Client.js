@@ -20,15 +20,16 @@ angular.module('FullstackApp.Client', ['ngRoute'])
 .controller('ClientCtrl', [ '$scope', 'ClientSvc', function( $scope, ClientSvc ) {
 	
 	var vm = this;
+	vm.modalShown = false;
 	vm.clients = [];
 
 	vm.addClient = function() {
-
+		console.log("adding")
+		vm.modalShown = !vm.modalShown;
 	}
 
 	ClientSvc.getAll().then( function( clients ) {
 		console.log(clients.data)
 		vm.clients = clients.data;
 	});
-	
 }]);

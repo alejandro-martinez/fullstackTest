@@ -1,3 +1,12 @@
+.absoluteCenter {
+	position: absolute;
+	width: 50%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
+}
 table {
 	border-width: 1px;
 	border-color: #666666;
@@ -17,3 +26,38 @@ table td {
 	border-color: #666666;
 	background-color: #ffffff;
 }
+
+/* INIT - MODAL WINDOW */
+.ng-modal-overlay {
+	position:absolute;
+	z-index:2;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color:#000000;
+	opacity: 0.8;
+}
+.ng-modal-dialog {
+	z-index:3;
+	width: 80%;
+	height: 73%;
+	background-color: #fff;
+	box-shadow: 4px 4px 80px #000;
+}
+.ng-modal-dialog-content {
+	padding:10px;
+	text-align: left;
+}
+.ng-modal-close {
+	position: absolute;
+	top: 3px;
+	right: 5px;
+	padding: 5px;
+	cursor: pointer;
+	font-size: 120%;
+	display: inline-block;
+	font-weight: bold;
+	font-family: 'arial', 'sans-serif';
+}
+/* END - MODAL WINDOW */
