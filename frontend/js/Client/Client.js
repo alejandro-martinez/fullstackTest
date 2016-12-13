@@ -75,6 +75,15 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		console.log("add client prov")
 	}
 
+	vm.isClientProvider = function(id) {
+		if ( vm.client ) {
+			var is = vm.client.providers.filter(function(p){
+				return p.id === id;
+			});
+			return is.length;
+		}
+	}
+
 	ClientSvc.getAll().then( function( res ) {
 		vm.clients = res.data;
 	});

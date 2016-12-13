@@ -22,7 +22,10 @@
 				<ul class="clientProviders">
 					<li ng-repeat="p in providers">
 						<div>
-							<input type="checkbox" id="checkbox-1-1" class="regular-checkbox" /><label for="checkbox-1-1"></label>
+							<input type="checkbox" 
+									ng-checked="vm.isClientProvider(p.id)"
+									class="regular-checkbox" />
+							<label for="checkbox-1-1"></label>
 							<div class="tag">{{p.name}}</div>
 						</div>
 						<a class="icon edit"></a>
