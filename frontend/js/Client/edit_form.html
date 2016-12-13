@@ -8,7 +8,22 @@
 	<input type="email" ng-model="vm.client.email" />
 	</label>
 	<label>Phone:
-	<input type="phone" ng-model="vm.client.phone" />
+	<input type="text" ng-model="vm.client.phone" />
+	</label>
+	<label>Providers:
+	<input type="text" />
+	<button ng-click="vm.addClientProvider">Add provider</button>
+
+	<ul class="clientProviders">
+	<li ng-repeat="p in vm.client.providers">
+		<label>
+			<input id="checkSlave" type="checkbox" ng-checked="master">
+			<span>{{ p.name }}</span>
+			<a class="icon edit"></a>
+			<a class="icon delete"></a>
+		</label>
+	</li>
+	</ul>
 	</label>
 </form>
 
@@ -17,5 +32,3 @@
 	<button ng-click="vm.toggleModal()">Cancel</button>
 	<button ng-click="vm.saveClient()">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
 </div>
-
-

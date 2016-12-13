@@ -8,7 +8,7 @@ var bodyParser = require('body-parser');
 // Express config
 app.use( express.static( __dirname + '/../frontend'));
 app.use( bodyParser.json() );
-app.use( bodyParser.urlencoded({ extended: false }) );
+app.use( bodyParser.urlencoded({ extended: true }) );
 
 // Server 
 app.listen( 8000, function() {

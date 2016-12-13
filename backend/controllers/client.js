@@ -3,9 +3,18 @@ var models  = require('../models/index');
 module.exports = function( app ) {
 	
 	app.get('/clients', function(req, res, next) {
-		models.client.findAll().then(function( clients ) {
+		
+		var onFind = function( clients ) {
 			res.json( clients );	
-		});
+		};
+
+		var params = {
+			include: [{ 
+				model: models.provider,
+				attributes: ['id', 'name']
+			}]
+		}
+		models.client.findAll( params ).then( onFind );		
 	});
 
 	app.get('/clients/:id', function(req, res, next) {
