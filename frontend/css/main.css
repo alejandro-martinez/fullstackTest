@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	padding:10px;
 }
 ol, ul {
 	list-style: none;
@@ -48,9 +49,17 @@ table {
 }
 label {
 	display:block;
+	font-weight:bold;
 }
 form label {
 	margin-bottom:20px;
+}
+h1 {
+	font-size:1.4em;	
+}
+h2 {
+	font-size:1.3em;
+	color:blue;
 }
 .absoluteCenter {
 	position: absolute;
@@ -63,24 +72,35 @@ form label {
 }
 table {
 	border-width: 1px;
-	border-color: #666666;
+	border-color: #666;
 	border-collapse: collapse;
+	width: 100%;
 }
 table th {
 	border-width: 1px;
 	padding: 8px;
 	border-style: solid;
-	border-color: #666666;
-	background-color: #dedede;
+	border-color: #666;
+	background-color: #efe;
+	font-weight:bold;
 }
 table td {
 	border-width: 1px;
 	padding: 8px;
 	border-style: solid;
-	border-color: #666666;
+	border-color: #666;
 	background-color: #ffffff;
 }
+table td:last-child {
+	width:20px;	
+}
 
+table td:last-child button{
+	background:none;
+	border:none;
+	color:blue;
+	text-decoration:underline;
+}
 /* INIT - MODAL WINDOW */
 .ng-modal-overlay {
 	position:absolute;
@@ -95,12 +115,10 @@ table td {
 .ng-modal-dialog {
 	z-index:3;
 	width: 80%;
-	height: 73%;
 	background-color: #fff;
 	box-shadow: 4px 4px 80px #000;
 }
 .ng-modal-dialog-content {
-	padding:10px;
 	text-align: left;
 }
 .ng-modal-close {
@@ -115,3 +133,84 @@ table td {
 	font-family: 'arial', 'sans-serif';
 }
 /* END - MODAL WINDOW */
+
+button {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px; 
+	border-radius: 3px;
+	border:1px solid #eee;
+	padding:10px; 
+}
+button.red {
+	color:#fff;
+	background:red;
+}
+.container {
+	background: #eee;
+	padding:10px;
+	margin:20px 10px;
+}
+.container h1, .container button {
+	display:inline-block;
+}
+.container button {
+	float:right;
+}
+.container table {
+	margin-top:20px;
+}
+.ng-modal h2 {
+	padding:10px 20px;
+	width:100%;
+	border-bottom:1px solid #000;
+}
+.ng-modal-dialog-content form {
+	margin:20px;
+}
+
+.ng-modal-dialog-content form + div {
+	margin:20px;
+}
+form {
+	overflow:hidden;
+}
+form .inputContainer {
+	position:relative;
+	margin:0 auto;
+	text-align:center;
+}
+form .inputContainer label,
+form .inputContainer input {
+	display:inline-block;
+}
+form .inputContainer label {
+	float:left;
+}
+.editContainer .formActions {
+	overflow:hidden;
+}
+.editContainer .formActions button{
+	float:right;
+}
+.editContainer .formActions button:first-child{
+	float:left;
+}
+input[type="text"],
+input[type="email"] {
+	padding:15px;
+	border:1px solid #000;
+}
+.inputContainer label {
+	width:20%;
+	text-align:left;
+}
+.inputContainer input {
+	width:70%;
+	text-align:left;
+}
+.inputContainer > div input {
+	width:40%;
+}
+.inputContainer > div button {
+	width:30%;
+}

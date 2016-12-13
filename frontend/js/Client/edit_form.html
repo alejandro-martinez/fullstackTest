@@ -1,34 +1,43 @@
 <h2>{{ ( vm.client.id ) ? 'Edit' : 'New' }} Client</h2>
 
-<form novalidate>
-	<label>Name:
-	<input type="text" ng-model="vm.client.name" />
-	</label>
-	<label>Email:
-	<input type="email" ng-model="vm.client.email" />
-	</label>
-	<label>Phone:
-	<input type="text" ng-model="vm.client.phone" />
-	</label>
-	<label>Providers:
-	<input type="text" ng-model="vm.newProvider.name" />
-	<button ng-click="vm.addClientProvider()">Add provider</button>
-
-	<ul class="clientProviders">
-	<li ng-repeat="p in vm.client.providers">
-		<label>
-			<input id="checkSlave" type="checkbox" ng-checked="master">
-			<span>{{ p.name }}</span>
-			<a class="icon edit"></a>
-			<a class="icon delete"></a>
+<div class="editContainer">
+	<form novalidate>
+		<div class="inputContainer">
+			<label>Name:</label>
+			<input type="text" ng-model="vm.client.name" />
+		</div>
+		<div class="inputContainer">
+			<label>Email:</label>
+			<input type="email" ng-model="vm.client.email" />
+		</div>
+		<div class="inputContainer">
+			<label>Phone:</label>
+			<input type="text" ng-model="vm.client.phone" />
+		</div>
+		<div class="inputContainer">
+			<label>Providers:</label>
+			<div>
+				<input type="text" ng-model="vm.newProvider.name" />
+				<button ng-click="vm.addClientProvider()">Add provider</button>
+				
+				<ul class="clientProviders">
+					<li ng-repeat="p in vm.client.providers">
+						<label>
+							<input id="checkSlave" type="checkbox" ng-checked="master">
+							<span>{{ p.name }}</span>
+							<a class="icon edit"></a>
+							<a class="icon delete"></a>
+						</label>
+					</li>
+				</ul>
+			</div>
+		</div>
 		</label>
-	</li>
-	</ul>
-	</label>
-</form>
+	</form>
 
-<div class="formActions">
-	<button ng-if="vm.client.id" ng-click="vm.deleteClient()" class="red">Delete client</button>
-	<button ng-click="vm.toggleModal()">Cancel</button>
-	<button ng-click="vm.saveClient()">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
+	<div class="formActions">
+		<button ng-if="vm.client.id" ng-click="vm.deleteClient()" class="red">Delete client</button>
+		<button ng-click="vm.saveClient()">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
+		<button ng-click="vm.toggleModal()">Cancel</button>
+	</div>
 </div>
