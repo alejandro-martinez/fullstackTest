@@ -16,20 +16,18 @@
 		</div>
 		<div class="inputContainer">
 			<label>Providers:</label>
-			<div>
-				<input type="text" ng-model="vm.newProvider.name" />
-				<button ng-click="vm.addClientProvider()">Add provider</button>
-				
-				<ul class="clientProviders">
-					<li ng-repeat="p in vm.client.providers">
-						<label>
-							<input id="checkSlave" type="checkbox" ng-checked="master">
-							<span>{{ p.name }}</span>
-							<a class="icon edit"></a>
-							<a class="icon delete"></a>
-						</label>
-					</li>
-				</ul>
+			<input type="text" ng-model="vm.newProvider.name" /> 
+			<button ng-click="vm.addClientProvider()">Add provider</button>
+			
+			<ul class="clientProviders" ng-controller="ProviderCtrl">
+				<li ng-repeat="p in providers">
+					<input type="checkbox" ng-checked="master">
+					<span>{{ p.name }}</span>
+					<a class="icon edit"></a>
+					<a class="icon delete"></a>
+				</li>
+			</ul>
+		
 			</div>
 		</div>
 		</label>

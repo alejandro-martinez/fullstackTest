@@ -1,20 +1,6 @@
 "use strict";
-
-angular.module('FullstackApp.Provider', ['ngRoute'])
-.config([ '$routeProvider', function( $routeProvider ) {
-	
-	$routeProvider.
-		when("/Providers", 	{ 
-			templateUrl: "js/Provider/index.html", 
-			controller: "ProviderCtrl" 
-		}).
-		when("/Providers/:id",{ 
-			templateUrl: "Provider/edit.html", 	
-			controller: "ProviderCtrl" 
-		}).
-		otherwise({ redirectTo: '/Providers' });
-}])
-.service('ProviderFct', [function() {
+angular.module('FullstackApp.Provider',[])
+.factory('ProviderFct', [function() {
 
 	var providerFct = {
 		new: function() {
@@ -30,13 +16,18 @@ angular.module('FullstackApp.Provider', ['ngRoute'])
 
 	return providerFct;
 }])
-.controller('ProviderCtrl', [ '$scope', 'ProviderSvc', function( $scope, ProviderSvc ) {
-	
-	var vm = this;
-	vm.Providers = [];
+.service('ProviderSvc', ['$http', function( $http ) {
 
-	ProviderSvc.getAll().then( function( Providers ) {
-		vm.Providers = Providers;
+	this.getAll = function() { return $http.get('/providers')	}
+	this.delete = function( client ) { return $http.delete('/providers/:id', client) }
+	this.save = function( client ) { return $http.post('/providers/:id', client) }
+}])
+.controller('ProviderCtrl', [ '$scope', 'ProviderSvc', function( $scope, ProviderSvc ) {
+
+	$scope.providers = [];
+
+	ProviderSvc.getAll().then( function( providers ) {
+		$scope.providers = providers.data;
 	});
 
 }]);

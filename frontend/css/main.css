@@ -177,7 +177,6 @@ form {
 form .inputContainer {
 	position:relative;
 	margin:0 auto;
-	text-align:center;
 }
 form .inputContainer label,
 form .inputContainer input {
@@ -200,6 +199,9 @@ input[type="email"] {
 	padding:15px;
 	border:1px solid #000;
 }
+.inputContainer {
+	margin-bottom:13px !important;
+}
 .inputContainer label {
 	width:20%;
 	text-align:left;
@@ -213,4 +215,19 @@ input[type="email"] {
 }
 .inputContainer > div button {
 	width:30%;
+}
+form .inputContainer:last-child input,
+form .inputContainer:last-child ul {
+	text-align:left;
+	width:38%;
+}
+form .inputContainer:last-child button {
+	text-align:left;
+	width:31.5%;	
+}
+
+form .inputContainer:last-child ul {
+	margin-top:10px;
+	margin-left:20%;
+	border:1px solid #000;
 }

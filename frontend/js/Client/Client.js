@@ -37,11 +37,11 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	this.save = function( client ) { return $http.post('/clients/:id', client) }
 }])
 .controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct','ProviderFct', 
-	function( $scope, ClientSvc, ClientFct, ProviderSvc ) {
+	function( $scope, ClientSvc, ClientFct, ProviderFct ) {
 	
 	var vm = this;
 	vm.clients = [];
-	vm.newProvider = ProviderSvc.new();
+	vm.newProvider = ProviderFct.new();
 
 	// Modal wiwndow config
 	vm.modalShown = false;
