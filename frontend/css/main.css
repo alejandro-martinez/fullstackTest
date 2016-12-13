@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
+	font-family: 'Arial';
 	line-height: 1;
 	padding:10px;
 }
@@ -184,6 +185,8 @@ form .inputContainer input {
 }
 form .inputContainer label {
 	float:left;
+	text-align:right;
+	margin-right:20px;
 }
 .editContainer .formActions {
 	overflow:hidden;
@@ -196,13 +199,14 @@ form .inputContainer label {
 }
 input[type="text"],
 input[type="email"] {
-	padding:15px;
-	border:1px solid #000;
+	border-radius:4px;
+	padding:10px;
+	border:1px solid #b0b0b0;
 }
 .inputContainer {
 	margin-bottom:13px !important;
 }
-.inputContainer label {
+.inputContainer > label {
 	width:20%;
 	text-align:left;
 }
@@ -210,24 +214,82 @@ input[type="email"] {
 	width:70%;
 	text-align:left;
 }
-.inputContainer > div input {
-	width:40%;
+
+/* Providers input */
+form .inputContainer div {
+	float:left;
+	width:55%;
 }
-.inputContainer > div button {
-	width:30%;
+form .inputContainer div input {
+	width:86%;
 }
-form .inputContainer:last-child input,
-form .inputContainer:last-child ul {
-	text-align:left;
-	width:38%;
-}
-form .inputContainer:last-child button {
-	text-align:left;
-	width:31.5%;	
+form .inputContainer button {
+	width:21%;
 }
 
-form .inputContainer:last-child ul {
+form .inputContainer div ul{
 	margin-top:10px;
-	margin-left:20%;
-	border:1px solid #000;
 }
+/* Providers input */
+
+/* CHECKBOX STYLING*/
+
+.regular-checkbox {
+	display: none;
+}
+
+.regular-checkbox + label {
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+}
+
+.regular-checkbox + label:active, .regular-checkbox:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+.regular-checkbox:checked + label {
+	background-color: #e9ecee;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	color: #99a1a7;
+}
+
+.regular-checkbox:checked + label:after {
+	content: '\2714';
+	font-size: 18px;
+	position: absolute;
+	top: 0px;
+	font-weight:100;
+	left: 3px;
+	color: #000;
+}
+
+.tag {
+	padding:0 20px;
+	width: 200px;
+	position: relative;
+	top: 5px;
+	font-weight: bold;
+	text-transform: uppercase;
+	display: block;
+	float: left;
+}
+form .inputContainer [type="checkbox"] {
+	display:none;
+}
+form .inputContainer ul li{
+	display:block !important;
+	overflow:hidden;
+}
+
+form .inputContainer ul li label {
+	margin:0 !important;
+}
+
+
+/* CHECKBOX STYLING*/

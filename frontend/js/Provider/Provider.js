@@ -25,6 +25,7 @@ angular.module('FullstackApp.Provider',[])
 .controller('ProviderCtrl', [ '$scope', 'ProviderSvc', function( $scope, ProviderSvc ) {
 
 	$scope.providers = [];
+	$scope.check = { checked: true };
 
 	ProviderSvc.getAll().then( function( providers ) {
 		$scope.providers = providers.data;
