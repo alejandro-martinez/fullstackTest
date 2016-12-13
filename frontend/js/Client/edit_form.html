@@ -14,12 +14,12 @@
 			<label>Phone:</label>
 			<input type="text" ng-model="vm.client.phone" />
 		</div>
-		<div class="inputContainer">
+		<div class="inputContainer" ng-controller="ProviderCtrl">
 			<label>Providers:</label>
 			<div>
-				<input type="text" ng-model="vm.newProvider.name" /> 
+				<input type="text" ng-model="newProvider.name" /> 
 				
-				<ul class="clientProviders" ng-controller="ProviderCtrl">
+				<ul class="clientProviders">
 					<li ng-repeat="p in providers">
 						<div>
 							<input type="checkbox" id="checkbox-1-1" class="regular-checkbox" /><label for="checkbox-1-1"></label>
@@ -30,8 +30,7 @@
 					</li>
 				</ul>
 			</div>
-			<button ng-click="vm.addClientProvider()">Add provider</button>
-
+			<button ng-click="addProvider()">Add provider</button>
 		</div>
 		</label>
 	</form>

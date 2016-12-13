@@ -22,13 +22,26 @@ angular.module('FullstackApp.Provider',[])
 	this.delete = function( client ) { return $http.delete('/providers/:id', client) }
 	this.save = function( client ) { return $http.post('/providers/:id', client) }
 }])
-.controller('ProviderCtrl', [ '$scope', 'ProviderSvc', function( $scope, ProviderSvc ) {
+.controller('ProviderCtrl', [ '$scope', 'ProviderSvc', 'ProviderFct',
+	function( $scope, ProviderSvc, ProviderFct ) {
 
-	$scope.providers = [];
-	$scope.check = { checked: true };
+	angular.extend($scope, {
+		providers: [],
+		check: { checked: true },
+		newProvider: ProviderFct.new(),
+		filterProvider: { name: ""}
+	});
+	
+	$scope.addProvider = function() {
+		ProviderSvc.save( $scope.newProvider ).then(function( res ){
+			if ( res.data.created ) {
+				$scope.providers.push( res.data.model );
+			}
+		});
+	}
 
-	ProviderSvc.getAll().then( function( providers ) {
-		$scope.providers = providers.data;
+	ProviderSvc.getAll().then( function( res ) {
+		$scope.providers = res.data;
 	});
 
 }]);

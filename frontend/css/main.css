@@ -216,7 +216,7 @@ input[type="email"] {
 }
 
 /* Providers input */
-form .inputContainer div {
+form .inputContainer > div {
 	float:left;
 	width:55%;
 }
@@ -229,6 +229,8 @@ form .inputContainer button {
 
 form .inputContainer div ul{
 	margin-top:10px;
+	height:50px;
+	overflow-y:scroll;
 }
 /* Providers input */
 
@@ -273,8 +275,7 @@ form .inputContainer div ul{
 	padding:0 20px;
 	width: 200px;
 	position: relative;
-	top: 5px;
-	font-weight: bold;
+	top: 2px;
 	text-transform: uppercase;
 	display: block;
 	float: left;
@@ -285,6 +286,7 @@ form .inputContainer [type="checkbox"] {
 form .inputContainer ul li{
 	display:block !important;
 	overflow:hidden;
+	margin-bottom:5px;
 }
 
 form .inputContainer ul li label {

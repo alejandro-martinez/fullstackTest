@@ -28,8 +28,7 @@ module.exports = function( app ) {
 			res.json(true)
 		});
 	});
-
-	// current
+	// Creates or update a client
 	app.post('/clients/:id', function(req, res, next) {
 		models.client
 			.findOrCreate({ where: { id: req.body.id }, defaults: req.body })

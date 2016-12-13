@@ -36,12 +36,11 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	this.delete = function( client ) { return $http.delete('/clients/:id', client) }
 	this.save = function( client ) { return $http.post('/clients/:id', client) }
 }])
-.controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct','ProviderFct', 
-	function( $scope, ClientSvc, ClientFct, ProviderFct ) {
+.controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct', 
+	function( $scope, ClientSvc, ClientFct) {
 	
 	var vm = this;
 	vm.clients = [];
-	vm.newProvider = ProviderFct.new();
 
 	// Modal wiwndow config
 	vm.modalShown = false;
@@ -59,27 +58,24 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	}
 
 	vm.deleteClient = function() {
-		ClientSvc.delete( vm.client ).then(function( response ) {
-			console.log(response.data)
+		ClientSvc.delete( vm.client ).then(function( res ) {
+			console.log(res.data)
 		});
 	}
 
 	vm.saveClient = function() {
-		ClientSvc.save( vm.client ).then(function( response ) {
-			if ( response.data.created ) vm.clients.push( response.data.model );
-
+		ClientSvc.save( vm.client ).then(function( res ) {
+			if ( res.data.created ) {
+				vm.clients.push( res.data.model );
+			}
 			vm.toggleModal();
 		});
 	}
-
-	vm.addProvider = function() {
-
-		ClientSvc.addProvider( vm.newProvider.name ).then(function(){
-
-		});
+	vm.addClientProvider = function() {
+		console.log("add client prov")
 	}
 
-	ClientSvc.getAll().then( function( clients ) {
-		vm.clients = clients.data;
+	ClientSvc.getAll().then( function( res ) {
+		vm.clients = res.data;
 	});
 }])
