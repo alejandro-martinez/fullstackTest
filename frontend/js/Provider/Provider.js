@@ -14,8 +14,21 @@ angular.module('FullstackApp.Provider', ['ngRoute'])
 		}).
 		otherwise({ redirectTo: '/Providers' });
 }])
-.service('ProviderSvc', [ '$http', function( $http ) {
+.service('ProviderFct', [function() {
 
+	var providerFct = {
+		new: function() {
+
+			var model = {
+				id: null,
+				name: ""
+			};
+
+			return model;	
+		}
+	}
+
+	return providerFct;
 }])
 .controller('ProviderCtrl', [ '$scope', 'ProviderSvc', function( $scope, ProviderSvc ) {
 	

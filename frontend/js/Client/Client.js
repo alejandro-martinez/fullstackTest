@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('FullstackApp.Client', ['ngRoute'])
+angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 .config([ '$routeProvider', function( $routeProvider ) {
 	
 	$routeProvider.
@@ -36,10 +36,12 @@ angular.module('FullstackApp.Client', ['ngRoute'])
 	this.delete = function( client ) { return $http.delete('/clients/:id', client) }
 	this.save = function( client ) { return $http.post('/clients/:id', client) }
 }])
-.controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct', function( $scope, ClientSvc, ClientFct ) {
+.controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct','ProviderFct', 
+	function( $scope, ClientSvc, ClientFct, ProviderSvc ) {
 	
 	var vm = this;
 	vm.clients = [];
+	vm.newProvider = ProviderSvc.new();
 
 	// Modal wiwndow config
 	vm.modalShown = false;
@@ -70,7 +72,14 @@ angular.module('FullstackApp.Client', ['ngRoute'])
 		});
 	}
 
+	vm.addProvider = function() {
+
+		ClientSvc.addProvider( vm.newProvider.name ).then(function(){
+
+		});
+	}
+
 	ClientSvc.getAll().then( function( clients ) {
 		vm.clients = clients.data;
 	});
-}]);
+}])

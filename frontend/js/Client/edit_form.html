@@ -11,8 +11,8 @@
 	<input type="text" ng-model="vm.client.phone" />
 	</label>
 	<label>Providers:
-	<input type="text" />
-	<button ng-click="vm.addClientProvider">Add provider</button>
+	<input type="text" ng-model="vm.newProvider.name" />
+	<button ng-click="vm.addClientProvider()">Add provider</button>
 
 	<ul class="clientProviders">
 	<li ng-repeat="p in vm.client.providers">
