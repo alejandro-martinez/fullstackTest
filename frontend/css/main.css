@@ -59,7 +59,7 @@ h1 {
 	font-size:1.4em;	
 }
 h2 {
-	font-size:1.3em;
+	font-size:1.14em;
 	color:#43829B;
 }
 .icon {
@@ -75,22 +75,21 @@ h2 {
 	-moz-transform: translate(-50%, -50%);
 }
 table {
-	border-width: 1px;
-	border-color: #C9C9C9;
+	border: 1px solid  #C9C9C9;
 	border-collapse: collapse;
 	width: 100%;
+	font-size:.8em;
 }
 table th {
-	border-width: 1px solid #C9C9C9;
-	padding: 8px;
-	font-size:.78em;
+	border: 1px solid #C9C9C9;
+	padding: 9px 10px;
 	background: #F5F5F5;
 	font-weight:bold;
 }
 table td {
 	border: 1px solid #C9C9C9;
-	padding: 8px;
-	background: #ffffff;
+	padding: 0 21px;
+	background: #fff;
 }
 table td:last-child {
 	width:20px;	
@@ -99,53 +98,45 @@ table td:last-child {
 table td:last-child button{
 	background:none;
 	border:none;
-	color:blue;
+	color:#43829B;
 	text-decoration:underline;
 }
 /* INIT - MODAL WINDOW */
-.ng-modal-overlay {
-	position:absolute;
-	z-index:2;
-	top:0;
-	left:0;
-	width:100%;
-	height:100%;
-	background:#000000;
-	opacity: 0.8;
-}
+
 .ng-modal-dialog {
 	background:#F0F5F9;
 	z-index:3;
 	width: 80%;
 	background: #fff;
-	box-shadow: 4px 4px 80px #000;
 	border:2px solid #E2E2E2;
 	border-radius:3px;
+}
+.ng-modal-dialog-content form input,
+.ng-modal-dialog-content ul {
+	border-color:#d5d5d5 !important;
 }
 .ng-modal-dialog-content {
 	text-align: left;
 }
-.ng-modal-close {
-	position: absolute;
-	top: 3px;
-	right: 5px;
-	padding: 5px;
-	cursor: pointer;
-	font-size: 120%;
-	display: inline-block;
-	font-weight: bold;
-	font-family: 'arial', 'sans-serif';
+.ng-modal-dialog h2 {
+	padding:12px 20px;
+	border-bottom:1px solid #e0e0e0;
 }
 /* END - MODAL WINDOW */
 
 button {
-	background:#f0f0f0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px; 
 	border-radius: 3px;
-	padding:10px;
+	padding:5px 15px;
 	color:#242424;
 	border:1px solid #e0e0e0;
+	background: #f3f3f3; /* Old browsers */
+	background: -moz-linear-gradient(top,  #f3f3f3 0%, #e2e2e2 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #f3f3f3 0%,#e2e2e2 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #f3f3f3 0%,#e2e2e2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
+
 }
 button.red {
 	color:#fff;
@@ -153,22 +144,18 @@ button.red {
 }
 .container {
 	background: #F0F5F9;
-	padding:10px;
 	margin:20px 10px;
 }
-.container button,.container h2 {
+.container h2 {
 	display:inline-block;
+	margin: 18px 15px 0 15px;
 }
-.container button {
+.container > button {
+	margin: 8px 15px 11px 0;
 	float:right;
 }
 .container table {
-	margin-top:20px;
-}
-.ng-modal h2 {
-	padding:10px 20px;
-	width:100%;
-	border-bottom:1px solid #000;
+	margin-top: 5px;
 }
 .ng-modal-dialog-content form {
 	margin:20px;
@@ -189,30 +176,33 @@ form .inputContainer input {
 	display:inline-block;
 }
 form .inputContainer label {
+	font-size:.8em;
 	float:left;
 	text-align:right;
-	margin-right:20px;
+	margin: 12px 15px 0 0;
 }
 .editContainer .formActions {
 	overflow:hidden;
 }
 .editContainer .formActions button{
 	float:right;
+	margin-left:10px;
 }
 .editContainer .formActions button:first-child{
 	float:left;
+	margin-left:0px;
 }
 input[type="text"],
 input[type="email"] {
 	border-radius:4px;
-	padding:10px;
+	padding: 10px;
 	border:1px solid #b0b0b0;
 }
 .inputContainer {
 	margin-bottom:13px !important;
 }
 .inputContainer > label {
-	width:20%;
+	width: 20%;
 	text-align:left;
 }
 .inputContainer input {
@@ -233,12 +223,11 @@ form .inputContainer button {
 
 form .inputContainer div ul{
 	box-sizing:border-box;
-	margin-top:10px;
-	padding:1px 20px;
+	margin-top: 10px;
+	padding: 10px 2px 0 20px;
 	height:50px;
 	border:1px solid #b0b0b0;
 	border-radius:3px;
-	overflow-x:none;
 	overflow-y:scroll;
 }
 /* Providers input */
@@ -258,7 +247,7 @@ form .inputContainer div ul{
 	background: #fafafa;
 	border: 1px solid #cacece;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-	padding: 9px;
+	padding: 7px;
 	border-radius: 3px;
 	display: inline-block;
 	position: relative;
@@ -279,9 +268,9 @@ form .inputContainer div ul{
 	content: '\2714';
 	font-size: 18px;
 	position: absolute;
-	top: 0px;
+	top: -2px;
 	font-weight:100;
-	left: 3px;
+	left: 0px;
 	color: #000;
 }
 
@@ -339,9 +328,14 @@ form .inputContainer div.checkboxContainer .tag {
 	margin:0;
 }
 form .inputContainer ul li a {
+	display:inline-block;
 	float:right;
-	margin-top:-20px;
+	margin-left: 10px !important;
+}
+form .inputContainer ul li a:last-child{
+	
 }
 form .inputContainer.clientProviders div {
 	width: 47%;
+	font-size:.94em;
 }
