@@ -30,10 +30,22 @@ module.exports = function( app ) {
 	});
 	// Creates or update a client
 	app.post('/clients/:id', function(req, res, next) {
-		models.client
-			.findOrCreate({ where: { id: req.body.id }, defaults: req.body })
-			.spread( function( client, created ) {
-				res.json({ created: created, model: client.get({ plain: true }) })
-		});
-	});
+
+		var onClientUpdated = function( client, created ) {
+			models.sequelize.transaction(function(t) { 
+
+				var onNext = function( p ) {
+					var params = { client_id: req.body.id, provider_id: p.id };
+					var action = ( p.deleted ) ? 'destroy' : 'create'; 
+					return models.client_provider[ action ]( params, { transaction: t });
+				}
+
+				return models.sequelize.Promise.map( req.body.providers, onNext);
+			});
+		}
+		
+		var params = { where: { id: req.body.id }, defaults: req.body };
+
+		models.client.findOrCreate( params ).spread( onClientUpdated );
+	})
 }
