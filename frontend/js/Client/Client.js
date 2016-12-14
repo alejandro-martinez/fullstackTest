@@ -57,10 +57,11 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	}
 
 	vm.deleteClient = function() {
-		ClientSvc.delete( vm.client ).then(function( res ) {
-			console.log(res.data)
-		});
-	}
+		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
+			ClientSvc.delete( vm.client ).then(function( res ) {
+				console.log(res.data)
+			});
+	}	}
 
 	vm.saveClient = function() {
 		ClientSvc.save( vm.client ).then(function( res ) {

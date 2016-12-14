@@ -63,7 +63,7 @@ h2 {
 	color:#43829B;
 }
 .icon {
-	width:1.3em;
+	width:1.1em;
 }
 .absoluteCenter {
 	position: absolute;
@@ -81,12 +81,18 @@ table {
 	font-size:.8em;
 }
 table th {
-	border: 1px solid #C9C9C9;
-	padding: 9px 10px;
-	background: #F5F5F5;
+	border: 2px solid #C9C9C9;
+	padding: 9px 21px;
 	font-weight:bold;
+	text-align:left;
+	background: #fbfbfb; /* Old browsers */
+	background: -moz-linear-gradient(top,  #fbfbfb 0%, #eeeeee 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #fbfbfb 0%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #fbfbfb 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
 }
 table td {
+	color:#787878;
 	border: 1px solid #C9C9C9;
 	padding: 0 21px;
 	background: #fff;
@@ -128,8 +134,10 @@ button {
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px; 
 	border-radius: 3px;
-	padding:5px 15px;
-	color:#242424;
+	padding:5px 15px 6px 15px;
+	color:#787878;
+	-webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
 	border:1px solid #e0e0e0;
 	background: #f3f3f3; /* Old browsers */
 	background: -moz-linear-gradient(top,  #f3f3f3 0%, #e2e2e2 100%); /* FF3.6-15 */
@@ -138,9 +146,38 @@ button {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
 
 }
+button:after {
+    content: "";
+    background: #90EE90;
+    display: block;
+    position: absolute;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+}
+
+button {
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+}
+button:hover {
+    border:1px solid #c0c0c0;
+}
 button.red {
 	color:#fff;
-	background:#D72E2E;
+	background: #e74241; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e74241 0%, #ad070f 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #e74241 0%,#ad070f 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #e74241 0%,#ad070f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e74241', endColorstr='#ad070f',GradientType=0 ); /* IE6-9 */
+
 }
 .container {
 	background: #F0F5F9;
@@ -194,6 +231,7 @@ form .inputContainer label {
 }
 input[type="text"],
 input[type="email"] {
+	color:#787878;
 	border-radius:4px;
 	padding: 10px;
 	border:1px solid #b0b0b0;
@@ -258,7 +296,7 @@ form .inputContainer div ul{
 }
 
 .regular-checkbox:checked + label {
-	background: #e9ecee;
+	background: #fff;
 	border: 1px solid #adb8c0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
 	color: #99a1a7;
@@ -266,12 +304,12 @@ form .inputContainer div ul{
 
 .regular-checkbox:checked + label:after {
 	content: '\2714';
-	font-size: 18px;
+	font-size: 25px;
 	position: absolute;
-	top: -2px;
+	top: -6px;
 	font-weight:100;
 	left: 0px;
-	color: #000;
+	color: #4A4A4C;
 }
 
 .tag {
@@ -330,7 +368,7 @@ form .inputContainer div.checkboxContainer .tag {
 form .inputContainer ul li a {
 	display:inline-block;
 	float:right;
-	margin-left: 10px !important;
+	margin-left: 14px !important;
 }
 form .inputContainer ul li a:last-child{
 	
