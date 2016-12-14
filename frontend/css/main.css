@@ -60,7 +60,7 @@ h1 {
 }
 h2 {
 	font-size:1.3em;
-	color:blue;
+	color:#43829B;
 }
 .absoluteCenter {
 	position: absolute;
@@ -73,16 +73,17 @@ h2 {
 }
 table {
 	border-width: 1px;
-	border-color: #666;
+	border-color: #C9C9C9;
 	border-collapse: collapse;
 	width: 100%;
 }
 table th {
 	border-width: 1px;
 	padding: 8px;
+	font-size:.78em;
 	border-style: solid;
-	border-color: #666;
-	background-color: #efe;
+	border-color: #C9C9C9;
+	background-color: #F5F5F5;
 	font-weight:bold;
 }
 table td {
@@ -139,22 +140,24 @@ table td:last-child button{
 /* END - MODAL WINDOW */
 
 button {
+	background:#f0f0f0;
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px; 
 	border-radius: 3px;
-	border:1px solid #eee;
-	padding:10px; 
+	padding:10px;
+	color:#242424;
+	border:1px solid #e0e0e0;
 }
 button.red {
 	color:#fff;
 	background:#D72E2E;
 }
 .container {
-	background: #eee;
+	background: #F0F5F9;
 	padding:10px;
 	margin:20px 10px;
 }
-.container h1, .container button {
+.container button,.container h2 {
 	display:inline-block;
 }
 .container button {
