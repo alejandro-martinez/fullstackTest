@@ -75,7 +75,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		var found = vm.getClientProvider( provider.id );
 		if ( found.length ) {
 			var i = vm.client.providers.indexOf( found);
-			vm.client.providers[i].deleted = true;
+			if ( i > 0 ) vm.client.providers[i].deleted = true;
 		}
 		else {
 			vm.client.providers.push( provider );

@@ -19,8 +19,8 @@ angular.module('FullstackApp.Provider',[])
 .service('ProviderSvc', ['$http', function( $http ) {
 
 	this.getAll = function() { return $http.get('/providers')	}
-	this.delete = function( client ) { return $http.delete('/providers/:id', client) }
-	this.save = function( client ) { return $http.post('/providers/:id', client) }
+	this.delete = function( provider ) { return $http.delete('/providers/:id', provider) }
+	this.save = function( provider ) { return $http.post('/providers/:id', provider) }
 }])
 .controller('ProviderCtrl', [ '$scope', 'ProviderSvc', 'ProviderFct',
 	function( $scope, ProviderSvc, ProviderFct ) {

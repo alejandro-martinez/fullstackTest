@@ -62,6 +62,9 @@ h2 {
 	font-size:1.3em;
 	color:#43829B;
 }
+.icon {
+	width:1.3em;
+}
 .absoluteCenter {
 	position: absolute;
 	width: 50%;
@@ -78,20 +81,16 @@ table {
 	width: 100%;
 }
 table th {
-	border-width: 1px;
+	border-width: 1px solid #C9C9C9;
 	padding: 8px;
 	font-size:.78em;
-	border-style: solid;
-	border-color: #C9C9C9;
-	background-color: #F5F5F5;
+	background: #F5F5F5;
 	font-weight:bold;
 }
 table td {
-	border-width: 1px;
+	border: 1px solid #C9C9C9;
 	padding: 8px;
-	border-style: solid;
-	border-color: #666;
-	background-color: #ffffff;
+	background: #ffffff;
 }
 table td:last-child {
 	width:20px;	
@@ -111,14 +110,14 @@ table td:last-child button{
 	left:0;
 	width:100%;
 	height:100%;
-	background-color:#000000;
+	background:#000000;
 	opacity: 0.8;
 }
 .ng-modal-dialog {
 	background:#F0F5F9;
 	z-index:3;
 	width: 80%;
-	background-color: #fff;
+	background: #fff;
 	box-shadow: 4px 4px 80px #000;
 	border:2px solid #E2E2E2;
 	border-radius:3px;
@@ -233,8 +232,13 @@ form .inputContainer button {
 }
 
 form .inputContainer div ul{
+	box-sizing:border-box;
 	margin-top:10px;
+	padding:1px 20px;
 	height:50px;
+	border:1px solid #b0b0b0;
+	border-radius:3px;
+	overflow-x:none;
 	overflow-y:scroll;
 }
 /* Providers input */
@@ -251,7 +255,7 @@ form .inputContainer div ul{
 }
 
 .regular-checkbox + label {
-	background-color: #fafafa;
+	background: #fafafa;
 	border: 1px solid #cacece;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
 	padding: 9px;
@@ -265,7 +269,7 @@ form .inputContainer div ul{
 }
 
 .regular-checkbox:checked + label {
-	background-color: #e9ecee;
+	background: #e9ecee;
 	border: 1px solid #adb8c0;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
 	color: #99a1a7;
@@ -305,20 +309,39 @@ form .inputContainer ul li label {
 	margin:0 !important;
 }
 
-form .inputContainer div input{
-	width:100%;
-}
+
 form .inputContainer div {
 	display:inline-block;
 	width: 40%;
 }
+form .inputContainer div input,
+form .inputContainer div ul {
+	width:100%;
+}
+form .inputContainer.clientProviders input {
+	box-sizing:border-box;
+}
 
-form .inputContainer div:last-child {
-	width: 28%;
-	margin-left: 33px;
+form .inputContainer.clientProviders div:last-child {
+	width: 24%;
+	margin-left: 16px;
 }
 form .inputContainer div button {
 	width: 100%;
 }
 
 /* CHECKBOX STYLING*/
+form .inputContainer div.checkboxContainer {
+	display:inline-block;
+	width: 100%;
+}
+form .inputContainer div.checkboxContainer .tag {
+	margin:0;
+}
+form .inputContainer ul li a {
+	float:right;
+	margin-top:-20px;
+}
+form .inputContainer.clientProviders div {
+	width: 47%;
+}
