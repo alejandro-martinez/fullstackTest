@@ -238,6 +238,11 @@ form .inputContainer div ul{
 
 .regular-checkbox {
 	display: none;
+	position:absolute;
+	top:0;
+	z-index: 2;
+	left:0;
+	width:50px !important;
 }
 
 .regular-checkbox + label {
@@ -274,19 +279,21 @@ form .inputContainer div ul{
 .tag {
 	padding:0 20px;
 	width: 200px;
-	position: relative;
+	position: absolute;
 	top: 2px;
+	left:20px;
+	height:20px;
+	background:#fff;
 	text-transform: uppercase;
 	display: block;
 	float: left;
-}
-form .inputContainer [type="checkbox"] {
-	display:none;
+	z-index:3;
 }
 form .inputContainer ul li{
 	display:block !important;
 	overflow:hidden;
 	margin-bottom:5px;
+	position:relative;
 }
 
 form .inputContainer ul li label {

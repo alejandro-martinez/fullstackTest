@@ -71,17 +71,30 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 			vm.toggleModal();
 		});
 	}
-	vm.addClientProvider = function() {
-		console.log("add client prov")
+	vm.toggleProvider = function( provider ) {
+		
+		var found = vm.getClientProvider( provider.id );
+		if ( found.length ) {
+			var index = vm.client.providers.indexOf( provider);
+			vm.client.providers.splice( index, 1);
+			console.log(vm.client.providers)
+		}
+		else {
+			console.log("not found")
+			vm.client.providers.push( provider);
+		}
+	}
+
+	vm.getClientProvider = function( id ) {
+		
+		var found = vm.client.providers.filter(function(p){
+			return p.id === id;
+		});
+		return found;
 	}
 
 	vm.isClientProvider = function(id) {
-		if ( vm.client ) {
-			var is = vm.client.providers.filter(function(p){
-				return p.id === id;
-			});
-			return is.length;
-		}
+		if ( vm.client ) return vm.getClientProvider(id).length;
 	}
 
 	ClientSvc.getAll().then( function( res ) {
