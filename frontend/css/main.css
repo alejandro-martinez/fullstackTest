@@ -114,10 +114,13 @@ table td:last-child button{
 	opacity: 0.8;
 }
 .ng-modal-dialog {
+	background:#F0F5F9;
 	z-index:3;
 	width: 80%;
 	background-color: #fff;
 	box-shadow: 4px 4px 80px #000;
+	border:2px solid #E2E2E2;
+	border-radius:3px;
 }
 .ng-modal-dialog-content {
 	text-align: left;
@@ -144,7 +147,7 @@ button {
 }
 button.red {
 	color:#fff;
-	background:red;
+	background:#D72E2E;
 }
 .container {
 	background: #eee;
@@ -177,7 +180,7 @@ form {
 }
 form .inputContainer {
 	position:relative;
-	margin:0 auto;
+	margin: 0 auto;
 }
 form .inputContainer label,
 form .inputContainer input {
@@ -211,20 +214,19 @@ input[type="email"] {
 	text-align:left;
 }
 .inputContainer input {
-	width:70%;
+	width: 70%;
 	text-align:left;
 }
 
 /* Providers input */
 form .inputContainer > div {
 	float:left;
-	width:55%;
 }
 form .inputContainer div input {
-	width:86%;
+	width: 100%;
 }
 form .inputContainer button {
-	width:21%;
+	width: 29%;
 }
 
 form .inputContainer div ul{
@@ -300,5 +302,20 @@ form .inputContainer ul li label {
 	margin:0 !important;
 }
 
+form .inputContainer div input{
+	width:100%;
+}
+form .inputContainer div {
+	display:inline-block;
+	width: 40%;
+}
+
+form .inputContainer div:last-child {
+	width: 28%;
+	margin-left: 33px;
+}
+form .inputContainer div button {
+	width: 100%;
+}
 
 /* CHECKBOX STYLING*/
