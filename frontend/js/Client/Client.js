@@ -10,7 +10,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		when("/clients/:id",{ 
 			templateUrl: "Client/edit.html"
 		}).
-		otherwise({ redirectTo: '/clients' });
+		otherwise({ redirectTo: '/' });
 }])
 .factory('ClientFct', function() {
 	
@@ -41,19 +41,22 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	
 	var vm = this;
 	vm.clients = [];
-	vm.modalShown = false;
 	vm.modalContent = "js/Client/edit_form.html";
 
 	vm.toggleModal = function() { vm.modalShown = !vm.modalShown }
 
-	vm.addClient = function() {
-		vm.toggleModal();
-		vm.client = ClientFct.new();
-	}
-
+	// Open a modal window to create / update a client
 	vm.editClient = function( client ) {
 		vm.toggleModal();
-		vm.client = client;
+		vm.client = (client) ? client : ClientFct.new();
+	}
+
+	// Creates or update a client
+	vm.saveClient = function() {
+		ClientSvc.save( vm.client ).then(function( res ) {
+			if ( res.data.created ) vm.clients.push( res.data.model );
+			vm.toggleModal();
+		});
 	}
 
 	vm.deleteClient = function() {
@@ -62,36 +65,29 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		});
 	}
 
-	vm.saveClient = function() {
-		ClientSvc.save( vm.client ).then(function( res ) {
-			if ( res.data.created ) {
-				vm.clients.push( res.data.model );
-			}
-			vm.toggleModal();
+	// Adds or Delete client providers
+	vm.toggleProvider = function( provider ) {		
+		var found = vm.findProvider( provider.id );
+		( found ) ? found.deleted = !found.deleted : vm.client.providers.push( provider );
+	}
+
+	// Find a provider in client_providers list
+	vm.findProvider = function( id ) {
+		var found = vm.client.providers.filter(function(p, k, _this) { 
+			return ( p.id === id ) && _this[k];
 		});
-	}
-	vm.toggleProvider = function( provider ) {
-		
-		var found = vm.getClientProvider( provider.id );
-		if ( found.length ) {
-			var i = vm.client.providers.indexOf( found);
-			vm.client.providers[i].deleted = true;
-		}
-		else {
-			vm.client.providers.push( provider );
-		}
+		return found[0];
 	}
 
-	vm.getClientProvider = function( id ) {
-		return vm.client.providers.filter(function(p) { 
-			return ( p.id === id && !p.deleted );
-		}); 
-	}
-
+	// Returns true if provider is as asociated with the client
 	vm.isClientProvider = function(id) {
-		if ( vm.client ) return vm.getClientProvider(id).length;
+		if ( vm.client ) {
+			var found = vm.findProvider( id ); 
+			return ( found && !found.deleted);
+		}
 	}
 
+	// Returns list of clients
 	ClientSvc.getAll().then( function( res ) {
 		vm.clients = res.data;
 	});

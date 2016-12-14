@@ -17,6 +17,7 @@ angular.module('FullstackApp', [
 	replace: true,
 	transclude: true,
 	link: function(scope, element, attrs) {
+		scope.show = false;
 		scope.hideModal = function() {
 			scope.show = false;
 		};
