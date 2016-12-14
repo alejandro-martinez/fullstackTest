@@ -41,21 +41,47 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	
 	var vm = this;
 	vm.clients = [];
+	var providersAdded = [];
 	vm.modalContent = "js/Client/edit_form.html";
 
-	vm.toggleModal = function() { vm.modalShown = !vm.modalShown }
+	vm.toggleModal = function() { 
+		vm.modalShown = !vm.modalShown;
+	}
 
 	// Open a modal window to create / update a client
 	vm.editClient = function( client ) {
 		vm.toggleModal();
+		
+		// Reset not saved changes in client providers list
+		if ( client ) {
+			client.providers.map(function(p) { 
+				delete p.deleted;
+				return p;
+			});
+		}
 		vm.client = (client) ? client : ClientFct.new();
 	}
 
 	// Creates or update a client
 	vm.saveClient = function() {
+		
+		vm.client.providers = vm.client.providers.concat( providersAdded );
+
 		ClientSvc.save( vm.client ).then(function( res ) {
-			if ( res.data.created ) vm.clients.push( res.data.model );
+			
+			if ( res.data.created ) {
+				vm.client.id = res.data.id;
+				vm.clients.push( vm.client);
+			}
+			// Refresh client_providers list
+			vm.client.providers = vm.client.providers.filter(function( p ) {
+				return !p.hasOwnProperty('deleted') && !p.deleted;
+			});
+			providersAdded = [];
 			vm.toggleModal();
+
+		}).catch(function( err ) {
+			alert("Sorry, an error ocurred,",err)
 		});
 	}
 
@@ -68,7 +94,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	// Adds or Delete client providers
 	vm.toggleProvider = function( provider ) {		
 		var found = vm.findProvider( provider.id );
-		( found ) ? found.deleted = !found.deleted : vm.client.providers.push( provider );
+		( found ) ? found.deleted = !found.deleted : providersAdded.push( provider );
 	}
 
 	// Find a provider in client_providers list
@@ -90,5 +116,5 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	// Returns list of clients
 	ClientSvc.getAll().then( function( res ) {
 		vm.clients = res.data;
-	});
+	})
 }])

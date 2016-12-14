@@ -42,6 +42,6 @@
 	<div class="formActions">
 		<button ng-if="vm.client.id" ng-click="vm.deleteClient()" class="red">Delete client</button>
 		<button ng-click="vm.saveClient()">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
-		<button ng-click="vm.toggleModal()">Cancel</button>
+		<button ng-click="vm.toggleModal( true )">Cancel</button>
 	</div>
 </div>

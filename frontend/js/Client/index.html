@@ -16,7 +16,7 @@
 			<td> {{ c.name }} </td>
 			<td> {{ c.email }} </td>
 			<td> {{ c.phone }} </td>
-			<td> <span ng-repeat="p in c.providers">{{ p.name }}</span></td>
+			<td> <span ng-repeat="p in c.providers">{{ p.name.concat(", ") }}</span></td>
 			<td> <button ng-click="vm.editClient( c )"> Edit </button> </td>
 		</tr>
 		</table>
