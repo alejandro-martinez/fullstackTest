@@ -41,10 +41,9 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	
 	var vm = this;
 	vm.clients = [];
-
-	// Modal wiwndow config
 	vm.modalShown = false;
-	vm.modalContent = "js/Client/edit_form.html"
+	vm.modalContent = "js/Client/edit_form.html";
+
 	vm.toggleModal = function() { vm.modalShown = !vm.modalShown }
 
 	vm.addClient = function() {
@@ -77,20 +76,14 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		if ( found.length ) {
 			var index = vm.client.providers.indexOf( provider);
 			vm.client.providers.splice( index, 1);
-			console.log(vm.client.providers)
 		}
 		else {
-			console.log("not found")
 			vm.client.providers.push( provider);
 		}
 	}
 
 	vm.getClientProvider = function( id ) {
-		
-		var found = vm.client.providers.filter(function(p){
-			return p.id === id;
-		});
-		return found;
+		return vm.client.providers.filter(function(p) { return p.id === id }); 
 	}
 
 	vm.isClientProvider = function(id) {

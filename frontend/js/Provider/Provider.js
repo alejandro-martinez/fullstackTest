@@ -28,8 +28,7 @@ angular.module('FullstackApp.Provider',[])
 	angular.extend($scope, {
 		providers: [],
 		check: { checked: true },
-		newProvider: ProviderFct.new(),
-		filterProvider: { name: ""}
+		newProvider: ProviderFct.new()
 	});
 	
 	$scope.addProvider = function() {
