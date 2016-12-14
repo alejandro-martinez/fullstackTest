@@ -17,17 +17,12 @@ module.exports = function( app ) {
 		models.client.findAll( params ).then( onFind );		
 	});
 
-	app.get('/clients/:id', function(req, res, next) {
-		models.client.findOne({ id: req.params.id }).then(function( client) {
-			res.json( client );	
-		});
-	});
-
 	app.delete('/clients/:id', function(req, res, next) {
 		models.client.destroy({where: {}}).then(function () {
 			res.json(true)
 		});
 	});
+	
 	// Creates or update a client
 	app.post('/clients/:id', function(req, res, next) {
 
