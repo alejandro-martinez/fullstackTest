@@ -40,8 +40,8 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	function( $scope, ClientSvc, ClientFct) {
 	
 	var vm = this;
-	vm.clients = [];
-	var providersAdded = [];
+	var newProviders = [];
+	vm.clients = [];	
 	vm.modalContent = "js/Client/edit_form.html";
 	
 	vm.toggleModal = function() { 
@@ -51,8 +51,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	// Open a modal window to create / update a client
 	vm.editClient = function( clientIndex ) {
 		var client = vm.clients[ clientIndex ];
-		vm.toggleModal();
-		
+				
 		// Reset not saved changes in client providers list
 		if ( client ) {
 			client.providers.map(function(p) { 
@@ -61,33 +60,44 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 			});
 		}
 		vm.client = (client) ? client : ClientFct.new();
+
+		vm.toggleModal();
 	}
 
 	vm.deleteClient = function() {
 		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
 			ClientSvc.delete( vm.client ).then(function( res ) {
-				console.log(res.data)
+				if ( res.data.deleted ) {
+					// Quiza se pueda refactorizar eliminando directamente vm.client?
+					var i = vm.clients.indexOf( vm.client );
+					vm.clients.splice(i, 1);
+				}
 			});
 		}	
+	}
+
+	vm.refreshProvidersList = function() {
+		// Refresh client_providers list
+		vm.client.providers = vm.client.providers.filter(function( p ) {
+			return !p.hasOwnProperty('deleted') && !p.deleted;
+		});
+		newProviders = [];
 	}
 
 	// Creates or update a client
 	vm.saveClient = function() {
 		
-		vm.client.providers = vm.client.providers.concat( providersAdded );
+		vm.client.providers = vm.client.providers.concat( newProviders );
 
 		ClientSvc.save( vm.client ).then(function( res ) {
-			
-			// Refresh client_providers list
-			vm.client.providers = vm.client.providers.filter(function( p ) {
-				return !p.hasOwnProperty('deleted') && !p.deleted;
-			});
+
+			vm.refreshProvidersList();
 
 			if ( res.data.created ) {
 				vm.client.id = res.data.id;
 				vm.clients.push( vm.client);
 			}
-			providersAdded = [];
+			
 			vm.toggleModal();
 
 		}).catch(function( err ) {
@@ -98,8 +108,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	// Adds or Delete client providers
 	vm.toggleProvider = function( provider ) {		
 		var found = vm.findProvider( provider.id );
-		console.log("Provider",provider);
-		( found ) ? found.deleted = !found.deleted : providersAdded.push( provider );
+		( found ) ? found.deleted = !found.deleted : newProviders.push( provider );
 	}
 
 	// Find a provider in client_providers list
@@ -126,8 +135,8 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	}
 
 	$scope.$on('providerDeleted', function (event, provider) {
-		var i = providersAdded.map(function(p) { return p.id; }).indexOf( provider.id );
-		providersAdded.splice(i,1);
+		var i = newProviders.map(function(p) { return p.id; }).indexOf( provider.id );
+		newProviders.splice(i,1);
 		vm.toggleProvider( provider );
 		vm.loadClientList();
 	});
