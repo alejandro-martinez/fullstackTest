@@ -364,6 +364,7 @@ form .inputContainer div.checkboxContainer {
 }
 form .inputContainer div.checkboxContainer .tag {
 	margin:0;
+	width: auto;
 }
 form .inputContainer ul li a {
 	display:inline-block;

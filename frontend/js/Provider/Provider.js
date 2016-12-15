@@ -19,7 +19,7 @@ angular.module('FullstackApp.Provider',[])
 .service('ProviderSvc', ['$http', function( $http ) {
 
 	this.getAll = function() { return $http.get('/providers')	}
-	this.delete = function( provider ) { return $http.delete('/providers/:id', provider) }
+	this.delete = function( provider ) { return $http.delete('/providers/' + provider.id) }
 	this.save = function( provider ) { return $http.post('/providers/:id', provider) }
 }])
 .controller('ProviderCtrl', [ '$scope', 'ProviderSvc', 'ProviderFct',
@@ -27,7 +27,6 @@ angular.module('FullstackApp.Provider',[])
 
 	angular.extend($scope, {
 		providers: [],
-		check: { checked: true },
 		newProvider: ProviderFct.new()
 	});
 	
@@ -37,6 +36,18 @@ angular.module('FullstackApp.Provider',[])
 				$scope.providers.push( res.data.model );
 			}
 		});
+	}
+
+	$scope.deleteProvider = function( provider ) {
+		if (confirm("Are you sure you want to delete the provider: ".concat(provider.name,"?"))) {
+			ProviderSvc.delete( provider ).then(function( res ) {
+				if ( res.data.deleted ) {
+					var i = $scope.providers.indexOf( provider );
+					$scope.providers.splice(i, 1);
+					$scope.$emit('providerDeleted', provider);
+				}
+			});
+		}
 	}
 
 	ProviderSvc.getAll().then( function( res ) {

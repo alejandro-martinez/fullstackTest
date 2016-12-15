@@ -3,15 +3,14 @@ var models  = require('../models/index');
 module.exports = function( app ) {
 	
 	app.get('/providers', function(req, res, next) {
-		res.json([{id:1,name:"ALE"}]);
 		models.provider.findAll().then(function( providers) {
 			res.json( providers );
 		});	
 	});
 
 	app.delete('/providers/:id', function(req, res, next) {
-		models.provider.destroy({where: { id: req.body.id }}).then(function () {
-			res.json(true)
+		models.provider.destroy({where: { id: req.params.id }}).then(function () {
+			res.json({ deleted: true });
 		});
 	});
 

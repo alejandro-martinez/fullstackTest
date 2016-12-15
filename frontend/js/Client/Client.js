@@ -43,13 +43,14 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.clients = [];
 	var providersAdded = [];
 	vm.modalContent = "js/Client/edit_form.html";
-
+	
 	vm.toggleModal = function() { 
 		vm.modalShown = !vm.modalShown;
 	}
 
 	// Open a modal window to create / update a client
-	vm.editClient = function( client ) {
+	vm.editClient = function( clientIndex ) {
+		var client = vm.clients[ clientIndex ];
 		vm.toggleModal();
 		
 		// Reset not saved changes in client providers list
@@ -77,14 +78,15 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 
 		ClientSvc.save( vm.client ).then(function( res ) {
 			
-			if ( res.data.created ) {
-				vm.client.id = res.data.id;
-				vm.clients.push( vm.client);
-			}
 			// Refresh client_providers list
 			vm.client.providers = vm.client.providers.filter(function( p ) {
 				return !p.hasOwnProperty('deleted') && !p.deleted;
 			});
+
+			if ( res.data.created ) {
+				vm.client.id = res.data.id;
+				vm.clients.push( vm.client);
+			}
 			providersAdded = [];
 			vm.toggleModal();
 
@@ -96,6 +98,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	// Adds or Delete client providers
 	vm.toggleProvider = function( provider ) {		
 		var found = vm.findProvider( provider.id );
+		console.log("Provider",provider);
 		( found ) ? found.deleted = !found.deleted : providersAdded.push( provider );
 	}
 
@@ -115,8 +118,19 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		}
 	}
 
-	// Returns list of clients
-	ClientSvc.getAll().then( function( res ) {
-		vm.clients = res.data;
-	})
+	vm.loadClientList = function() {
+		// Returns list of clients
+		ClientSvc.getAll().then( function( res ) {
+			vm.clients = res.data;
+		});
+	}
+
+	$scope.$on('providerDeleted', function (event, provider) {
+		var i = providersAdded.map(function(p) { return p.id; }).indexOf( provider.id );
+		providersAdded.splice(i,1);
+		vm.toggleProvider( provider );
+		vm.loadClientList();
+	});
+
+	vm.loadClientList();
 }])

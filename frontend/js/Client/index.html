@@ -11,12 +11,12 @@
 			<th> Providers </th>
 			<th></th>
 		</tr>
-		<tr ng-repeat="c in vm.clients">
+		<tr ng-repeat="c in vm.clients | orderBy:'name' track by c.id">
 			<td> {{ c.name }} </td>
 			<td> {{ c.email }} </td>
 			<td> {{ c.phone }} </td>
-			<td> <span ng-repeat="p in c.providers">{{ p.name.concat(", ") }}</span></td>
-			<td> <button ng-click="vm.editClient( c )"> Edit </button> </td>
+			<td> <span ng-repeat="p in c.providers | orderBy:'name' track by p.id">{{ p.name.concat(", ") }}</span></td>
+			<td> <button ng-click="vm.editClient( $index )"> Edit </button> </td>
 		</tr>
 		</table>
 	</div>

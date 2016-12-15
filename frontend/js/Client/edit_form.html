@@ -4,7 +4,7 @@
 	<form novalidate>
 		<div class="inputContainer">
 			<label>Name:</label>
-			<input type="text" ng-model="vm.client.name" />
+			<input type="text" required ng-model="vm.client.name" />
 		</div>
 		<div class="inputContainer">
 			<label>Email:</label>
@@ -17,10 +17,10 @@
 		<div class="inputContainer clientProviders" ng-controller="ProviderCtrl">
 			<label>Providers:</label>
 			<div>
-				<input type="text" ng-model="newProvider.name" /> 
+				<input type="text" required ng-model="newProvider.name" /> 
 				
 				<ul ng-if="providers.length">
-					<li ng-repeat="p in providers | filter:newProvider.name | orderBy: 'name'">
+					<li ng-repeat="p in providers | filter:newProvider.name | orderBy: 'name'  track by p.id">
 						<div class="checkboxContainer">
 							<input type="checkbox"
 									ng-checked="vm.isClientProvider( p.id)"
