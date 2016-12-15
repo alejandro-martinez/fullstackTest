@@ -3,9 +3,9 @@ var models  = require('../models/index');
 module.exports = function( app ) {
 	
 	app.get('/clients', function(req, res, next) {
-		
+		res.json([{id:1,name:"ALE",phone:"asdasd",providers:[]}]);
 		var onFind = function( clients ) {
-			res.json( clients );	
+			res.json( clients );
 		};
 
 		var params = {
@@ -22,6 +22,7 @@ module.exports = function( app ) {
 			res.json(true)
 		});
 	});
+	
 	// Creates or update a client and it's providers
 	app.post('/clients/:id', function(req, res, next) {
 

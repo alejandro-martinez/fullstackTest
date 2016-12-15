@@ -14,14 +14,14 @@
 			<label>Phone:</label>
 			<input type="text" ng-model="vm.client.phone" />
 		</div>
-		<div class="inputContainer" ng-controller="ProviderCtrl">
+		<div class="inputContainer clientProviders" ng-controller="ProviderCtrl">
 			<label>Providers:</label>
 			<div>
 				<input type="text" ng-model="newProvider.name" /> 
 				
-				<ul class="clientProviders">
+				<ul ng-if="providers.length">
 					<li ng-repeat="p in providers | filter:newProvider.name | orderBy: 'name'">
-						<div>
+						<div class="checkboxContainer">
 							<input type="checkbox"
 									ng-checked="vm.isClientProvider( p.id)"
 									ng-click="vm.toggleProvider( p )"
@@ -29,12 +29,16 @@
 							<label for="checkbox-1-1"></label>
 							<div class="tag">{{ p.name }}</div>
 						</div>
-						<a class="icon edit"></a>
-						<a class="icon delete"></a>
+						<a class="icon" ng-click="deleteProvider(p)">
+							<img src="images/delete.svg"/>
+						</a>
+						<a class="icon" ng-click="editProvider(p)">
+							<img class="icon" src="images/edit.svg"/>
+						</a>
 					</li>
 				</ul>
 			</div>
-			<button ng-click="addProvider()">Add provider</button>
+			<div> <button ng-click="addProvider()">Add provider</button> </div>
 		</div>
 		</label>
 	</form>

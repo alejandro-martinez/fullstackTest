@@ -1,6 +1,4 @@
 <div ng-controller="ClientCtrl as vm">
-	
-	<h1> List of clients </h1>
 	<div class="container">
 		<h2> Clients </h2>
 		<button ng-click="vm.editClient()">New client</button>
@@ -11,6 +9,7 @@
 			<th> Email </th>
 			<th> Phone </th>
 			<th> Providers </th>
+			<th></th>
 		</tr>
 		<tr ng-repeat="c in vm.clients">
 			<td> {{ c.name }} </td>

@@ -3,17 +3,16 @@ var models  = require('../models/index');
 module.exports = function( app ) {
 	
 	app.get('/providers', function(req, res, next) {
+		res.json([{id:1,name:"ALE"}]);
 		models.provider.findAll().then(function( providers) {
 			res.json( providers );
 		});	
 	});
 
-	app.get('/providers/:id', function(req, res, next) {
-	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
-	});
-
 	app.delete('/providers/:id', function(req, res, next) {
-	  res.json( [ {id:1,name:"Ale",phone:"123123"} ] );
+		models.provider.destroy({where: { id: req.body.id }}).then(function () {
+			res.json(true)
+		});
 	});
 
 	app.post('/providers/:id', function(req, res, next) {

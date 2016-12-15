@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "FullStack test",
   "main": "server.js",
+  "url": "https://github.com/alejandro-martinez/fullstackTest",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Alejandro Martinez",
+  "email": "alejandromartinezap@gmail.com",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
