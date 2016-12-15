@@ -33,13 +33,9 @@ module.exports = function( app ) {
 				var onNext = function( p ) {
 					var provider = { client_id: client.id, provider_id: p.id },
 						params = { where: provider, defaults: provider, transaction: t };
-						if ( p.deleted ) { 
-							return models.client_provider.destroy( params);
-						}
-						else {
-							return models.client_provider.findOrCreate( params);
-						}
-					
+						action = ( p.deleted ) ? 'destroy' : 'findOrCreate';
+
+						return models.client_provider[action]( params);					
 				}
 				return models.sequelize.Promise.map( req.body.providers, onNext);
 
