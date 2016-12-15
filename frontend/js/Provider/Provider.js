@@ -38,6 +38,10 @@ angular.module('FullstackApp.Provider',[])
 		});
 	}
 
+	$scope.editProvider = function( provider ) {
+		provider.editMode = true;
+	}
+
 	$scope.deleteProvider = function( provider ) {
 		if (confirm("Are you sure you want to delete the provider: ".concat(provider.name,"?"))) {
 			ProviderSvc.delete( provider ).then(function( res ) {

@@ -3,6 +3,7 @@ var models  = require('../models/index');
 module.exports = function( app ) {
 	
 	app.get('/providers', function(req, res, next) {
+		res.json([{id:1, name:"prov 1"}])
 		models.provider.findAll().then(function( providers) {
 			res.json( providers );
 		});	

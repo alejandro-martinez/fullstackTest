@@ -27,7 +27,13 @@
 									ng-click="vm.toggleProvider( p )"
 									class="regular-checkbox" />
 							<label for="checkbox-1-1"></label>
-							<div class="tag">{{ p.name }}</div>
+							
+
+							<div ng-hide="p.editMode" class="tag">{{ p.name }}</div>
+							<div ng-show="p.editMode" class="tag">
+								<input ng-model="p.name" type="text" />
+							</div>
+
 						</div>
 						<a class="icon" ng-click="deleteProvider(p)">
 							<img src="images/delete.svg"/>

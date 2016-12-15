@@ -69,8 +69,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 			ClientSvc.delete( vm.client ).then(function( res ) {
 				if ( res.data.deleted ) {
 					// Quiza se pueda refactorizar eliminando directamente vm.client?
-					var i = vm.clients.indexOf( vm.client );
-					vm.clients.splice(i, 1);
+					vm.clients.splice( vm.clients.indexOf( vm.client ) , 1);
 				}
 			});
 		}	
