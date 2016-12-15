@@ -3,14 +3,14 @@
 var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
-var env       = process.env.NODE_ENV || "development";
-var config    = require(path.join(__dirname, '..', 'config', 'env.json'))[env];
+var config    = require("../config.js")();
 var options = {
 	logging: console.log,
 	define: {
 		timestamps: false
 	}
 }
+console.log(config)
 var sequelize = new Sequelize(config.db.name, config.db.user, config.db.password, options);
 var db        = {};
 
