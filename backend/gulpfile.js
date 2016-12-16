@@ -16,6 +16,11 @@ gulp.task('buildCSS', function(cb) {
 });
 
 gulp.task('buildJSAppCode',['buildCSS'], function() {
+
+	fs.exists(main + 'js/bundle.js', function(file) {
+		if (file) fs.writeFileSync(main + "js/bundle.js", '');
+	});
+
 	return gulp.src([main + 'js/**/*.js',main + 'js/main.js'])
 				.pipe(ngAnnotate())	
 				.pipe(transpile())
@@ -27,7 +32,7 @@ gulp.task('buildJSAppCode',['buildCSS'], function() {
 gulp.task('buildJSBundle',['buildJSAppCode'], function() {
 	return gulp.src([
 		bower + 'angular/angular.js',
-		bower + 'angular-ui-router/release/angular-ui-router.js',
+		bower + 'angular-route/angular-route.js',
 		main + 'js/temp.js'
 	])
 	.pipe(concat('./bundle.js'))	

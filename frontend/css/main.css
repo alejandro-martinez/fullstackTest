@@ -103,6 +103,9 @@ table td {
 	background: #fff;
 }
 
+table td:last-child {
+	text-align:center;
+}
 
 table td:last-child button {
 	background:none;
