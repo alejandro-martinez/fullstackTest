@@ -5,7 +5,7 @@
 	<meta charset="utf-8">
 	<title>FullStack test</title>
 	<meta name="description" content="FullStack test">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/css-min.css">
 </head>
 <body ng-app="FullstackApp">
 	
@@ -13,8 +13,11 @@
 	<section ng-view></section>
 	<script type="text/javascript" src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
+	<!-- Development 
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/Client/Client.js"></script>
-	<script type="text/javascript" src="js/Provider/Provider.js"></script>
+	<script type="text/javascript" src="js/Provider/Provider.js"></script>-->
+	<!-- Production -->
+	<script type="text/javascript" src="js/bundle.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 "use strict";
 
 angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
-.config([ '$routeProvider', function( $routeProvider ) {
+.config(function( $routeProvider ) {
 	
 	$routeProvider.
 		when("/", 	{ 
@@ -11,7 +11,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 			templateUrl: "Client/edit.html"
 		}).
 		otherwise({ redirectTo: '/' });
-}])
+})
 .factory('ClientFct', function() {
 	
 	var clientFct = {
@@ -30,14 +30,13 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 
 	return clientFct;
 })
-.service('ClientSvc', [ '$http', function( $http ) {
+.service('ClientSvc',function( $http ) {
 	
 	this.getAll = function() { return $http.get('/clients')	}
 	this.delete = function( client ) { return $http.delete('/clients/' + client.id) }
 	this.save = function( client ) { return $http.post('/clients/:id', client) }
-}])
-.controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct', 
-	function( $scope, ClientSvc, ClientFct) {
+})
+.controller('ClientCtrl', function( $scope, ClientSvc, ClientFct) {
 	
 	var vm = this;
 	var newProviders = [];
@@ -152,4 +151,4 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	});
 
 	vm.loadClientList();
-}])
+})

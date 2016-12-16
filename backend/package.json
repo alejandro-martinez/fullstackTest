@@ -4,9 +4,6 @@
   "description": "FullStack test",
   "main": "server.js",
   "url": "https://github.com/alejandro-martinez/fullstackTest",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Alejandro Martinez",
   "email": "alejandromartinezap@gmail.com",
   "license": "ISC",
@@ -14,8 +11,15 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-es6-module-transpiler": "^0.2.2",
+    "gulp-minify": "0.0.14",
+    "gulp-ng-annotate": "^2.0.0",
     "mysql": "^2.12.0",
     "mysql2": "^1.1.2",
     "sequelize": "^3.27.0"
+  },
+  "devDependencies": {
+    "del": "^2.2.2"
   }
 }

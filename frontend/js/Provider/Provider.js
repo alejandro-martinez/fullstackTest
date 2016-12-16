@@ -1,6 +1,7 @@
 "use strict";
+
 angular.module('FullstackApp.Provider',[])
-.factory('ProviderFct', [function() {
+.factory('ProviderFct', function() {
 
 	var providerFct = {
 		new: function() {
@@ -15,15 +16,14 @@ angular.module('FullstackApp.Provider',[])
 	}
 
 	return providerFct;
-}])
-.service('ProviderSvc', ['$http', function( $http ) {
+})
+.service('ProviderSvc',function( $http ) {
 
 	this.getAll = function() { return $http.get('/providers')	}
 	this.delete = function( provider ) { return $http.delete('/providers/' + provider.id) }
 	this.save = function( provider ) { return $http.post('/providers/:id', provider) }
-}])
-.controller('ProviderCtrl', [ '$scope', 'ProviderSvc', 'ProviderFct',
-	function( $scope, ProviderSvc, ProviderFct ) {
+})
+.controller('ProviderCtrl',function( $scope, ProviderSvc, ProviderFct ) {
 
 	angular.extend($scope, {
 		providers: [],
@@ -64,4 +64,4 @@ angular.module('FullstackApp.Provider',[])
 		$scope.providers = res.data;
 	});
 
-}]);
+});
