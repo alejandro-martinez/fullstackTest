@@ -1,7 +1,6 @@
  var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	ngAnnotate = require('gulp-ng-annotate'),
-	transpile = require('gulp-es6-module-transpiler'),
 	minify = require('gulp-minify');
 	fs = require('fs');
 
@@ -22,8 +21,7 @@ gulp.task('buildJSAppCode',['buildCSS'], function() {
 	});
 
 	return gulp.src([main + 'js/**/*.js',main + 'js/main.js'])
-				.pipe(ngAnnotate())	
-				.pipe(transpile())
+				.pipe(ngAnnotate())
 				.pipe(minify())
 				.pipe(concat('./temp.js'))
 				.pipe(gulp.dest("../frontend/js/"));
