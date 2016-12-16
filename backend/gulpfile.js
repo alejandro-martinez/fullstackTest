@@ -32,6 +32,10 @@ gulp.task('buildJSBundle',['buildJSAppCode'], function() {
 	])
 	.pipe(concat('./bundle.js'))	
 	.pipe(gulp.dest("../frontend/js/"))
+	.on('end', function() {
+		fs.writeFileSync(main + "js/temp.js", '');
+		fs.writeFileSync(main + "css/temp.css", '');
+	})
 });
 
 gulp.task('default', ['buildCSS', 'buildJSAppCode','buildJSBundle']);
