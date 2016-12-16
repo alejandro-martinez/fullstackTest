@@ -51,17 +51,24 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		vm.modalShown = !vm.modalShown;
 	}
 
+	var findClient = function( id, onlyIndex ) {
+		var i = vm.clients.map(function(_c) { return _c.id; }).indexOf( id );
+		return (onlyIndex) ? i : vm.clients[i];	
+	}
+
 	// Open a modal window to create / update a client
-	vm.editClient = function( c ) {
-		var i = vm.clients.map(function(_c) { return _c.id; }).indexOf( c.id );
-		var client = vm.clients[i];
-				
-		// Reset not saved changes in client providers list
-		if ( client ) {
-			client.providers.map(function(p) { 
-				delete p.deleted;
-				return p;
-			});
+	vm.editClient = function( _client ) {
+		if ( _client ) {
+			var i = vm.clients.map(function(_c) { return _c.id; }).indexOf( _client.id );
+			var client = findClient( _client.id );
+					
+			// Reset not saved changes in client providers list
+			if ( client ) {
+				client.providers.map(function(p) { 
+					delete p.deleted;
+					return p;
+				});
+			}
 		}
 		vm.client = (client) ? client : ClientFct.new();
 
@@ -72,8 +79,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
 			ClientSvc.delete( vm.client ).then(function( res ) {
 				if ( res.data.success ) {
-					var i = vm.clients.map(function(c) { return c.id; }).indexOf( vm.client.id );
-					vm.clients.splice(i, 1);
+					vm.clients.splice( findClient( vm.client.id, true ), 1);
 					vm.toggleModal();
 				}
 				else {
