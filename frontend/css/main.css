@@ -32,6 +32,7 @@ body {
 	font-family: 'Arial';
 	line-height: 1;
 	padding:10px;
+	color:#515153;
 }
 ol, ul {
 	list-style: none;
@@ -63,8 +64,9 @@ h2 {
 	color:#43829B;
 }
 .icon {
-	width:1.1em;
+	width: .8em;
 }
+
 .absoluteCenter {
 	position: absolute;
 	width: 50%;
@@ -82,40 +84,49 @@ table {
 }
 table th {
 	border: 2px solid #C9C9C9;
-	padding: 9px 21px;
+	padding: 8px 1px 8px 17px;
 	font-weight:bold;
 	text-align:left;
+	font-size:.9em;
+}
+table th, button {
 	background: #fbfbfb; /* Old browsers */
-	background: -moz-linear-gradient(top,  #fbfbfb 0%, #eeeeee 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top,  #fbfbfb 0%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  #fbfbfb 0%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	background: -moz-linear-gradient(top,  #fbfbfb 20%, #eeeeee 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient(top,  #fbfbfb 20%,#eeeeee 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to bottom,  #fbfbfb 20%,#eeeeee 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#eeeeee',GradientType=0 ); /* IE6-9 */
 }
 table td {
 	color:#787878;
 	border: 1px solid #C9C9C9;
-	padding: 0 21px;
+	padding: 1px 17px 0 17px;
 	background: #fff;
 }
-table td:last-child {
-	width:20px;	
-}
 
-table td:last-child button{
+
+table td:last-child button {
 	background:none;
 	border:none;
+	font-size:1em;
 	color:#43829B;
 	text-decoration:underline;
+}
+table td:last-child button:active {
+	border:none;
+} 
+input, button, table td {
+	text-shadow:.1px .1px .1px #787878;
 }
 /* INIT - MODAL WINDOW */
 
 .ng-modal-dialog {
+	max-width:560px;
 	background:#F0F5F9;
 	z-index:3;
 	width: 80%;
 	background: #fff;
 	border:2px solid #E2E2E2;
-	border-radius:3px;
+	border-radius:4px;
 }
 .ng-modal-dialog-content form input,
 .ng-modal-dialog-content ul {
@@ -125,26 +136,30 @@ table td:last-child button{
 	text-align: left;
 }
 .ng-modal-dialog h2 {
-	padding:12px 20px;
+	padding:15px 20px;
+	font-weight:bold;
 	border-bottom:1px solid #e0e0e0;
 }
 /* END - MODAL WINDOW */
 
 button {
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px; 
-	border-radius: 3px;
-	padding:5px 15px 6px 15px;
+	font-size: .72em;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 5px;
+	padding: 8.5px 15px;
 	color:#787878;
 	-webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+	transition-duration: 0.4s;
+	box-sizing: border-box;
 	border:1px solid #e0e0e0;
 	background: #f3f3f3; /* Old browsers */
 	background: -moz-linear-gradient(top,  #f3f3f3 0%, #e2e2e2 100%); /* FF3.6-15 */
 	background: -webkit-linear-gradient(top,  #f3f3f3 0%,#e2e2e2 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  #f3f3f3 0%,#e2e2e2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	background: linear-gradient(to bottom,  #f3f3f3 20%,#e2e2e2 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
-
+	-webkit-transition-duration: 0.4s; /* Safari */
+	transition-duration: 0.4s;
 }
 button:after {
     content: "";
@@ -161,11 +176,6 @@ button:active:after {
     margin: 0;
     opacity: 1;
     transition: 0s
-}
-
-button {
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
 }
 button:hover {
     border:1px solid #c0c0c0;
@@ -195,7 +205,7 @@ button.red {
 	margin-top: 5px;
 }
 .ng-modal-dialog-content form {
-	margin:20px;
+	margin: 21px;
 }
 
 .ng-modal-dialog-content form + div {
@@ -213,10 +223,12 @@ form .inputContainer input {
 	display:inline-block;
 }
 form .inputContainer label {
-	font-size:.8em;
+	font-size: .72em;
 	float:left;
+	font-weight: bold;
 	text-align:right;
-	margin: 12px 15px 0 0;
+	color:#000;
+	margin: 10px 12px 0 0;
 }
 .editContainer .formActions {
 	overflow:hidden;
@@ -233,18 +245,19 @@ input[type="text"],
 input[type="email"] {
 	color:#787878;
 	border-radius:4px;
-	padding: 10px;
+	padding: 7px 9px;
 	border:1px solid #b0b0b0;
+	font-size:.78em !important;
 }
 .inputContainer {
-	margin-bottom:13px !important;
+	margin-bottom: 11px !important;
 }
 .inputContainer > label {
 	width: 20%;
 	text-align:left;
 }
 .inputContainer input {
-	width: 70%;
+	width: 60%;
 	text-align:left;
 }
 
@@ -261,12 +274,11 @@ form .inputContainer button {
 
 form .inputContainer div ul{
 	box-sizing:border-box;
-	margin-top: 10px;
-	padding: 10px 2px 0 20px;
+	margin-top: 8px;
+	padding: 7px 2px 0 20px;
 	height:50px;
 	border:1px solid #b0b0b0;
-	border-radius:3px;
-	overflow-y:scroll;
+	border-radius:4px;
 }
 /* Providers input */
 
@@ -286,7 +298,7 @@ form .inputContainer div ul{
 	border: 1px solid #cacece;
 	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
 	padding: 7px;
-	border-radius: 3px;
+	border-radius: 4px;
 	display: inline-block;
 	position: relative;
 }
@@ -306,21 +318,23 @@ form .inputContainer div ul{
 	content: '\2714';
 	font-size: 25px;
 	position: absolute;
-	top: -6px;
+	font-family: monospace;
+	top: -7px;
 	font-weight:100;
 	left: 0px;
 	color: #4A4A4C;
 }
 
 .tag {
-	padding:0 20px;
-	width: 200px;
+	padding: 0 0 0 11px;
+	/* width: 200px !important; */
 	position: absolute;
-	top: 2px;
-	left:20px;
+	top: 3px;
+	left: 22px;
+	font-size: .78em;
 	height:20px;
+	font-weight: bold;
 	background:#fff;
-	text-transform: uppercase;
 	display: block;
 	float: left;
 	z-index:3;
@@ -360,7 +374,7 @@ form .inputContainer div button {
 /* CHECKBOX STYLING*/
 form .inputContainer div.checkboxContainer {
 	display:inline-block;
-	width: 100%;
+	/* width: 100%; */
 }
 form .inputContainer div.checkboxContainer .tag {
 	margin:0;
@@ -368,13 +382,16 @@ form .inputContainer div.checkboxContainer .tag {
 }
 form .inputContainer ul li a {
 	display:inline-block;
-	float:right;
-	margin-left: 14px !important;
+	position: absolute;
+	top: 1px !important;
+	right: 11px;
+	z-index: 3;
 }
 form .inputContainer ul li a:last-child{
-	
+	right: 35px;
 }
-form .inputContainer.clientProviders div {
-	width: 47%;
-	font-size:.94em;
+form .inputContainer.clientProviders ul div {
+}
+.editContainer form{
+	margin: 14px 54px;
 }

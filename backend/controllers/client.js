@@ -3,7 +3,7 @@ var models  = require('../models/index');
 module.exports = function( app ) {
 	
 	app.get('/clients', function(req, res, next) {
-		res.json([{id:1,name:"Ale",email:"a@g.com",phone:"123123",providers:[{id:1, name:"prov 1"}]}])
+		
 		var onFind = function( clients ) {
 			res.json( clients );
 		};

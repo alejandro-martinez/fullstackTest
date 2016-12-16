@@ -26,20 +26,16 @@
 									ng-checked="vm.isClientProvider( p.id)"
 									ng-click="vm.toggleProvider( p )"
 									class="regular-checkbox" />
-							<label for="checkbox-1-1"></label>
-							
-
-							<div ng-hide="p.editMode" class="tag">{{ p.name }}</div>
-							<div ng-show="p.editMode" class="tag">
-								<input ng-model="p.name" type="text" />
-							</div>
+							<label></label>
+						
+							<div class="tag">{{ p.name }}</div>
 
 						</div>
 						<a class="icon" ng-click="deleteProvider(p)">
 							<img src="images/delete.svg"/>
 						</a>
 						<a class="icon" ng-click="editProvider(p)">
-							<img class="icon" src="images/edit.svg"/>
+							<img src="images/edit.svg"/>
 						</a>
 					</li>
 				</ul>
