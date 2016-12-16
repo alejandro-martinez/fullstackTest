@@ -73,7 +73,6 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
 			ClientSvc.delete( vm.client ).then(function( res ) {
 				if ( res.data.success ) {
-					// Quiza se pueda refactorizar eliminando directamente vm.client?
 					var i = vm.clients.map(function(c) { return c.id; }).indexOf( vm.client.id );
 					vm.clients.splice(i, 1);
 					vm.toggleModal();
@@ -84,9 +83,9 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 			});
 		}	
 	}
-
+	
+	// Refresh client_providers list
 	vm.refreshProvidersList = function() {
-		// Refresh client_providers list
 		vm.client.providers = vm.client.providers.filter(function( p ) {
 			return !p.hasOwnProperty('deleted') && !p.deleted;
 		});

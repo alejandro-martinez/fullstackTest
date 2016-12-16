@@ -12,7 +12,7 @@ app.use( bodyParser.urlencoded({ extended: true }) );
 
 // Server 
 app.listen( 8000, function() {
-	console.log("Running server on localhost:8000")	
+	console.log("Server running on localhost:8000")	
 });
 
 // REST ROUTES
