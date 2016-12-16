@@ -359,7 +359,7 @@ form .inputContainer ul li label {
 
 form .inputContainer div {
 	display:inline-block;
-	width: 38%;
+	width: 40%;
 }
 form .inputContainer div input,
 form .inputContainer div ul {
@@ -401,9 +401,16 @@ form .inputContainer.clientProviders ul div {
 .editContainer form{
 	margin: 14px 54px;
 }
+
 /* Firefox settings*/
 @-moz-document url-prefix() { 
-  input[type="checkbox"] {
-     top:2px;
-  }
+	input[type="checkbox"] {
+		top:2px;
+	}
+	form .inputContainer div {
+		width: 36.5%;
+	}
+	form .inputContainer.clientProviders div:last-child {
+		width: 33%;
+	}
 }
