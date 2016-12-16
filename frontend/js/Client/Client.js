@@ -33,7 +33,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 .service('ClientSvc', [ '$http', function( $http ) {
 	
 	this.getAll = function() { return $http.get('/clients')	}
-	this.delete = function( client ) { return $http.delete('/clients/:id', client) }
+	this.delete = function( client ) { return $http.delete('/clients/' + client.id) }
 	this.save = function( client ) { return $http.post('/clients/:id', client) }
 }])
 .controller('ClientCtrl', [ '$scope', 'ClientSvc', 'ClientFct', 
@@ -44,13 +44,18 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.clients = [];	
 	vm.modalContent = "js/Client/edit_form.html";
 	
+	var showError = function( err ) {
+		alert("Sorry, an error ocurred: ".concat( err ));
+	}
+
 	vm.toggleModal = function() { 
 		vm.modalShown = !vm.modalShown;
 	}
 
 	// Open a modal window to create / update a client
-	vm.editClient = function( clientIndex ) {
-		var client = vm.clients[ clientIndex ];
+	vm.editClient = function( c ) {
+		var i = vm.clients.map(function(_c) { return _c.id; }).indexOf( c.id );
+		var client = vm.clients[i];
 				
 		// Reset not saved changes in client providers list
 		if ( client ) {
@@ -67,9 +72,14 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.deleteClient = function() {
 		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
 			ClientSvc.delete( vm.client ).then(function( res ) {
-				if ( res.data.deleted ) {
+				if ( res.data.success ) {
 					// Quiza se pueda refactorizar eliminando directamente vm.client?
-					vm.clients.splice( vm.clients.indexOf( vm.client ) , 1);
+					var i = vm.clients.map(function(c) { return c.id; }).indexOf( vm.client.id );
+					vm.clients.splice(i, 1);
+					vm.toggleModal();
+				}
+				else {
+					showError( res.data.err );
 				}
 			});
 		}	
@@ -91,16 +101,18 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		ClientSvc.save( vm.client ).then(function( res ) {
 
 			vm.refreshProvidersList();
-
-			if ( res.data.created ) {
-				vm.client.id = res.data.id;
-				vm.clients.push( vm.client);
+			if ( res.data.success ) {
+				if ( res.data.created ) {
+					vm.client.id = res.data.id;
+					vm.clients.push( vm.client);
+				}	
+				vm.toggleModal();
 			}
-			
-			vm.toggleModal();
-
-		}).catch(function( err ) {
-			alert("Sorry, an error ocurred,",err)
+			else {
+				showError( res.data.err );
+			}
+		}).catch(function( res ) {
+			showError( res.data.err );
 		});
 	}
 

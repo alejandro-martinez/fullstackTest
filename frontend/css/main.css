@@ -140,6 +140,9 @@ input, button, table td {
 	font-weight:bold;
 	border-bottom:1px solid #e0e0e0;
 }
+.ng-modal-dialog-content form input.ng-invalid {
+	border-color:#e74241 !important;
+}
 /* END - MODAL WINDOW */
 
 button {
@@ -276,7 +279,7 @@ form .inputContainer div ul{
 	box-sizing:border-box;
 	margin-top: 8px;
 	padding: 7px 2px 0 20px;
-	height:50px;
+	max-height:250px;
 	border:1px solid #b0b0b0;
 	border-radius:4px;
 }

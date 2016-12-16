@@ -18,8 +18,8 @@ module.exports = function( app ) {
 	});
 
 	app.delete('/clients/:id', function(req, res, next) {
-		models.client.destroy({where: { id: req.params.id }}).then(function () {
-			res.json(true)
+		models.client.destroy({ where: { id: req.params.id }}).then(function ( err, a ) {
+			res.json({ success: err > 0 });
 		});
 	});
 
@@ -27,7 +27,7 @@ module.exports = function( app ) {
 	app.post('/clients/:id', function(req, res, next) {
 
 		var onClientUpdated = function( client, created ) {
-			var response = { id: client.id, created: created, success: true };
+			var response = { success: true, id: client.id, created: created, success: true };
 
 			models.sequelize.transaction(function( t ) { 
 
@@ -36,7 +36,9 @@ module.exports = function( app ) {
 						params = { where: provider, defaults: provider, transaction: t };
 						action = ( p.deleted ) ? 'destroy' : 'findOrCreate';
 
-						return models.client_provider[action]( params);					
+						return models.client_provider[action]( params ).catch(function(err) {
+							response.success = false;
+						});					
 				}
 				return models.sequelize.Promise.map( req.body.providers, onNext);
 
@@ -46,6 +48,8 @@ module.exports = function( app ) {
 		}
 		var params = { where: { id: req.body.id }, defaults: req.body };
 
-		models.client.findOrCreate( params ).spread( onClientUpdated );
+		models.client.findOrCreate( params ).spread( onClientUpdated ).catch(function(err) {
+			res.json( { success: false, err: err.errors[0].message });
+		});					
 	})
 }
