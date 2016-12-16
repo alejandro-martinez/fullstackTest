@@ -39,7 +39,13 @@ angular.module('FullstackApp.Provider',[])
 	}
 
 	$scope.editProvider = function( provider ) {
-		provider.editMode = true;
+		var name = prompt("Enter the provider's name", provider.name);
+		if ( angular.isString( name ) && name.length ) {
+			provider.name = name;
+			ProviderSvc.save( provider ).then(function( res ) {
+				$scope.$emit('providersChange', provider);
+			});
+		}	
 	}
 
 	$scope.deleteProvider = function( provider ) {
@@ -48,7 +54,7 @@ angular.module('FullstackApp.Provider',[])
 				if ( res.data.deleted ) {
 					var i = $scope.providers.indexOf( provider );
 					$scope.providers.splice(i, 1);
-					$scope.$emit('providerDeleted', provider);
+					$scope.$emit('providersChange', provider);
 				}
 			});
 		}

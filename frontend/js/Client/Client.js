@@ -133,7 +133,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		});
 	}
 
-	$scope.$on('providerDeleted', function (event, provider) {
+	$scope.$on('providersChange', function (event, provider) {
 		var i = newProviders.map(function(p) { return p.id; }).indexOf( provider.id );
 		newProviders.splice(i,1);
 		vm.toggleProvider( provider );
