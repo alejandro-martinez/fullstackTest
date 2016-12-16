@@ -11,8 +11,8 @@ var bower = main + "bower_components/";
 
 gulp.task('buildCSS', function(cb) {
 	return gulp.src([main  + 'css/main.css'])
-		.pipe(concat(main + 'css/'))
-		.pipe(gulp.dest(main + 'css'))
+		.pipe(concat('./bundle.css'))
+		.pipe(gulp.dest('../frontend/css/'))
 });
 
 gulp.task('buildJSAppCode',['buildCSS'], function() {
