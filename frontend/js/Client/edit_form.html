@@ -20,7 +20,7 @@
 				<input type="text" ng-model="newProvider.name" /> 
 				
 				<ul ng-if="providers.length">
-					<li ng-repeat="p in providers | filter:newProvider.name | orderBy: 'name'  track by p.id">
+					<li ng-repeat="p in providers | filter:newProvider.name | orderBy: 'name'  track by $index">
 						<div class="checkboxContainer">
 							<input type="checkbox"
 									ng-checked="vm.isClientProvider( p.id)"

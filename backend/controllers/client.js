@@ -9,8 +9,8 @@ module.exports = function( app ) {
 
 		var params = {
 			include: [{ 
-				model: models.provider,
-				attributes: ['id', 'name']
+				model: models.client_provider,
+				attributes: [['provider_id', 'id']]
 			}]
 		}
 		models.client.findAll( params ).then( onFind );		
@@ -39,7 +39,7 @@ module.exports = function( app ) {
 							response.success = false;
 						});					
 				}
-				return models.sequelize.Promise.map( req.body.providers, onNext);
+				return models.sequelize.Promise.map( req.body.client_providers, onNext);
 
 			}).then(function() {
 				res.json( response );

@@ -27,6 +27,8 @@ fs.readdirSync(__dirname)
 db.provider.belongsToMany(db.client, { through: 'client_provider', foreignKey: 'provider_id'});
 db.client.belongsToMany(db.provider, { through: 'client_provider', foreignKey: 'client_id'});
 
+db.client.hasMany(db.client_provider, {foreignKey:'client_id'});
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
