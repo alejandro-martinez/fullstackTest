@@ -64,7 +64,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 				}
 			});
 		
-			return list.join(",");
+			return list.join(", ");
 		}
 		return "";
 	}
