@@ -21,7 +21,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 				id: null,
 				name: "",
 				phone:"",
-				providers:[]
+				client_providers:[]
 			}
 
 			return model;	
@@ -36,12 +36,12 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	this.delete = function( client ) { return $http.delete('/clients/' + client.id) }
 	this.save = function( client ) { return $http.post('/clients/:id', client) }
 })
-.controller('ClientCtrl', function( $scope, ClientSvc, ClientFct) {
+.controller('ClientCtrl', function( $scope, ClientSvc, ClientFct, ProviderSvc) {
 	
 	var vm = this;
 	vm.clients = [];	
 	vm.modalContent = "js/Client/edit_form.html";
-	
+
 	var showError = function( err ) {
 		alert("Sorry, an error ocurred: ".concat( err ));
 	}
@@ -50,15 +50,19 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		vm.modalShown = !vm.modalShown;
 	}
 
+	var findIndex = function( array, id ) {
+		return array.map(function(elem) { return elem.id; }).indexOf( id );
+	}
+
 	var findClient = function( id, onlyIndex ) {
-		var i = vm.clients.map(function(_c) { return _c.id; }).indexOf( id );
+		var i = findIndex( vm.clients, id );
 		return (onlyIndex) ? i : vm.clients[i];	
 	}
 
 	// Open a modal window to create / update a client
 	vm.editClient = function( _client ) {
 		if ( _client ) {
-			var client = findClient( _client.id );		
+			var client = findClient( _client.id );
 		}
 		vm.client = (client) ? client : ClientFct.new();
 
@@ -79,31 +83,46 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		}	
 	}
 
+	vm.formatClientProviders = function( providers ) {
+		
+		if ( $scope.providers.length && providers.length) {
+			var list = [];
+			providers.forEach(function( p ) {
+				var index = findIndex( $scope.providers, p.id );
+				list.push( $scope.providers[ index ].name );
+			});
+			return list.join(",");
+		}
+	}
+
 	// Creates or update a client
-	vm.saveClient = function() {
+	vm.saveClient = function( form ) {
+		if ( form.$valid ) {
 
-		ClientSvc.save( vm.client ).then(function( res ) {
+			ClientSvc.save( vm.client ).then(function( res ) {
 
-			if ( res.data.success ) {
-				if ( res.data.created ) {
-					vm.client.id = res.data.id;
-					vm.clients.push( vm.client);
-				}	
-				vm.toggleModal();
-			}
-			else {
+				if ( res.data.success ) {
+					vm.client = res.data.client;
+
+					if ( res.data.created ) {	
+						vm.clients.push( vm.client );
+					}
+					vm.toggleModal();
+				}
+				else {
+					showError( res.data.err );
+				}
+			}).catch(function( res ) {
 				showError( res.data.err );
-			}
-		}).catch(function( res ) {
-			showError( res.data.err );
-		});
+			});
+		}
 	}
 
 	// Asociates a provider to a client
 	vm.toggleProvider = function( provider ) {	
-		if ( vm.isClientProvider( provider.id ))	{
-			var index = vm.findProvider( provider.id, true );
-			vm.client.client_providers.splice(index, 1 );
+		if ( vm.isClientProvider( provider.id )) {
+			var index = findIndex( vm.client.client_providers, provider.id );
+			vm.client.client_providers[index].delete = true;
 		}
 		else {
 			vm.client.client_providers.push({ id: provider.id })
@@ -112,10 +131,12 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 
 	// Find a provider in client_providers list
 	vm.findProvider = function( id ) {
-		var found = vm.client.client_providers.filter(function(p, k, _this) { 
-			return ( p.id === id ) && _this[k];
-		});
-		return found[0];
+		if ( vm.client.client_providers ) {
+			var found = vm.client.client_providers.filter(function(p, k, _this) { 
+				return ( p.id === id ) && _this[k];
+			});
+			return found[0];
+		}
 	}
 
 	// Returns true if provider is as asociated with the client
@@ -123,14 +144,10 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		return vm.client && vm.findProvider( id ); 
 	}
 
-	$scope.$on('providersChange', function (event, provider) {
-		var i = newProviders.map(function(p) { return p.id; }).indexOf( provider.id );
-		newProviders.splice(i,1);
-		vm.toggleProvider( provider );
-		vm.loadClientList();
+	ProviderSvc.getAll().then(function( providers ) {
+		$scope.providers = providers;		
 	});
-
-	// Returns list of clients
+	// Returns list of clients, and adds providers info to each one
 	ClientSvc.getAll().then( function( res ) {
 		vm.clients = res.data;
 	});

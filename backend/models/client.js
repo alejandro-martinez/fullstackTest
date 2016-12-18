@@ -21,6 +21,17 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: true
     }
   }, {
-    tableName: 'client'
+    tableName: 'client',
+    classMethods: {
+      getMsgError: function( name ) {
+        var msg = "";
+        switch( name ) {
+          case 'SequelizeUniqueConstraintError':
+          msg = "That email is already registered";
+          break;
+        }
+        return msg;
+      }
+    }
   });
 };

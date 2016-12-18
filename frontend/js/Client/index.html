@@ -15,11 +15,7 @@
 			<td> {{ c.name }} </td>
 			<td> {{ c.email }} </td>
 			<td> {{ c.phone }} </td>
-			<td> 
-				<span ng-repeat="p in c.providers | orderBy:'name' track by $index">
-					{{ p.name.concat($last ? "" : ",") }}
-				</span>
-			</td>
+			<td> {{ vm.formatClientProviders( c.client_providers ) }}</td>
 			<td> <button ng-click="vm.editClient(c)"> Edit </button> </td>
 		</tr>
 		</table>

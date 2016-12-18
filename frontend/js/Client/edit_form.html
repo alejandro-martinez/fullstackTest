@@ -1,7 +1,7 @@
 <h2>{{ ( vm.client.id ) ? 'Edit' : 'New' }} Client</h2>
 
 <div class="editContainer">
-	<form novalidate>
+	<form name="clientForm">
 		<div class="inputContainer">
 			<label>Name:</label>
 			<input type="text" required ng-model="vm.client.name" />
@@ -47,7 +47,7 @@
 
 	<div class="formActions">
 		<button ng-show="vm.client.id" ng-click="vm.deleteClient()" class="red">Delete client</button>
-		<button ng-click="vm.saveClient()">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
+		<button type="submit" ng-click="vm.saveClient(clientForm)">{{ ( vm.client.id ) ? 'Save ' : 'Add' }} Client </button>
 		<button ng-click="vm.toggleModal( true )">Cancel</button>
 	</div>
 </div>

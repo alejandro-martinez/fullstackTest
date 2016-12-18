@@ -21,6 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   }, {
-    tableName: 'client_provider'
+    tableName: 'client_provider',
+    underscored: true
   });
 };
