@@ -143,7 +143,7 @@ input, button, table td {
 	font-weight:bold;
 	border-bottom:1px solid #e0e0e0;
 }
-.ng-modal-dialog-content form input.ng-invalid {
+.ng-modal-dialog-content form input.ng-not-empty.ng-invalid {
 	border-color:#e74241 !important;
 }
 /* END - MODAL WINDOW */
