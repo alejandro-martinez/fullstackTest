@@ -10,7 +10,7 @@ module.exports = function( app ) {
 
 	app.delete('/providers/:id', function(req, res, next) {
 		models.provider.destroy({ where: { id: req.params.id } }).then(function () {
-			res.json({ deleted: true });
+			res.sendStatus(200);
 		});
 	});
 
@@ -31,11 +31,18 @@ module.exports = function( app ) {
 					else {
 						callback( response );
 					}
+			}).catch(function( err ) {
+				callback( err )
 			});
 		}
 
 		updateCreate(function( response ) {
-			res.json( response );
+			if (response.hasOwnProperty('model')) {
+				res.sendStatus(500).json({ err: response.err[0].msg } );
+			}
+			else {
+				res.sendStatus(200).json( response );
+			}
 		});
 	});
 }
