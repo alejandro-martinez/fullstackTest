@@ -17,8 +17,8 @@ module.exports = function( app ) {
 	});
 
 	app.delete('/clients/:id', function(req, res, next) {
-		models.client.destroy({ where: { id: req.params.id }}).then(function ( err, a ) {
-			res.json({ success: err > 0 });
+		models.client.destroy({ where: { id: req.params.id }}).then(function ( deleted) {
+			res.sendStatus(200);
 		});
 	});
 
@@ -38,8 +38,8 @@ module.exports = function( app ) {
 			};
 			
 			models.client.findOne(asociatedModel).then(function( client ) {
-				Object.assign(response, { client: client, success:true});							
-				res.json(response);
+				Object.assign(response, { client: client });							
+				res.status(200).json(response);
 			});
 		}
 
@@ -50,8 +50,7 @@ module.exports = function( app ) {
 				action = ( prov.delete ) ? 'destroy' : 'findOrCreate';
 
 				return models.client_provider[action]( params ).catch(function(err) {
-					response.success = false;
-					response.err = err.errors;
+					res.sendStatus(500).json({ err: err.errors[0].message });
 				});
 		}
 
@@ -65,8 +64,8 @@ module.exports = function( app ) {
 						return models.sequelize.Promise.map( req.body.client_providers, updateClientProviders.bind(this,t,client));
 					}).then( sendResponse );
 				}).catch(function(err) {
-					response.err = models.client.getMsgError(err.name);
-					res.json( response );
+					response.err = ;
+					res.status(500).json({err: models.client.getMsgError(err.name)});
 				});
 			}
 			else {
@@ -76,7 +75,7 @@ module.exports = function( app ) {
 		
 		// Updates o create a client
 		models.client.findOrCreate( params ).spread( onClient ).catch(function(err) {
-			res.json( { success: false, err: models.client.getMsgError(err.name) });
+			res.status(500).json( { err: models.client.getMsgError(err.name) });
 		});
 	})
 }

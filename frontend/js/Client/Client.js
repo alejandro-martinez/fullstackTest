@@ -57,7 +57,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.deleteClient = function() {
 		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
 			ClientSvc.delete( vm.client ).then(function( res ) {
-				if ( res.data.success ) {
+				if ( res.status == 200 ) {
 					vm.clients.splice( findClient( vm.client.id, true ), 1);
 					vm.toggleModal();
 				}
@@ -99,8 +99,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.saveClient = function( form ) {
 		if ( form.$valid ) {
 			ClientSvc.save( vm.client ).then(function( res ) {
-
-				if ( res.data.success ) {
+				if ( res.status === 200 ) {
 					vm.client = res.data.client;
 					if ( res.data.created ) vm.clients.push( vm.client );
 					vm.toggleModal();

@@ -305,6 +305,9 @@ font-style: italic;
     <h4 class="field-label">200</h4>
     A json object with the results of the operations
         <a href="#Object">Object</a>
+    <h4 class="field-label">500</h4>
+    A json object containing the operation error&#39;s
+        <a href="#Object">Object</a>
   </div> <!-- method -->
   <hr/>
   <h1><a name="CreatingAProviderUpdatingAProvider">CreatingAProviderUpdatingAProvider</a></h1>
@@ -344,6 +347,9 @@ font-style: italic;
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
     A json object with the results of the operations
+        <a href="#Object">Object</a>
+    <h4 class="field-label">500</h4>
+    A json object containing the operation error&#39;s
         <a href="#Object">Object</a>
   </div> <!-- method -->
   <hr/>
@@ -481,6 +487,7 @@ font-style: italic;
     <li><a href="#ClientProvider"><code>ClientProvider</code></a></li>
     <li><a href="#ClientSaveResponse"><code>ClientSaveResponse</code></a></li>
     <li><a href="#DeleteResponse"><code>DeleteResponse</code></a></li>
+    <li><a href="#ErrorResponse"><code>ErrorResponse</code></a></li>
     <li><a href="#Provider"><code>Provider</code></a></li>
     <li><a href="#ProviderSaveResponse"><code>ProviderSaveResponse</code></a></li>
   </ol>
@@ -507,8 +514,7 @@ font-style: italic;
     <h3 class="field-label"><a name="ClientSaveResponse">ClientSaveResponse - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'></div>
     <div class="field-items">
-      <div class="param">success (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Result of the operation </div>
-<div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if was a new record </div>
+      <div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if a new record was created </div>
 <div class="param">model (optional)</div><div class="param-desc"><span class="param-type"><a href="#Provider">Provider</a></span>  </div>
 <div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s phone. </div>
 <div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s email. </div>
@@ -519,6 +525,13 @@ font-style: italic;
     <div class='model-description'></div>
     <div class="field-items">
       <div class="param">success (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if client was deleted succesfuly </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="ErrorResponse">ErrorResponse - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">err (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Description of the error </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
@@ -533,8 +546,7 @@ font-style: italic;
     <h3 class="field-label"><a name="ProviderSaveResponse">ProviderSaveResponse - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'></div>
     <div class="field-items">
-      <div class="param">success (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Result of the operation </div>
-<div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if was a new record </div>
+      <div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if was a new record </div>
 <div class="param">model (optional)</div><div class="param-desc"><span class="param-type"><a href="#Provider">Provider</a></span>  </div>
     </div>  <!-- field-items -->
   </div>
