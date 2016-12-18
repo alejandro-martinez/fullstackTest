@@ -1,0 +1,542 @@
+<!doctype html>
+<html>
+  <head>
+    <title>FullStackTest Api</title>
+    <style type="text/css">
+      body {
+	font-family: Trebuchet MS, sans-serif;
+	font-size: 15px;
+	color: #444;
+	margin-right: 24px;
+}
+
+h1	{
+	font-size: 25px;
+}
+h2	{
+	font-size: 20px;
+}
+h3	{
+	font-size: 16px;
+	font-weight: bold;
+}
+hr	{
+	height: 1px;
+	border: 0;
+	color: #ddd;
+	background-color: #ddd;
+}
+
+.app-desc {
+  clear: both;
+  margin-left: 20px;
+}
+.param-name {
+  width: 100%;
+}
+.license-info {
+  margin-left: 20px;
+}
+
+.license-url {
+  margin-left: 20px;
+}
+
+.model {
+  margin: 0 0 0px 20px;
+}
+
+.method {
+  margin-left: 20px;
+}
+
+.method-notes	{
+	margin: 10px 0 20px 0;
+	font-size: 90%;
+	color: #555;
+}
+
+pre {
+  padding: 10px;
+  margin-bottom: 2px;
+}
+
+.http-method {
+ text-transform: uppercase;
+}
+
+pre.get {
+  background-color: #0f6ab4;
+}
+
+pre.post {
+  background-color: #10a54a;
+}
+
+pre.put {
+  background-color: #c5862b;
+}
+
+pre.delete {
+  background-color: #a41e22;
+}
+
+.huge	{
+	color: #fff;
+}
+
+pre.example {
+  background-color: #f3f3f3;
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+
+code {
+  white-space: pre;
+}
+
+.nickname {
+  font-weight: bold;
+}
+
+.method-path {
+  font-size: 1.5em;
+  background-color: #0f6ab4;
+}
+
+.up {
+  float:right;
+}
+
+.parameter {
+  width: 500px;
+}
+
+.param {
+  width: 500px;
+  padding: 10px 0 0 20px;
+  font-weight: bold;
+}
+
+.param-desc {
+  width: 700px;
+  padding: 0 0 0 20px;
+  color: #777;
+}
+
+.param-type {
+  font-style: italic;
+}
+
+.param-enum-header {
+width: 700px;
+padding: 0 0 0 60px;
+color: #777;
+font-weight: bold;
+}
+
+.param-enum {
+width: 700px;
+padding: 0 0 0 80px;
+color: #777;
+font-style: italic;
+}
+
+.field-label {
+  padding: 0;
+  margin: 0;
+  clear: both;
+}
+
+.field-items	{
+	padding: 0 0 15px 0;
+	margin-bottom: 15px;
+}
+
+.return-type {
+  clear: both;
+  padding-bottom: 10px;
+}
+
+.param-header {
+  font-weight: bold;
+}
+
+.method-tags {
+  text-align: right;
+}
+
+.method-tag {
+  background: none repeat scroll 0% 0% #24A600;
+  border-radius: 3px;
+  padding: 2px 10px;
+  margin: 2px;
+  color: #FFF;
+  display: inline-block;
+  text-decoration: none;
+}
+
+    </style>
+  </head>
+  <body>
+  <h1>FullStackTest Api</h1>
+    <div class="app-desc">Client/Providers CRUD</div>
+    <div class="app-desc">More information: <a href="https://helloreverb.com">https://helloreverb.com</a></div>
+    <div class="app-desc">Contact Info: <a href="hello@helloreverb.com">hello@helloreverb.com</a></div>
+    <div class="app-desc">Version: 1.0.0</div>
+    <div class="app-desc">BasePath:/</div>
+    <div class="license-info">All rights reserved</div>
+    <div class="license-url">http://apache.org/licenses/LICENSE-2.0.html</div>
+  <h2>Access</h2>
+
+  <h2><a name="__Methods">Methods</a></h2>
+  [ Jump to <a href="#__Models">Models</a> ]
+
+  <h3>Table of Contents </h3>
+  <div class="method-summary"></div>
+  <h4><a href="#ClientsList">ClientsList</a></h4>
+  <ul>
+  <li><a href="#clientsGet"><code><span class="http-method">get</span> /clients</code></a></li>
+  </ul>
+  <h4><a href="#CreatingAClientUpdatingAClient">CreatingAClientUpdatingAClient</a></h4>
+  <ul>
+  <li><a href="#clientsidPost"><code><span class="http-method">post</span> /clients/:id</code></a></li>
+  </ul>
+  <h4><a href="#CreatingAProviderUpdatingAProvider">CreatingAProviderUpdatingAProvider</a></h4>
+  <ul>
+  <li><a href="#providersidPost"><code><span class="http-method">post</span> /providers/:id</code></a></li>
+  </ul>
+  <h4><a href="#DeletingClients">DeletingClients</a></h4>
+  <ul>
+  <li><a href="#clientsidDelete"><code><span class="http-method">delete</span> /clients/:id</code></a></li>
+  </ul>
+  <h4><a href="#DeletingProviders">DeletingProviders</a></h4>
+  <ul>
+  <li><a href="#providersidDelete"><code><span class="http-method">delete</span> /providers/:id</code></a></li>
+  </ul>
+  <h4><a href="#ProvidersList">ProvidersList</a></h4>
+  <ul>
+  <li><a href="#providersGet"><code><span class="http-method">get</span> /providers</code></a></li>
+  </ul>
+
+  <h1><a name="ClientsList">ClientsList</a></h1>
+  <div class="method"><a name="clientsGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /clients</code></pre></div>
+    <div class="method-summary">Client&#39;s list (<span class="nickname">clientsGet</span>)</div>
+    <div class="method-notes">The clients endpoint returns the client&#39;s list and their providers.
+</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Client">Client</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "phone" : "aeiou",
+  "name" : "aeiou",
+  "client_providers" : [ {
+    "id" : ""
+  } ],
+  "id" : "",
+  "email" : "aeiou"
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    An array of clients
+        
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="CreatingAClientUpdatingAClient">CreatingAClientUpdatingAClient</a></h1>
+  <div class="method"><a name="clientsidPost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /clients/:id</code></pre></div>
+    <div class="method-summary">Updates an existing client or creates a new one (<span class="nickname">clientsidPost</span>)</div>
+    <div class="method-notes">This endpoint lets you create or update clients and their providers
+</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Object
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>"{}"</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A json object with the results of the operations
+        <a href="#Object">Object</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="CreatingAProviderUpdatingAProvider">CreatingAProviderUpdatingAProvider</a></h1>
+  <div class="method"><a name="providersidPost"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="post"><code class="huge"><span class="http-method">post</span> /providers/:id</code></pre></div>
+    <div class="method-summary">Updates an existing provider or creates a new one (<span class="nickname">providersidPost</span>)</div>
+    <div class="method-notes">This endpoint lets you create or update providers
+</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Object
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>"{}"</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A json object with the results of the operations
+        <a href="#Object">Object</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="DeletingClients">DeletingClients</a></h1>
+  <div class="method"><a name="clientsidDelete"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /clients/:id</code></pre></div>
+    <div class="method-summary">Delete an existing client (<span class="nickname">clientsidDelete</span>)</div>
+    <div class="method-notes">This enddpoint lets you delete a specific client.
+</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Object
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>"{}"</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A json object with the results of the operations
+        <a href="#Object">Object</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="DeletingProviders">DeletingProviders</a></h1>
+  <div class="method"><a name="providersidDelete"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="delete"><code class="huge"><span class="http-method">delete</span> /providers/:id</code></pre></div>
+    <div class="method-summary">Delete an existing provider (<span class="nickname">providersidDelete</span>)</div>
+    <div class="method-notes">This enddpoint lets you delete a specific provider.
+</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      
+      Object
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>"{}"</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    A json object with the results of the operations
+        <a href="#Object">Object</a>
+  </div> <!-- method -->
+  <hr/>
+  <h1><a name="ProvidersList">ProvidersList</a></h1>
+  <div class="method"><a name="providersGet"/>
+    <div class="method-path">
+    <a class="up" href="#__Methods">Up</a>
+    <pre class="get"><code class="huge"><span class="http-method">get</span> /providers</code></pre></div>
+    <div class="method-summary">Provider&#39;s list (<span class="nickname">providersGet</span>)</div>
+    <div class="method-notes">The providers endpoint returns the provider&#39;s list.
+</div>
+
+
+
+
+
+
+
+    <h3 class="field-label">Return type</h3>
+    <div class="return-type">
+      array[<a href="#Provider">Provider</a>]
+      
+    </div>
+
+    <!--Todo: process Response Object and its headers, schema, examples -->
+
+    <h3 class="field-label">Example data</h3>
+    <div class="example-data-content-type">Content-Type: application/json</div>
+    <pre class="example"><code>[ {
+  "name" : "aeiou",
+  "id" : ""
+} ]</code></pre>
+
+    <h3 class="field-label">Produces</h3>
+    This API call produces the following media types according to the <span class="header">Accept</span> request header;
+    the media type will be conveyed by the <span class="heaader">Content-Type</span> response header.
+    <ul>
+      <li><code>application/json</code></li>
+    </ul>
+
+    <h3 class="field-label">Responses</h3>
+    <h4 class="field-label">200</h4>
+    An array of providers
+        
+  </div> <!-- method -->
+  <hr/>
+
+  <div class="up"><a href="#__Models">Up</a></div>
+  <h2><a name="__Models">Models</a></h2>
+  [ Jump to <a href="#__Methods">Methods</a> ]
+
+  <h3>Table of Contents</h3>
+  <ol>
+    <li><a href="#Client"><code>Client</code></a></li>
+    <li><a href="#ClientProvider"><code>ClientProvider</code></a></li>
+    <li><a href="#ClientSaveResponse"><code>ClientSaveResponse</code></a></li>
+    <li><a href="#DeleteResponse"><code>DeleteResponse</code></a></li>
+    <li><a href="#Provider"><code>Provider</code></a></li>
+    <li><a href="#ProviderSaveResponse"><code>ProviderSaveResponse</code></a></li>
+  </ol>
+
+  <div class="model">
+    <h3 class="field-label"><a name="Client">Client - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Unique identifier representing a specific client. It&#39;s and autonumeric field. </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s name. </div>
+<div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s phone. </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s email. </div>
+<div class="param">client_providers (optional)</div><div class="param-desc"><span class="param-type"><a href="#ClientProvider">array[ClientProvider]</a></span> An array containing the providers&#39;s id&#39;s associated with each client </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="ClientProvider">ClientProvider - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Provider&#39;s unique identifier representing a specific provider. It&#39;s and autonumeric field. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="ClientSaveResponse">ClientSaveResponse - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">success (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Result of the operation </div>
+<div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if was a new record </div>
+<div class="param">model (optional)</div><div class="param-desc"><span class="param-type"><a href="#Provider">Provider</a></span>  </div>
+<div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s phone. </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s email. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="DeleteResponse">DeleteResponse - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">success (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if client was deleted succesfuly </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="Provider">Provider - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Unique identifier representing a specific provider. </div>
+<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The provider&#39;s name. </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="ProviderSaveResponse">ProviderSaveResponse - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">success (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Result of the operation </div>
+<div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if was a new record </div>
+<div class="param">model (optional)</div><div class="param-desc"><span class="param-type"><a href="#Provider">Provider</a></span>  </div>
+    </div>  <!-- field-items -->
+  </div>
+  </body>
+</html>
