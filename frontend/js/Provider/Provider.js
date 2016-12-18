@@ -48,11 +48,13 @@ angular.module('FullstackApp.Provider',[])
 	});
 	
 	$scope.addProvider = function() {
-		ProviderSvc.save( $scope.newProvider ).then(function( res ){
-			if ( res.data.created ) {
-				$scope.providers.push( res.data.model );
-			}
-		});
+		if ( $scope.newProvider.name.length ) {
+			ProviderSvc.save( $scope.newProvider ).then(function( res ){
+				if ( res.data.created ) {
+					$scope.providers.push( res.data.model );
+				}
+			});
+		}
 	}
 
 	$scope.editProvider = function( provider ) {
@@ -60,7 +62,7 @@ angular.module('FullstackApp.Provider',[])
 		if ( angular.isString( name ) && name.length ) {
 			provider.name = name;
 			ProviderSvc.save( provider ).then(function( res ) {
-				$scope.$emit('onProvidersChange', provider);
+				$scope.$emit('providersChange', $scope.providers);
 			});
 		}	
 	}
@@ -71,15 +73,14 @@ angular.module('FullstackApp.Provider',[])
 				if ( res.data.deleted ) {
 					var i = $scope.providers.indexOf( provider );
 					$scope.providers.splice(i, 1);
-					$scope.$emit('onProvidersChange', provider);
+					$scope.$emit('providersChange', $scope.providers);
 				}
 			});
 		}
 	}
 
-	if (!$scope.providers.length) {
-		ProviderSvc.getAll().then(function( providers ) {
-			$scope.providers = providers;		
-		});
-	}
+	ProviderSvc.getAll().then(function( providers ) {
+		$scope.providers = providers;		
+		$scope.$emit('providersChange', providers);
+	});
 });

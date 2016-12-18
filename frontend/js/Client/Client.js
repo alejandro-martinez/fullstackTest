@@ -54,21 +54,6 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		return array.map(function(elem) { return elem.id; }).indexOf( id );
 	}
 
-	var findClient = function( id, onlyIndex ) {
-		var i = findIndex( vm.clients, id );
-		return (onlyIndex) ? i : vm.clients[i];	
-	}
-
-	// Open a modal window to create / update a client
-	vm.editClient = function( _client ) {
-		if ( _client ) {
-			var client = findClient( _client.id );
-		}
-		vm.client = (client) ? client : ClientFct.new();
-
-		vm.toggleModal();
-	}
-
 	vm.deleteClient = function() {
 		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
 			ClientSvc.delete( vm.client ).then(function( res ) {
@@ -94,6 +79,21 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 			return list.join(",");
 		}
 	}
+	
+	var findClient = function( id, onlyIndex ) {
+		var i = findIndex( vm.clients, id );
+		return (onlyIndex) ? i : vm.clients[i];	
+	}
+
+	// Open a modal window to create / update a client
+	vm.editClient = function( _client ) {
+		if ( _client ) {
+			var client = findClient( _client.id );
+		}
+		vm.client = (client) ? client : ClientFct.new();
+
+		vm.toggleModal();
+	}
 
 	// Creates or update a client
 	vm.saveClient = function( form ) {
@@ -103,10 +103,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 
 				if ( res.data.success ) {
 					vm.client = res.data.client;
-
-					if ( res.data.created ) {	
-						vm.clients.push( vm.client );
-					}
+					if ( res.data.created ) vm.clients.push( vm.client );
 					vm.toggleModal();
 				}
 				else {
@@ -144,11 +141,12 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		return vm.client && vm.findProvider( id ); 
 	}
 
-	ProviderSvc.getAll().then(function( providers ) {
+	$scope.$on('providersChange', function( event, providers ) {
 		$scope.providers = providers;		
-	});
-	// Returns list of clients, and adds providers info to each one
-	ClientSvc.getAll().then( function( res ) {
-		vm.clients = res.data;
+
+		// Returns list of clients, and adds providers info to each one
+		ClientSvc.getAll().then( function( res ) {
+			vm.clients = res.data;
+		});
 	});
 })

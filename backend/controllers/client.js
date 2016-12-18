@@ -31,13 +31,14 @@ module.exports = function( app ) {
 					update: { phone: req.body.phone,  email: req.body.email }
 			};
 
+		// Reload the client model and send to the user
 		var sendResponse = function() {
 			var asociatedModel = {
 				include: [{ model: models.client_provider, attributes: [['provider_id', 'id']]}]
 			};
-			// Reload the client model and send to the user
+			
 			models.client.findOne(asociatedModel).then(function( client ) {
-				Object.assign(response, { created: created, client: client, success:true});							
+				Object.assign(response, { client: client, success:true});							
 				res.json(response);
 			});
 		}
@@ -56,6 +57,7 @@ module.exports = function( app ) {
 
 
 		var onClient = function( client, created ) {
+			response.created = created;
 			if (!created) {
 				client.updateAttributes( params.update ).then(function() {
 					// Deletes or creates client_providers	
