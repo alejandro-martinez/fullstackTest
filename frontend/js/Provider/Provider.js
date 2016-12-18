@@ -37,7 +37,14 @@ angular.module('FullstackApp.Provider',[])
 		return promise;
 	}
 	this.delete = function( provider ) { return $http.delete('/providers/' + provider.id) }
-	this.save = function( provider ) { return $http.post('/providers/:id', provider) }
+	this.save = function( provider ) {
+		var promise = new Promise(
+			function( resolve, reject ) {
+				$http.post('/providers/:id', provider).then(resolve, reject); 
+			}
+		);
+		return promise;
+	}
 	this.getAll = this.getAll.bind( this );
 })
 .controller('ProviderCtrl',function( $scope, ProviderSvc, ProviderFct ) {
@@ -50,10 +57,11 @@ angular.module('FullstackApp.Provider',[])
 	$scope.addProvider = function() {
 		if ( $scope.newProvider.name.length ) {
 			ProviderSvc.save( $scope.newProvider ).then(function( res ){
-				if ( res.data.created ) {
-					$scope.providers.push( res.data.model );
-				}
-			});
+				$scope.providers.push( res.data.model );
+				$scope.$emit('providersChange', $scope.providers);
+			}).catch( function( err ) {
+				$scope.showError( err.data );
+			})
 		}
 	}
 
@@ -61,20 +69,20 @@ angular.module('FullstackApp.Provider',[])
 		var name = prompt("Enter the provider's name", provider.name);
 		if ( angular.isString( name ) && name.length ) {
 			provider.name = name;
-			ProviderSvc.save( provider ).then(function( res ) {
+			ProviderSvc.save( provider ).then(function() {
 				$scope.$emit('providersChange', $scope.providers);
+			}).catch(function(err) {
+				$scope.showError( err.data );
 			});
-		}	
+		}
 	}
 
 	$scope.deleteProvider = function( provider ) {
 		if (confirm("Are you sure you want to delete the provider: ".concat(provider.name,"?"))) {
 			ProviderSvc.delete( provider ).then(function( res ) {
-				if ( res.data.deleted ) {
-					var i = $scope.providers.indexOf( provider );
-					$scope.providers.splice(i, 1);
-					$scope.$emit('providersChange', $scope.providers);
-				}
+				var i = $scope.providers.indexOf( provider );
+				$scope.providers.splice(i, 1);
+				$scope.$emit('providersChange', $scope.providers);
 			});
 		}
 	}

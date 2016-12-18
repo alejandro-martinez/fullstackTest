@@ -33,12 +33,13 @@ module.exports = function( app ) {
 
 		// Reload the client model and send to the user
 		var sendResponse = function() {
-			var asociatedModel = {
+			var findParams = {
+				where: params.where,
 				include: [{ model: models.client_provider, attributes: [['provider_id', 'id']]}]
 			};
 			
-			models.client.findOne(asociatedModel).then(function( client ) {
-				Object.assign(response, { client: client });							
+			models.client.findOne( findParams ).then(function( client ) {
+				Object.assign(response, { client: client.get({ plain: true }) });			
 				res.status(200).json(response);
 			});
 		}
@@ -50,7 +51,7 @@ module.exports = function( app ) {
 				action = ( prov.delete ) ? 'destroy' : 'findOrCreate';
 
 				return models.client_provider[action]( params ).catch(function(err) {
-					res.sendStatus(500).json({ err: err.errors[0].message });
+					res.status(500).json({ err: err.errors[0].message });
 				});
 		}
 
@@ -59,12 +60,13 @@ module.exports = function( app ) {
 			response.created = created;
 			if (!created) {
 				client.updateAttributes( params.update ).then(function() {
+					
 					// Deletes or creates client_providers	
 					models.sequelize.transaction(function( t ) { 
 						return models.sequelize.Promise.map( req.body.client_providers, updateClientProviders.bind(this,t,client));
 					}).then( sendResponse );
+
 				}).catch(function(err) {
-					response.err = ;
 					res.status(500).json({err: models.client.getMsgError(err.name)});
 				});
 			}

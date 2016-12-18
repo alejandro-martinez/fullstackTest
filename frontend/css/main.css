@@ -120,7 +120,7 @@ input, button, table td {
 	border:2px solid #E2E2E2;
 	border-radius:4px;
 	position: absolute;
-	top: 180px;
+	top: 225px;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	-webkit-transform: translate(-50%, -50%);

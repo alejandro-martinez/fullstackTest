@@ -9,9 +9,9 @@ module.exports = function( app ) {
 	});
 
 	app.delete('/providers/:id', function(req, res, next) {
-		models.provider.destroy({ where: { id: req.params.id } }).then(function () {
+		models.provider.destroy({ where: { id: req.params.id } }).then(function (a,s) {
 			res.sendStatus(200);
-		});
+		})
 	});
 
 	app.post('/providers/:id', function( req, res, next ) {
@@ -37,11 +37,12 @@ module.exports = function( app ) {
 		}
 
 		updateCreate(function( response ) {
+
 			if (response.hasOwnProperty('model')) {
-				res.sendStatus(500).json({ err: response.err[0].msg } );
+				res.status(200).json( response );
 			}
 			else {
-				res.sendStatus(200).json( response );
+				res.status(500).json({ err: response } );
 			}
 		});
 	});

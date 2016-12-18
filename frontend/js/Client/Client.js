@@ -42,7 +42,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.clients = [];	
 	vm.modalContent = "js/Client/edit_form.html";
 
-	var showError = function( err ) {
+	$scope.showError = function( err ) {
 		alert("Sorry, an error ocurred: ".concat( err ));
 	}
 
@@ -54,45 +54,53 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		return array.map(function(elem) { return elem.id; }).indexOf( id );
 	}
 
-	vm.deleteClient = function() {
-		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
-			ClientSvc.delete( vm.client ).then(function( res ) {
-				if ( res.status == 200 ) {
-					vm.clients.splice( findClient( vm.client.id, true ), 1);
-					vm.toggleModal();
-				}
-				else {
-					showError( res.data.err );
-				}
-			});
-		}	
-	}
-
 	vm.formatClientProviders = function( providers ) {
-		
 		if ( $scope.providers.length && providers.length) {
 			var list = [];
 			providers.forEach(function( p ) {
 				var index = findIndex( $scope.providers, p.id );
-				list.push( $scope.providers[ index ].name );
+				if ($scope.providers[ index ]) {
+					list.push( $scope.providers[ index ].name );
+				}
 			});
+		
 			return list.join(",");
 		}
+		return "";
 	}
 	
+	// Refresh client_providers list on the index page
+	vm.refreshClientProvidersList = function( providers ) {
+		vm.clients.map(function( c) {
+			if ( c.id === vm.client.id ) {
+				c.client_providers = providers;
+			}
+			return c;
+		});
+	}
+
 	var findClient = function( id, onlyIndex ) {
 		var i = findIndex( vm.clients, id );
 		return (onlyIndex) ? i : vm.clients[i];	
 	}
 
 	// Open a modal window to create / update a client
-	vm.editClient = function( _client ) {
-		if ( _client ) {
-			var client = findClient( _client.id );
-		}
+	vm.editClient = function( id ) {
+		var client = findClient( id );
 		vm.client = (client) ? client : ClientFct.new();
 
 		vm.toggleModal();
+	}
+
+	vm.deleteClient = function() {
+		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
+			ClientSvc.delete( vm.client ).then(function( res ) {
+				vm.clients.splice( findClient( vm.client.id, true ), 1);
+				vm.toggleModal();
+			}).catch(function(err) {
+				$scope.showError( res.statusText );
+			});
+		}	
 	}
 
 	// Creates or update a client
@@ -100,15 +108,15 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		if ( form.$valid ) {
 			ClientSvc.save( vm.client ).then(function( res ) {
 				if ( res.status === 200 ) {
-					vm.client = res.data.client;
+					vm.refreshClientProvidersList( res.data.client.client_providers );
 					if ( res.data.created ) vm.clients.push( vm.client );
 					vm.toggleModal();
 				}
 				else {
-					showError( res.data.err );
+					$scope.showError( res.data.err );
 				}
-			}).catch(function( res ) {
-				showError( res.data.err );
+			}).catch(function(err) {
+				$scope.showError( res.statusText );
 			});
 		}
 	}
