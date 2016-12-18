@@ -32,9 +32,9 @@ module.exports = function( app ) {
 			};
 
 		// Reload the client model and send to the user
-		var sendResponse = function() {
+		var sendResponse = function( client ) {
 			var findParams = {
-				where: params.where,
+				where: { id: client.get('id') },
 				include: [{ model: models.client_provider, attributes: [['provider_id', 'id']]}]
 			};
 			
@@ -64,14 +64,14 @@ module.exports = function( app ) {
 					// Deletes or creates client_providers	
 					models.sequelize.transaction(function( t ) { 
 						return models.sequelize.Promise.map( req.body.client_providers, updateClientProviders.bind(this,t,client));
-					}).then( sendResponse );
+					}).then( sendResponse.bind( client ) );
 
 				}).catch(function(err) {
 					res.status(500).json({err: models.client.getMsgError(err.name)});
 				});
 			}
 			else {
-				sendResponse();
+				sendResponse( client);
 			}
 		}
 		
