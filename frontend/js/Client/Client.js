@@ -98,7 +98,6 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	// Creates or update a client
 	vm.saveClient = function( form ) {
 		if ( form.$valid ) {
-
 			ClientSvc.save( vm.client ).then(function( res ) {
 
 				if ( res.data.success ) {
