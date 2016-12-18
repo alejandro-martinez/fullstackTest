@@ -5,7 +5,7 @@ var path      = require("path");
 var Sequelize = require("sequelize");
 var config    = require("../config.js")();
 var options = {
-	logging: console.log,
+	logging: false,
 	define: {
 		timestamps: false
 	}

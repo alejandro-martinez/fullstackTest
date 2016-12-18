@@ -2,6 +2,7 @@
 	concat = require('gulp-concat'),
 	ngAnnotate = require('gulp-ng-annotate'),
 	minify = require('gulp-minify');
+	cleanCSS = require('gulp-clean-css');
 	fs = require('fs');
 
 //Paths
@@ -9,9 +10,10 @@ var main = "../frontend/";
 var bower = main + "bower_components/";
 
 gulp.task('buildCSS', function(cb) {
-	return gulp.src([main  + 'css/main.css'])
+	return gulp.src(main  + 'css/main.css')
+		.pipe(cleanCSS())
 		.pipe(concat('./bundle.css'))
-		.pipe(gulp.dest('../frontend/css/'))
+		.pipe(gulp.dest('../frontend/css/'));		
 });
 
 gulp.task('buildJSAppCode',['buildCSS'], function() {

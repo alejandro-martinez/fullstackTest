@@ -66,16 +66,6 @@ h2 {
 .icon {
 	width: .8em;
 }
-
-.absoluteCenter {
-	position: absolute;
-	width: 50%;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-}
 table {
 	border: 1px solid  #C9C9C9;
 	border-collapse: collapse;
@@ -84,7 +74,7 @@ table {
 }
 table th {
 	border: 2px solid #C9C9C9;
-	padding: 8px 1px 8px 17px;
+	padding: 8px 17px 8px 17px;
 	font-weight:bold;
 	text-align:left;
 	font-size:.9em;
@@ -107,21 +97,20 @@ table td:last-child {
 	text-align:center;
 }
 
-table td:last-child button {
+table td:last-child a {
 	background:none;
 	border:none;
 	font-size:1em;
 	color:#43829B;
 	text-decoration:underline;
 }
-table td:last-child button:active {
-	border:none;
-} 
 input, button, table td {
 	text-shadow:.1px .1px .1px #787878;
 }
 /* INIT - MODAL WINDOW */
-
+.ng-modal-dialog {
+	
+}
 .ng-modal-dialog {
 	max-width:560px;
 	background:#F0F5F9;
@@ -130,6 +119,12 @@ input, button, table td {
 	background: #fff;
 	border:2px solid #E2E2E2;
 	border-radius:4px;
+	position: absolute;
+	top: 180px;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-webkit-transform: translate(-50%, -50%);
+	-moz-transform: translate(-50%, -50%);
 }
 .ng-modal-dialog-content form input,
 .ng-modal-dialog-content ul {
@@ -148,7 +143,8 @@ input, button, table td {
 }
 /* END - MODAL WINDOW */
 
-button {
+.button, button {
+	display: block;
 	font-size: .72em;
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
@@ -167,7 +163,7 @@ button {
 	-webkit-transition-duration: 0.4s; /* Safari */
 	transition-duration: 0.4s;
 }
-button:after {
+.button:after, button:after {
     content: "";
     background: #90EE90;
     display: block;
@@ -177,7 +173,7 @@ button:after {
     opacity: 0;
     transition: all 0.8s
 }
-button:active:after {
+.button:active:after, button:active:after {
     padding: 0;
     margin: 0;
     opacity: 1;
@@ -197,7 +193,7 @@ button.red {
 }
 .container {
 	background: #F0F5F9;
-	margin:20px 10px;
+	margin:10px 10px;
 }
 .container h2 {
 	display:inline-block;
