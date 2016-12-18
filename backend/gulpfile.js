@@ -1,6 +1,7 @@
  var gulp = require('gulp'),
 	concat = require('gulp-concat'),
 	ngAnnotate = require('gulp-ng-annotate'),
+	minify = require('gulp-minify');
 	cleanCSS = require('gulp-clean-css');
 	fs = require('fs');
 
@@ -15,10 +16,14 @@ gulp.task('buildCSS', function(cb) {
 		.pipe(gulp.dest('../frontend/css/'));		
 });
 
-gulp.task('buildJSAppCode',['buildCSS'], function() {
-
-	fs.exists(main + 'js/bundle.js', function(file) {
-		if (file) fs.writeFileSync(main + "js/bundle.js", '');
+gulp.task('concatJS',['buildCSS'], function() {
+	
+	var tempFiles = ['temp','bundle','bundle-min'];
+	tempFiles.forEach(function(file) {
+		var filePath = main + "js/" + file + ".js";
+		fs.exists(filePath, function(exists) {
+			fs.writeFileSync(filePath, '');
+		});
 	});
 
 	return gulp.src([main + 'js/**/*.js',main + 'js/main.js'])
@@ -27,18 +32,20 @@ gulp.task('buildJSAppCode',['buildCSS'], function() {
 				.pipe(gulp.dest("../frontend/js/"));
 });
 
-gulp.task('buildJSBundle',['buildJSAppCode'], function() {
+gulp.task('buildJSBundle',['concatJS'], function() {
 	return gulp.src([
 		bower + 'angular/angular.js',
 		bower + 'angular-route/angular-route.js',
 		main + 'js/temp.js'
 	])
 	.pipe(concat('./bundle.js'))	
+	.pipe(minify())
 	.pipe(gulp.dest("../frontend/js/"))
 	.on('end', function() {
+		fs.writeFileSync(main + "js/bundle.js", '');
 		fs.writeFileSync(main + "js/temp.js", '');
 		fs.writeFileSync(main + "css/temp.css", '');
 	})
 });
 
-gulp.task('default', ['buildCSS', 'buildJSAppCode','buildJSBundle']);
+gulp.task('default', ['buildCSS', 'concatJS', 'buildJSBundle']);
