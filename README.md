@@ -27,31 +27,34 @@ Certain configuration in both the application and the database must be done befo
 
 Make sure you have a ** running MySQL server **. Then:
 
-* Go to the project's root folder 
+* **Go to the project's root folder** 
 
- * Open a console and run the following command: ( replace yourDBusername with your DB user )
+ * **Open a console and run ** the following command: ( replace {yourDBusername} with your DB user )
  
-   * mysql -u yourDBusername -p < db.sql  (it will ask for a password)
+   * **mysql -u {yourDBusername} -p < db.sql**  (it will ask for a password)
 	   
-** Step 2: Configure the access to the database from the application
+** **Step 2: Configure the access to the database from the application**
 
-* Go to the backend folder and edit the file 'env.json'.
- * Change the 'user' and 'password' keys under the development object 
-  (use the same values that you've used at the previous step) 
-  * Save and close the file.
+* **Go to the backend folder and edit the file 'env.json'.**
+
+ * **Change the 'user' and 'password' keys under the development object
+  (use the same values that you've used at the previous step)** 
+  
+   **Save and close the file.**
 
 ** Step 3: Installing project dependencies **
 
-* Go to the frontend folder and run "bower install". 
- * Go to the backend folder and run "npm install". 
+* **Go to the frontend folder and run "bower install"** 
+  **Go to the backend folder and run "npm install"**
 
 ** Step 4: Build and Run the project **
  
- * Go to the backend folder and run "gulp; npm start"
-  * Open your browser on "http://localhost:8000"
+* **Go to the backend folder and run "gulp; npm start"**
+
+  * **Open your browser at "http://localhost:8000"**
 
 ## Doing changes
-If you've done some changes in the source, you may want * to rebuild the project by * running "gulp" from the backend folder.
+If you've done some changes in the source, you may want **to rebuild the project** by **running "gulp" from the backend folder.**
 
 ## Built With
 
