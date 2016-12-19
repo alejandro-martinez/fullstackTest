@@ -117,6 +117,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.saveClient = function( form ) {
 		if ( form.$valid ) {
 			ClientSvc.save( vm.client ).then(function( res ) {
+				vm.client.id = res.data.client.id;
 				vm.toggleModal();
 				vm.refreshClientProvidersList( res.data.client.client_providers );
 				if ( res.data.created ) vm.clients.push( vm.client );
