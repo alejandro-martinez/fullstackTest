@@ -248,9 +248,9 @@ font-style: italic;
   "phone" : "aeiou",
   "name" : "aeiou",
   "client_providers" : [ {
-    "id" : ""
+    "id" : "",
+    "delete" : true
   } ],
-  "id" : "",
   "email" : "aeiou"
 } ]</code></pre>
 
@@ -263,7 +263,7 @@ font-style: italic;
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    An array of clients
+    An array of clients objects
         
   </div> <!-- method -->
   <hr/>
@@ -278,6 +278,12 @@ font-style: italic;
 
 
 
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">client (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Client object </div>
+    </div>  <!-- field-items -->
 
 
 
@@ -306,7 +312,7 @@ font-style: italic;
     A json object with the results of the operations
         <a href="#Object">Object</a>
     <h4 class="field-label">500</h4>
-    A json object containing the operation error&#39;s
+    That email is already registered
         <a href="#Object">Object</a>
   </div> <!-- method -->
   <hr/>
@@ -321,6 +327,12 @@ font-style: italic;
 
 
 
+    <h3 class="field-label">Request body</h3>
+    <div class="field-items">
+      <div class="param">provider (required)</div>
+
+      <div class="param-desc"><span class="param-type">Body Parameter</span> &mdash; Provider Object </div>
+    </div>  <!-- field-items -->
 
 
 
@@ -349,7 +361,7 @@ font-style: italic;
     A json object with the results of the operations
         <a href="#Object">Object</a>
     <h4 class="field-label">500</h4>
-    A json object containing the operation error&#39;s
+    Internal server error
         <a href="#Object">Object</a>
   </div> <!-- method -->
   <hr/>
@@ -359,26 +371,24 @@ font-style: italic;
     <a class="up" href="#__Methods">Up</a>
     <pre class="delete"><code class="huge"><span class="http-method">delete</span> /clients/:id</code></pre></div>
     <div class="method-summary">Delete an existing client (<span class="nickname">clientsidDelete</span>)</div>
-    <div class="method-notes">This enddpoint lets you delete a specific client.
+    <div class="method-notes">This endpoint lets you delete a specific client.
 </div>
 
 
 
 
 
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">params (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; ID of client to be deleted </div>
+    </div>  <!-- field-items -->
 
 
-    <h3 class="field-label">Return type</h3>
-    <div class="return-type">
-      
-      Object
-    </div>
 
     <!--Todo: process Response Object and its headers, schema, examples -->
 
-    <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>"{}"</code></pre>
 
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
@@ -389,8 +399,8 @@ font-style: italic;
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    A json object with the results of the operations
-        <a href="#Object">Object</a>
+    The client has been deleted or it wasn&#39;t exists
+        <a href="#"></a>
   </div> <!-- method -->
   <hr/>
   <h1><a name="DeletingProviders">DeletingProviders</a></h1>
@@ -399,26 +409,24 @@ font-style: italic;
     <a class="up" href="#__Methods">Up</a>
     <pre class="delete"><code class="huge"><span class="http-method">delete</span> /providers/:id</code></pre></div>
     <div class="method-summary">Delete an existing provider (<span class="nickname">providersidDelete</span>)</div>
-    <div class="method-notes">This enddpoint lets you delete a specific provider.
+    <div class="method-notes">This endpoint lets you delete a specific provider.
 </div>
 
 
 
 
 
+    <h3 class="field-label">Query parameters</h3>
+    <div class="field-items">
+      <div class="param">params (required)</div>
+
+      <div class="param-desc"><span class="param-type">Query Parameter</span> &mdash; Provider&#39;s ID </div>
+    </div>  <!-- field-items -->
 
 
-    <h3 class="field-label">Return type</h3>
-    <div class="return-type">
-      
-      Object
-    </div>
 
     <!--Todo: process Response Object and its headers, schema, examples -->
 
-    <h3 class="field-label">Example data</h3>
-    <div class="example-data-content-type">Content-Type: application/json</div>
-    <pre class="example"><code>"{}"</code></pre>
 
     <h3 class="field-label">Produces</h3>
     This API call produces the following media types according to the <span class="header">Accept</span> request header;
@@ -429,8 +437,8 @@ font-style: italic;
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    A json object with the results of the operations
-        <a href="#Object">Object</a>
+    The provider has been deleted or it wasn&#39;t exists.
+        <a href="#"></a>
   </div> <!-- method -->
   <hr/>
   <h1><a name="ProvidersList">ProvidersList</a></h1>
@@ -450,7 +458,7 @@ font-style: italic;
 
     <h3 class="field-label">Return type</h3>
     <div class="return-type">
-      array[<a href="#Provider">Provider</a>]
+      array[<a href="#ProviderParamResponse">ProviderParamResponse</a>]
       
     </div>
 
@@ -459,8 +467,11 @@ font-style: italic;
     <h3 class="field-label">Example data</h3>
     <div class="example-data-content-type">Content-Type: application/json</div>
     <pre class="example"><code>[ {
-  "name" : "aeiou",
-  "id" : ""
+  "created" : true,
+  "model" : {
+    "name" : "aeiou",
+    "id" : ""
+  }
 } ]</code></pre>
 
     <h3 class="field-label">Produces</h3>
@@ -472,7 +483,7 @@ font-style: italic;
 
     <h3 class="field-label">Responses</h3>
     <h4 class="field-label">200</h4>
-    An array of providers
+    An array of providers objects
         
   </div> <!-- method -->
   <hr/>
@@ -484,47 +495,37 @@ font-style: italic;
   <h3>Table of Contents</h3>
   <ol>
     <li><a href="#Client"><code>Client</code></a></li>
+    <li><a href="#ClientParamResponse"><code>ClientParamResponse</code></a></li>
     <li><a href="#ClientProvider"><code>ClientProvider</code></a></li>
-    <li><a href="#ClientSaveResponse"><code>ClientSaveResponse</code></a></li>
-    <li><a href="#DeleteResponse"><code>DeleteResponse</code></a></li>
     <li><a href="#ErrorResponse"><code>ErrorResponse</code></a></li>
     <li><a href="#Provider"><code>Provider</code></a></li>
-    <li><a href="#ProviderSaveResponse"><code>ProviderSaveResponse</code></a></li>
+    <li><a href="#ProviderParamResponse"><code>ProviderParamResponse</code></a></li>
   </ol>
 
   <div class="model">
     <h3 class="field-label"><a name="Client">Client - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'></div>
     <div class="field-items">
-      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Unique identifier representing a specific client. It&#39;s and autonumeric field. </div>
-<div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s name. </div>
-<div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s phone. </div>
-<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s email. </div>
+      <div class="param">name (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Client&#39;s name. </div>
+<div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Client&#39;s phone. </div>
+<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> Client&#39;s email., </div>
 <div class="param">client_providers (optional)</div><div class="param-desc"><span class="param-type"><a href="#ClientProvider">array[ClientProvider]</a></span> An array containing the providers&#39;s id&#39;s associated with each client </div>
+    </div>  <!-- field-items -->
+  </div>
+  <div class="model">
+    <h3 class="field-label"><a name="ClientParamResponse">ClientParamResponse - </a> <a class="up" href="#__Models">Up</a></h3>
+    <div class='model-description'></div>
+    <div class="field-items">
+      <div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if a new record was created </div>
+<div class="param">model (optional)</div><div class="param-desc"><span class="param-type"><a href="#Client">Client</a></span>  </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
     <h3 class="field-label"><a name="ClientProvider">ClientProvider - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'></div>
     <div class="field-items">
-      <div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Provider&#39;s unique identifier representing a specific provider. It&#39;s and autonumeric field. </div>
-    </div>  <!-- field-items -->
-  </div>
-  <div class="model">
-    <h3 class="field-label"><a name="ClientSaveResponse">ClientSaveResponse - </a> <a class="up" href="#__Models">Up</a></h3>
-    <div class='model-description'></div>
-    <div class="field-items">
-      <div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if a new record was created </div>
-<div class="param">model (optional)</div><div class="param-desc"><span class="param-type"><a href="#Provider">Provider</a></span>  </div>
-<div class="param">phone (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s phone. </div>
-<div class="param">email (optional)</div><div class="param-desc"><span class="param-type"><a href="#string">String</a></span> The client&#39;s email. </div>
-    </div>  <!-- field-items -->
-  </div>
-  <div class="model">
-    <h3 class="field-label"><a name="DeleteResponse">DeleteResponse - </a> <a class="up" href="#__Models">Up</a></h3>
-    <div class='model-description'></div>
-    <div class="field-items">
-      <div class="param">success (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> true if client was deleted succesfuly </div>
+      <div class="param">delete (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> Usefull to identify if the provider needs to be removed from client provider&#39;s list. </div>
+<div class="param">id (optional)</div><div class="param-desc"><span class="param-type"><a href="#integer">Integer</a></span> Provider&#39;s unique identifier representing a specific provider. It&#39;s and autonumeric field. </div>
     </div>  <!-- field-items -->
   </div>
   <div class="model">
@@ -543,7 +544,7 @@ font-style: italic;
     </div>  <!-- field-items -->
   </div>
   <div class="model">
-    <h3 class="field-label"><a name="ProviderSaveResponse">ProviderSaveResponse - </a> <a class="up" href="#__Models">Up</a></h3>
+    <h3 class="field-label"><a name="ProviderParamResponse">ProviderParamResponse - </a> <a class="up" href="#__Models">Up</a></h3>
     <div class='model-description'></div>
     <div class="field-items">
       <div class="param">created (optional)</div><div class="param-desc"><span class="param-type"><a href="#boolean">Boolean</a></span> True if was a new record </div>

@@ -11,9 +11,9 @@ module.exports = function( app ) {
 
 	// Deletes a provider
 	app.delete('/providers/:id', function(req, res, next) {
-		models.provider.destroy({ where: { id: req.params.id } }).then(function (a,s) {
+		models.provider.destroy({ where: { id: req.params.id } }).then(function (deletedRows) {
 			res.sendStatus(200);
-		})
+		});
 	});
 
 	// Creates or update a provider

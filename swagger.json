@@ -18,12 +18,15 @@
             "get": {
                 "summary": "Client's list",
                 "description": "The clients endpoint returns the client's list and their providers.\n",
+                "produces": [
+                    "application/json"
+                ],
                 "tags": [
                     "Clients list"
                 ],
                 "responses": {
                     "200": {
-                        "description": "An array of clients",
+                        "description": "An array of clients objects",
                         "schema": {
                             "type": "array",
                             "items": {
@@ -38,6 +41,20 @@
             "post": {
                 "summary": "Updates an existing client or creates a new one",
                 "description": "This endpoint lets you create or update clients and their providers\n",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "client",
+                        "in": "body",
+                        "description": "Client object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ClientParamResponse"
+                        }
+                    }
+                ],
                 "tags": [
                     "Creating a client, updating a client"
                 ],
@@ -47,12 +64,12 @@
                         "schema": {
                             "type": "object",
                             "items": {
-                                "$ref": "#/definitions/ClientSaveResponse"
+                                "$ref": "#/definitions/ClientParamResponse"
                             }
                         }
                     },
                     "500": {
-                        "description": "A json object containing the operation error's",
+                        "description": "That email is already registered",
                         "schema": {
                             "type": "object",
                             "items": {
@@ -64,25 +81,31 @@
             },
             "delete": {
                 "summary": "Delete an existing client",
-                "description": "This enddpoint lets you delete a specific client.\n",
+                "description": "This endpoint lets you delete a specific client.\n",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "query",
+                        "description": "ID of client to be deleted",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
                 "tags": [
                     "Deleting clients"
                 ],
                 "responses": {
                     "200": {
-                        "description": "A json object with the results of the operations",
-                        "schema": {
-                            "type": "object",
-                            "items": {
-                                "$ref": "#/definitions/DeleteResponse"
-                            }
-                        }
+                        "description": "The client has been deleted or it wasn't exists"
                     }
                 }
             }
         },
         "/providers": {
             "get": {
+                "produces": [
+                    "application/json"
+                ],
                 "summary": "Provider's list",
                 "description": "The providers endpoint returns the provider's list.\n",
                 "tags": [
@@ -90,11 +113,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "An array of providers",
+                        "description": "An array of providers objects",
                         "schema": {
                             "type": "array",
                             "items": {
-                                "$ref": "#/definitions/Provider"
+                                "$ref": "#/definitions/ProviderParamResponse"
                             }
                         }
                     }
@@ -108,18 +131,29 @@
                 "tags": [
                     "Creating a provider, updating a provider"
                 ],
+                "parameters": [
+                    {
+                        "name": "provider",
+                        "in": "body",
+                        "description": "Provider Object",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Provider"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "A json object with the results of the operations",
                         "schema": {
                             "type": "object",
                             "items": {
-                                "$ref": "#/definitions/ProviderSaveResponse"
+                                "$ref": "#/definitions/ProviderParamResponse"
                             }
                         }
                     },
                     "500": {
-                        "description": "A json object containing the operation error's",
+                        "description": "Internal server error",
                         "schema": {
                             "type": "object",
                             "items": {
@@ -131,35 +165,53 @@
             },
             "delete": {
                 "summary": "Delete an existing provider",
-                "description": "This enddpoint lets you delete a specific provider.\n",
+                "description": "This endpoint lets you delete a specific provider.\n",
+                "parameters": [
+                    {
+                        "name": "params",
+                        "in": "query",
+                        "description": "Provider's ID",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
                 "tags": [
                     "Deleting providers"
                 ],
                 "responses": {
                     "200": {
-                        "description": "A json object with the results of the operations",
-                        "schema": {
-                            "type": "object",
-                            "items": {
-                                "$ref": "#/definitions/DeleteResponse"
-                            }
-                        }
+                        "description": "The provider has been deleted or it wasn't exists."
                     }
                 }
             }
         }
     },
     "definitions": {
-        "DeleteResponse": {
+        "Client": {
             "type": "object",
             "properties": {
-                "success": {
-                    "type": "boolean",
-                    "description": "true if client was deleted succesfuly"
+                "name": {
+                    "type": "string",
+                    "description": "Client's name."
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "Client's phone."
+                },
+                "email": {
+                    "type": "string",
+                    "description": "Client's email.,"
+                },
+                "client_providers": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ClientProvider"
+                    },
+                    "description": "An array containing the providers's id's associated with each client"
                 }
             }
         },
-        "ClientSaveResponse": {
+        "ClientParamResponse": {
             "type": "object",
             "properties": {
                 "created": {
@@ -167,19 +219,11 @@
                     "description": "True if a new record was created"
                 },
                 "model": {
-                    "$ref": "#/definitions/Provider"
-                },
-                "phone": {
-                    "type": "string",
-                    "description": "The client's phone."
-                },
-                "email": {
-                    "type": "string",
-                    "description": "The client's email."
+                    "$ref": "#/definitions/Client"
                 }
             }
         },
-        "ProviderSaveResponse": {
+        "ProviderParamResponse": {
             "type": "object",
             "properties": {
                 "created": {
@@ -213,37 +257,13 @@
                 }
             }
         },
-        "Client": {
-            "type": "object",
-            "properties": {
-                "id": {
-                    "type": "integer",
-                    "description": "Unique identifier representing a specific client. It's and autonumeric field."
-                },
-                "name": {
-                    "type": "string",
-                    "description": "The client's name."
-                },
-                "phone": {
-                    "type": "string",
-                    "description": "The client's phone."
-                },
-                "email": {
-                    "type": "string",
-                    "description": "The client's email."
-                },
-                "client_providers": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/ClientProvider"
-                    },
-                    "description": "An array containing the providers's id's associated with each client"
-                }
-            }
-        },
         "ClientProvider": {
             "type": "object",
             "properties": {
+                "delete": {
+                    "type": "boolean",
+                    "description": "Usefull to identify if the provider needs to be removed from client provider's list."
+                },
                 "id": {
                     "type": "integer",
                     "description": "Provider's unique identifier representing a specific provider. It's and autonumeric field."
