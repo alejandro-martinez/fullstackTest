@@ -156,7 +156,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	// Refresh the client list if the provider's list changes
 	$scope.$on('providersChange', function( event, providers ) {
 		$scope.providers = providers;		
-
+		vm.refreshClientProvidersList( providers );
 		// Returns list of clients, and adds providers info to each one
 		ClientSvc.getAll().then( function( res ) {
 			vm.clients = res.data;

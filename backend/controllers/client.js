@@ -53,6 +53,7 @@ module.exports = function( app ) {
 			action = ( prov.delete ) ? 'destroy' : 'findOrCreate';
 
 			return models.client_provider[ action ]( params ).catch(function( err ) {
+				console.log(err)
 				res.status( 500 ).json({ err: err.errors[0].message });
 			});
 		}
