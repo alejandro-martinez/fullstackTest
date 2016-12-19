@@ -28,7 +28,9 @@ module.exports = function( app ) {
 
 					if ( !created ) {
 						provider.name = req.body.name;
-						provider.save().then( callback );
+						provider.save().then(function() {
+							callback(response);
+						});
 					}
 					else {
 						callback( response );
@@ -37,7 +39,6 @@ module.exports = function( app ) {
 		}
 
 		updateCreate(function( response ) {
-
 			if ( response.model ) {
 				res.status(200).json( response );
 			}

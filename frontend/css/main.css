@@ -274,7 +274,7 @@ form .inputContainer div input {
 	width: 100%;
 }
 form .inputContainer button {
-	/*! width: 29%; */
+	float: right;
 }
 
 form .inputContainer div ul{
@@ -369,8 +369,8 @@ form .inputContainer.clientProviders input {
 }
 
 form .inputContainer.clientProviders div:last-child {
-	width: 18%;
-	margin-left: 8px;
+	width: 17%;
+	margin-left: 10px;
 }
 
 /* CHECKBOX STYLING*/

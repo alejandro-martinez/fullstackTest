@@ -28,7 +28,7 @@ Step 1: Configuring a local MySQL instance
 
 	b) Open a console and run the following command: (it will ask for your user password)
 
-		"mysql -u yourDBusername -p < db.sql"
+	   mysql -u yourDBusername -p < db.sql
 
 Step 2: Configure the access to the database from the application
 
@@ -53,7 +53,7 @@ Step 4: Run the project
 ## Doing changes
 
 	If you've done some changes in the source, you may want to rebuild 
-	the project by running "gulp" at the backend folder.
+	the project by running "gulp" from the backend folder.
 
 ## Built With
 
