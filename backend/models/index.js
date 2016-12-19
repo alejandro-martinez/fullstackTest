@@ -11,7 +11,7 @@ var options = {
 	}
 }
 var sequelize = new Sequelize(config.db.name, config.db.user, config.db.password, options);
-var db        = {};
+var db = {};
 
 fs.readdirSync(__dirname).filter(function(file) {
 	return (file.indexOf(".") !== 0) && (file !== "index.js");

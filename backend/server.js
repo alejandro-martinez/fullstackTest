@@ -2,7 +2,6 @@
 
 var express = require('express');
 var app = express();
-var routes = require('./controllers/index');
 var bodyParser = require('body-parser');
 
 // Express config
@@ -16,6 +15,5 @@ app.listen( 8000, function() {
 });
 
 // REST ROUTES
-require('./controllers/index')( app );
 require('./controllers/client')( app );
 require('./controllers/provider')( app );
