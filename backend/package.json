@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "FullStack test",
   "main": "server.js",
-  "scripts": {
-    "postinstall": "gulp"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/alejandro-martinez/fullstackTest"
