@@ -49,7 +49,7 @@ Make sure you have a **running MySQL server**. Then:
  
 * Go to the **backend folder** and run **"gulp; npm start"**
 
- * **Open your browser at "http://localhost:8000"**
+ * **Open your browser and enter the url "http://localhost:8000"**
 
 ## Doing changes
 If you've done some changes in the source, you may want **to rebuild the project** by **running "gulp" from the backend folder.**
