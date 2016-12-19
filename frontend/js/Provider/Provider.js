@@ -20,6 +20,7 @@ angular.module('FullstackApp.Provider',[])
 .service('ProviderSvc',function( $http ) {
 	this.providers = [];
 	var That = this;
+
 	this.getAll = function() { 
 		var promise = new Promise(
 			function( resolve, reject) {
@@ -54,6 +55,7 @@ angular.module('FullstackApp.Provider',[])
 		newProvider: ProviderFct.new()
 	});
 	
+	// Adds a new provider
 	$scope.addProvider = function() {
 		if ( $scope.newProvider.name.length ) {
 			ProviderSvc.save( $scope.newProvider ).then(function( res ){
@@ -65,6 +67,7 @@ angular.module('FullstackApp.Provider',[])
 		}
 	}
 
+	// Updates a provider's name
 	$scope.editProvider = function( provider ) {
 		var name = prompt("Enter the provider's name", provider.name);
 		if ( angular.isString( name ) && name.length ) {
@@ -76,7 +79,7 @@ angular.module('FullstackApp.Provider',[])
 			});
 		}
 	}
-
+	// Deletes a provider
 	$scope.deleteProvider = function( provider ) {
 		if (confirm("Are you sure you want to delete the provider: ".concat(provider.name,"?"))) {
 			ProviderSvc.delete( provider ).then(function( res ) {
@@ -87,6 +90,7 @@ angular.module('FullstackApp.Provider',[])
 		}
 	}
 
+	// Loads the provider's list
 	ProviderSvc.getAll().then(function( providers ) {
 		$scope.providers = providers;		
 		$scope.$emit('providersChange', providers);

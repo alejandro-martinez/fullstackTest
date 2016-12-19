@@ -53,14 +53,17 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		alert("Sorry, an error ocurred: ".concat( err ));
 	}
 
+	// Shows/Hides the modal window
 	vm.toggleModal = function() { 
 		vm.modalShown = !vm.modalShown;
 	}
 
+	// Returns the position of a element in a array filtered by the id key
 	var findIndex = function( array, id ) {
 		return array.map(function(elem) { return elem.id; }).indexOf( id );
 	}
 
+	// Convert client_providers list to a string separated by ,
 	vm.formatClientProviders = function( providers ) {
 		if ( $scope.providers.length && providers.length) {
 			var list = [];
@@ -86,6 +89,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		});
 	}
 
+	// Find a client (or it's index position) in the client's list
 	var findClient = function( id, onlyIndex ) {
 		var i = findIndex( vm.clients, id );
 		return (onlyIndex) ? i : vm.clients[i];	
@@ -99,6 +103,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		vm.toggleModal();
 	}
 
+	// Deletes a client
 	vm.deleteClient = function() {
 		if (confirm("Are you sure you want to delete the client: ".concat(vm.client.name,"?"))) {
 			ClientSvc.delete( vm.client ).then(function( res ) {
@@ -122,7 +127,7 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		}
 	}
 
-	// Asociates a provider to a client
+	// Associates a provider to a client
 	vm.toggleProvider = function( provider ) {	
 		if ( vm.isClientProvider( provider.id )) {
 			var index = findIndex( vm.client.client_providers, provider.id );
@@ -143,11 +148,12 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 		}
 	}
 
-	// Returns true if provider is as asociated with the client
+	// Returns true if provider is asociated with the client
 	vm.isClientProvider = function(id) {
 		return vm.client && vm.findProvider( id ); 
 	}
 
+	// Refresh the client list if the provider's list changes
 	$scope.$on('providersChange', function( event, providers ) {
 		$scope.providers = providers;		
 
