@@ -34,7 +34,14 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	
 	this.getAll = function() { return $http.get('/clients')	}
 	this.delete = function( client ) { return $http.delete('/clients/' + client.id) }
-	this.save = function( client ) { return $http.post('/clients/:id', client) }
+	this.save = function( client ) { 
+		var promise = new Promise(
+			function( resolve, reject ) {
+				$http.post('/clients/:id', client).then(resolve).catch(reject); 
+			}
+		);
+		return promise; 
+	}
 })
 .controller('ClientCtrl', function( $scope, ClientSvc, ClientFct, ProviderSvc) {
 	
@@ -97,8 +104,6 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 			ClientSvc.delete( vm.client ).then(function( res ) {
 				vm.clients.splice( findClient( vm.client.id, true ), 1);
 				vm.toggleModal();
-			}).catch(function(err) {
-				$scope.showError( res.statusText );
 			});
 		}	
 	}
@@ -107,16 +112,12 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 	vm.saveClient = function( form ) {
 		if ( form.$valid ) {
 			ClientSvc.save( vm.client ).then(function( res ) {
-				if ( res.status === 200 ) {
-					vm.refreshClientProvidersList( res.data.client.client_providers );
-					if ( res.data.created ) vm.clients.push( vm.client );
-					vm.toggleModal();
-				}
-				else {
-					$scope.showError( res.data.err );
-				}
-			}).catch(function(err) {
-				$scope.showError( res.statusText );
+				vm.toggleModal();
+				vm.refreshClientProvidersList( res.data.client.client_providers );
+				if ( res.data.created ) vm.clients.push( vm.client );
+				$scope.$digest();
+			}).catch(function( err ) {
+				$scope.showError( err.data.err );
 			});
 		}
 	}

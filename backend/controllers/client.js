@@ -26,7 +26,7 @@ module.exports = function( app ) {
 
 	// Creates or update a client and their associated providers
 	app.post('/clients/:id', function(req, res, next) {
-		var response = { success: false },
+		var response = {},
 			params = { 
 					where: { id: req.body.id }, 
 					defaults: req.body, 
@@ -35,13 +35,13 @@ module.exports = function( app ) {
 
 		var sendResponse = function( client ) {
 			var findParams = {
-				where: { id: client.get('id') },
+				where: { id: client.id },
 				include: [{ model: models.client_provider, attributes: [['provider_id', 'id']]}]
 			};
 			
 			// Reloads the client instance and send to the user
 			models.client.findOne( findParams ).then(function( client ) {
-				Object.assign(response, { client: client.get({ plain: true }) });			
+				Object.assign(response, { client: client });			
 				res.status( 200 ).json(response);
 			});
 		}
@@ -57,7 +57,6 @@ module.exports = function( app ) {
 			});
 		}
 
-
 		var onClient = function( client, created ) {
 			response.created = created;
 			if ( !created ) {
@@ -67,14 +66,16 @@ module.exports = function( app ) {
 					// Iterates the client_providers list to update them
 					models.sequelize.transaction(function( t ) { 
 						return models.sequelize.Promise.map( req.body.client_providers, updateClientProviders.bind(this,t,client));
-					}).then( sendResponse.bind( client ) );
+					}).then(function() {
+						sendResponse( client.get({ plain: true }) ) 
+					});
 
 				}).catch(function(err) {
 					res.status( 500 ).json({ err: models.client.getMsgError(err.name) });
 				});
 			}
 			else {
-				sendResponse( client);
+				sendResponse( client.get({ plain: true }));
 			}
 		}
 		

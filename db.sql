@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Dec 18, 2016 at 07:20 PM
+-- Generation Time: Dec 18, 2016 at 09:37 PM
 -- Server version: 5.7.13-0ubuntu0.16.04.2
 -- PHP Version: 7.0.8-0ubuntu0.16.04.2
 
@@ -20,7 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `fullstackTest`
 --
-CREATE DATABASE IF NOT EXISTS `fullstackTest` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+DROP DATABASE IF EXISTS `fullstackTest`;
+CREATE DATABASE `fullstackTest` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `fullstackTest`;
 
 -- --------------------------------------------------------
@@ -56,6 +57,15 @@ CREATE TABLE `client_provider` (
   `provider_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `client_provider`
+--
+
+INSERT INTO `client_provider` (`client_id`, `provider_id`) VALUES
+(1, 1),
+(1, 2),
+(1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -85,7 +95,8 @@ INSERT INTO `provider` (`id`, `name`) VALUES
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `client_provider`
@@ -108,7 +119,7 @@ ALTER TABLE `provider`
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `provider`
 --

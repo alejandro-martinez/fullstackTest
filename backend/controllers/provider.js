@@ -38,7 +38,7 @@ module.exports = function( app ) {
 
 		updateCreate(function( response ) {
 
-			if (response.hasOwnProperty('model')) {
+			if ( response.model ) {
 				res.status(200).json( response );
 			}
 			else {
