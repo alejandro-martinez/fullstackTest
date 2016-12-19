@@ -9,15 +9,12 @@ These instructions will get you a copy of the project up and running on your loc
 ### Prerequisites
 
 You'll need the following:
-
-1) ** Node.js ** 
-    Installation guide: https://docs.npmjs.com/getting-started/installing-node
-	
-2) ** Bower **
-    Installation guide: https://bower.io/#install-bower
-	
-3) ** MySQL Server ** 
-    Installation guide: https://dev.mysql.com/doc/refman/5.6/en/installing.html
+ 
+ **Node.js** ( Installation guide: https://docs.npmjs.com/getting-started/installing-node )
+ 
+ **Bower** ( Installation guide: https://bower.io/#install-bower )
+ 
+ **MySQL Server** ( Installation guide: https://dev.mysql.com/doc/refman/5.6/en/installing.html )
 
 ### Installation & Configuration
 
@@ -31,7 +28,7 @@ Make sure you have a **running MySQL server**. Then:
 
  * **Open a console and run** the following command: ( replace {yourDBusername} with your DB user )
  
-  **mysql -u {yourDBusername} -p < db.sql**  (it will ask for a password)
+    **mysql -u {yourDBusername} -p < db.sql**  (it will ask for a password)
 	   
 ### Step 2: Configure the access to the database from the application 
 
@@ -44,13 +41,13 @@ Make sure you have a **running MySQL server**. Then:
 
 ### Step 3: Installing project dependencies
 
-* Go to the frontend folder and **run "bower install"** 
+* Go to the **frontend folder** and **run "bower install"** 
 
-* Go to the backend folder and **run "npm install"**
+* Go to the **backend folder** and **run "npm install"**
 
 ### Step 4: Build and Run the project
  
-* Go to the backend folder and run **"gulp; npm start"**
+* Go to the **backend folder** and run **"gulp; npm start"**
 
  * **Open your browser at "http://localhost:8000"**
 
