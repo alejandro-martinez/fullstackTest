@@ -26,9 +26,9 @@ Make sure you have a **running MySQL server**. Then:
 
 * **Go to the project's root folder** 
 
- * **Open a console and run** the following command: ( replace {yourDBusername} with your DB user )
+ * **Open a console and run** the following command: ( replace {yourDBusername} with your MySQL user )
  
-    **mysql -u {yourDBusername} -p < db.sql**  (it will ask for a password)
+    **mysql -u {yourDBusername} -p < db.sql**  (it will ask for your MySQL user password)
 	   
 ### Step 2: Configure the access to the database from the application 
 
@@ -50,6 +50,10 @@ Make sure you have a **running MySQL server**. Then:
 * Go to the **backend folder** and run **"gulp; npm start"**
 
  * **Open your browser and enter the url "http://localhost:8000"**
+
+## Rest API documentation
+
+ * See API_Docs.html on the project's root folder 
 
 ## Doing changes
 If you've done some changes in the source, you may want **to rebuild the project** by **running "gulp" from the backend folder.**
