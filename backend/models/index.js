@@ -22,8 +22,6 @@ fs.readdirSync(__dirname).filter(function(file) {
 });
 
 // Model relations
-//db.client_provider.hasMany(db.client, {as: 'providers1', otherKey:'id'});
-//db.client_provider.belongsToMany(db.client, {through: 'client_provider'});
 db.client.hasMany(db.client_provider, { foreignKey: 'client_id'});
 
 db.sequelize = sequelize;

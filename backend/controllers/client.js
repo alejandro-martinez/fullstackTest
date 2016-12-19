@@ -2,6 +2,7 @@ var models  = require('../models/index');
 
 module.exports = function( app ) {
 	
+	// Return the clients list and their providers associated
 	app.get('/clients', function(req, res, next) {
 		var onFind = function( clients ) {
 			res.json( clients );
@@ -16,13 +17,14 @@ module.exports = function( app ) {
 		models.client.findAll( params ).then( onFind );		
 	});
 
+	// Deletes a client from the database
 	app.delete('/clients/:id', function(req, res, next) {
 		models.client.destroy({ where: { id: req.params.id }}).then(function ( deleted) {
 			res.sendStatus(200);
 		});
 	});
 
-	// Creates or update a client and their providers
+	// Creates or update a client and their associated providers
 	app.post('/clients/:id', function(req, res, next) {
 		var response = { success: false },
 			params = { 
@@ -31,13 +33,13 @@ module.exports = function( app ) {
 					update: { phone: req.body.phone,  email: req.body.email }
 			};
 
-		// Reload the client model and send to the user
 		var sendResponse = function( client ) {
 			var findParams = {
 				where: { id: client.get('id') },
 				include: [{ model: models.client_provider, attributes: [['provider_id', 'id']]}]
 			};
 			
+			// Reloads the client instance and send to the user
 			models.client.findOne( findParams ).then(function( client ) {
 				Object.assign(response, { client: client.get({ plain: true }) });			
 				res.status(200).json(response);
@@ -58,16 +60,17 @@ module.exports = function( app ) {
 
 		var onClient = function( client, created ) {
 			response.created = created;
-			if (!created) {
+			if ( !created ) {
+				// Update an existing client
 				client.updateAttributes( params.update ).then(function() {
 					
-					// Deletes or creates client_providers	
+					// Iterates the client_providers list to update them
 					models.sequelize.transaction(function( t ) { 
 						return models.sequelize.Promise.map( req.body.client_providers, updateClientProviders.bind(this,t,client));
 					}).then( sendResponse.bind( client ) );
 
 				}).catch(function(err) {
-					res.status(500).json({err: models.client.getMsgError(err.name)});
+					res.status(500).json({ err: models.client.getMsgError(err.name) });
 				});
 			}
 			else {

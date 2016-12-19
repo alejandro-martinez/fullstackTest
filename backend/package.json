@@ -3,8 +3,11 @@
   "version": "1.0.0",
   "description": "FullStack test",
   "main": "server.js",
+  "scripts": {
+    "postinstall": "gulp"
+  },
   "repository": {
-    "url":"https://github.com/alejandro-martinez/fullstackTest"
+    "url": "https://github.com/alejandro-martinez/fullstackTest"
   },
   "author": "Alejandro Martinez",
   "email": "alejandromartinezap@gmail.com",
@@ -15,6 +18,7 @@
     "gulp": "^3.9.1",
     "gulp-clean-css": "^2.3.2",
     "gulp-concat": "^2.6.1",
+    "gulp-minify": "0.0.14",
     "gulp-ng-annotate": "^2.0.0",
     "mysql": "^2.12.0",
     "mysql2": "^1.1.2",
