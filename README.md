@@ -20,18 +20,37 @@ You'll need the following:
 
 Certain configuration in both the application and the database must be done before this project is usable.
 
-Step 1: 
+Step 1: Configuring a local MySQL instance 
 
-IMPORT SQL SCRIPT TO CREATE THE DATABASE
-CONFIGURE ENV.JSON APP
+1) Make sure you have a running MySQL server. Then:
 
-THESE 2 CAN BE JOINED IN ONE STEP USING PACKAGE.JSON SCRIPTS
-NPM INSTALL ON BACKEND
-BOWER INSTALL ON FRONTEND
+	Go to the project's root folder ( the folder where you've clone the project into).
 
-## Deployment
+	Open a console and run the following command: (it will ask for your user password)
 
-NPM RUN-SCRIPT BUILD
+	"mysql -u yourDBusername -p < fullstackTest.sql"
+
+Step 2: Configure the access to the database from the application
+
+a)	Go to the backend folder and edit the file env.json.
+
+	You'll have to edit the user and password keys under the development object (use the same values that you've used at the previous step), save and close the file.
+
+Step 3: Installing app dependencies
+
+	a) Go to the frontend folder and run "bower install".
+
+	b) Go to the backend folder and run "npm install".
+
+Step 4: Run the project
+
+	a) On the backend folder, run "npm start"
+
+	b) Open your browser on "http://localhost:8000"
+
+## Doing changes
+
+	If you've done some changes in the source, you may want to rebuild the project by running "gulp" at the backend folder.
 
 ## Built With
 
