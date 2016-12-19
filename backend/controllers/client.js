@@ -20,7 +20,7 @@ module.exports = function( app ) {
 	// Deletes a client from the database
 	app.delete('/clients/:id', function(req, res, next) {
 		models.client.destroy({ where: { id: req.params.id }}).then(function ( deleted) {
-			res.sendStatus(200);
+			res.sendStatus( 200 );
 		});
 	});
 
@@ -42,19 +42,19 @@ module.exports = function( app ) {
 			// Reloads the client instance and send to the user
 			models.client.findOne( findParams ).then(function( client ) {
 				Object.assign(response, { client: client.get({ plain: true }) });			
-				res.status(200).json(response);
+				res.status( 200 ).json(response);
 			});
 		}
 
 		// Deletes or creates client_providers
 		var updateClientProviders = function( t, client, prov) {
-				var provider = { client_id: client.id, provider_id: prov.id },
-				params = { where: provider, defaults: provider, transaction: t };
-				action = ( prov.delete ) ? 'destroy' : 'findOrCreate';
+			var provider = { client_id: client.id, provider_id: prov.id },
+			params = { where: provider, defaults: provider, transaction: t };
+			action = ( prov.delete ) ? 'destroy' : 'findOrCreate';
 
-				return models.client_provider[action]( params ).catch(function(err) {
-					res.status(500).json({ err: err.errors[0].message });
-				});
+			return models.client_provider[ action ]( params ).catch(function( err ) {
+				res.status( 500 ).json({ err: err.errors[0].message });
+			});
 		}
 
 
@@ -70,7 +70,7 @@ module.exports = function( app ) {
 					}).then( sendResponse.bind( client ) );
 
 				}).catch(function(err) {
-					res.status(500).json({ err: models.client.getMsgError(err.name) });
+					res.status( 500 ).json({ err: models.client.getMsgError(err.name) });
 				});
 			}
 			else {
@@ -80,7 +80,7 @@ module.exports = function( app ) {
 		
 		// Updates o create a client
 		models.client.findOrCreate( params ).spread( onClient ).catch(function(err) {
-			res.status(500).json( { err: models.client.getMsgError(err.name) });
+			res.status( 500 ).json( { err: models.client.getMsgError(err.name) });
 		});
 	})
 }
