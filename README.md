@@ -57,7 +57,7 @@ Make sure you have a **running MySQL server**. Then:
 
 ## Rest API documentation
 
- * See API_Docs.html on the project's root folder 
+ * See API_REST_DOCS.html on the project's root folder 
 
 ## Doing changes
 If you've done some changes in the source, you may want **to rebuild the project** by **running "gulp" from the backend folder.**
