@@ -1,10 +1,10 @@
 # FullStackTest
 
-A single page app that consists in a CRUD system that relays on a REST api built on NodeJS, Express and MySQL.
+A single page app with a REST Api architecture built on Node and Angular.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for deployment purposes.
+These instructions will get you a copy of the project up and running on your local machine.
 
 ### Prerequisites
 
@@ -12,7 +12,8 @@ You'll need the following:
 
 1) Node.js: 
 	Installation guide: https://docs.npmjs.com/getting-started/installing-node
-
+2) Bower 
+	https://bower.io/#install-bower
 2) MySQL Server: 
 	Installation guide: https://dev.mysql.com/doc/refman/5.6/en/installing.html
 
