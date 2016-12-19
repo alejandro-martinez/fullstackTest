@@ -10,47 +10,47 @@ These instructions will get you a copy of the project up and running on your loc
 
 You'll need the following:
 
-1) ** Node.js: ** 
-	Installation guide: https://docs.npmjs.com/getting-started/installing-node
+1) ** Node.js ** 
+    Installation guide: https://docs.npmjs.com/getting-started/installing-node
 	
-2) ** Bower ** 
-	https://bower.io/#install-bower
+2) ** Bower **
+    Installation guide: https://bower.io/#install-bower
 	
-2) ** MySQL Server: ** 
-	Installation guide: https://dev.mysql.com/doc/refman/5.6/en/installing.html
+3) ** MySQL Server ** 
+    Installation guide: https://dev.mysql.com/doc/refman/5.6/en/installing.html
 
 ### Installation & Configuration
 
 Certain configuration in both the application and the database must be done before this project is usable.
 
-** Step 1: Configuring a local MySQL instance **
+### Step 1: Configuring a local MySQL instance
 
-Make sure you have a ** running MySQL server **. Then:
+Make sure you have a **running MySQL server**. Then:
 
-* **Go to the project's root folder** 
+* ** Go to the project's root folder ** 
 
- * **Open a console and run ** the following command: ( replace {yourDBusername} with your DB user )
+ * **Open a console and run** the following command: ( replace {yourDBusername} with your DB user )
  
-   * **mysql -u {yourDBusername} -p < db.sql**  (it will ask for a password)
+  **mysql -u {yourDBusername} -p < db.sql**  (it will ask for a password)
 	   
-** Step 2: Configure the access to the database from the application **
+### Step 2: Configure the access to the database from the application 
 
-* **Go to the backend folder and edit the file 'env.json'.**
+* Go to the backend folder and **edit the file 'env.json'.**
 
- * **Change the 'user' and 'password' keys under the development object
-  (use the same values that you've used at the previous step)** 
+ * **Change the 'user' and 'password' keys under the development object**
+  (use the same values that you've used at the previous step) 
   
   * **Save and close the file.**
 
-** Step 3: Installing project dependencies **
+### Step 3: Installing project dependencies
 
-* **Go to the frontend folder and run "bower install"** 
+* Go to the frontend folder and **run "bower install"** 
 
-* **Go to the backend folder and run "npm install"**
+* Go to the backend folder and **run "npm install"**
 
-** Step 4: Build and Run the project **
+### Step 4: Build and Run the project
  
-* **Go to the backend folder and run "gulp; npm start"**
+* Go to the backend folder and run **"gulp; npm start"**
 
  * **Open your browser at "http://localhost:8000"**
 
