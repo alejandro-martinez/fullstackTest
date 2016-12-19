@@ -10,51 +10,48 @@ These instructions will get you a copy of the project up and running on your loc
 
 You'll need the following:
 
-1) Node.js: 
+1) ** Node.js: ** 
 	Installation guide: https://docs.npmjs.com/getting-started/installing-node
-2) Bower 
+	
+2) ** Bower ** 
 	https://bower.io/#install-bower
-2) MySQL Server: 
+	
+2) ** MySQL Server: ** 
 	Installation guide: https://dev.mysql.com/doc/refman/5.6/en/installing.html
 
 ### Installation & Configuration
 
 Certain configuration in both the application and the database must be done before this project is usable.
 
-Step 1: Configuring a local MySQL instance 
+** Step 1: Configuring a local MySQL instance **
 
-1) Make sure you have a running MySQL server. Then:
+Make sure you have a ** running MySQL server **. Then:
 
-	a) Go to the project's root folder ( the folder where you've clone the project into).
+* Go to the project's root folder 
 
-	b) Open a console and run the following command: (it will ask for your user password)
+ * Open a console and run the following command: ( replace yourDBusername with your DB user )
+ 
+   * mysql -u yourDBusername -p < db.sql  (it will ask for a password)
+	   
+** Step 2: Configure the access to the database from the application
 
-	   mysql -u yourDBusername -p < db.sql
+* Go to the backend folder and edit the file 'env.json'.
+ * Change the 'user' and 'password' keys under the development object 
+  (use the same values that you've used at the previous step) 
+  * Save and close the file.
 
-Step 2: Configure the access to the database from the application
+** Step 3: Installing project dependencies **
 
-	a)	Go to the backend folder and edit the file env.json.
+* Go to the frontend folder and run "bower install". 
+ * Go to the backend folder and run "npm install". 
 
-	b) Change the 'user' and 'password' keys under the development object 
-		(use the same values that you've used at the previous step), 
-	c) Save and close the file.
-
-Step 3: Installing app dependencies
-
-	a) Go to the frontend folder and run "bower install".
-
-	b) Go to the backend folder and run "npm install".
-
-Step 4: Run the project
-
-	a) Go to the backend folder and run "npm start"
-
-	b) Open your browser on "http://localhost:8000"
+** Step 4: Build and Run the project **
+ 
+ * Go to the backend folder and run "gulp; npm start"
+  * Open your browser on "http://localhost:8000"
 
 ## Doing changes
-
-	If you've done some changes in the source, you may want to rebuild 
-	the project by running "gulp" from the backend folder.
+If you've done some changes in the source, you may want * to rebuild the project by * running "gulp" from the backend folder.
 
 ## Built With
 
@@ -68,7 +65,7 @@ GIT (https://git-scm.com) was used for versioning
 
 ## Authors
 
-* ** Alejandro Martinez**
+* ** Alejandro Martinez **
 
 ## License
 
