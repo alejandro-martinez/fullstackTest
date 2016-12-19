@@ -62,6 +62,7 @@ h1 {
 h2 {
 	font-size:1.14em;
 	color:#43829B;
+	font-weight:bold;
 }
 .icon {
 	width: .8em;
@@ -112,7 +113,7 @@ input, button, table td {
 	
 }
 .ng-modal-dialog {
-	max-width:560px;
+	max-width:700px;
 	background:#F0F5F9;
 	z-index:3;
 	width: 80%;
@@ -135,7 +136,6 @@ input, button, table td {
 }
 .ng-modal-dialog h2 {
 	padding:15px 20px;
-	font-weight:bold;
 	border-bottom:1px solid #e0e0e0;
 }
 .ng-modal-dialog-content form input.ng-not-empty.ng-invalid {
@@ -358,7 +358,7 @@ form .inputContainer ul li label {
 
 form .inputContainer div {
 	display:inline-block;
-	width: 40%;
+	width: 45%;
 }
 form .inputContainer div input,
 form .inputContainer div ul {
@@ -369,17 +369,13 @@ form .inputContainer.clientProviders input {
 }
 
 form .inputContainer.clientProviders div:last-child {
-	width: 25%;
-	margin-left: 10px;
-}
-form .inputContainer div button {
-	/*! width: 100%; */
+	width: 18%;
+	margin-left: 8px;
 }
 
 /* CHECKBOX STYLING*/
 form .inputContainer div.checkboxContainer {
 	display:inline-block;
-	/* width: 100%; */
 }
 form .inputContainer div.checkboxContainer .tag {
 	margin:0;
