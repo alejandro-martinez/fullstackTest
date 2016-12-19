@@ -47,9 +47,13 @@ Make sure you have a **running MySQL server**. Then:
 
 ### Step 4: Build and Run the project
  
-* Go to the **backend folder** and run **"gulp; npm start"**
+* Go to the **backend folder** and run the following comands:
 
- * **Open your browser and enter the url "http://localhost:8000"**
+ * **"gulp"**
+ 
+ 	* **"npm start"**
+
+ 		* **Open your browser and enter the url "http://localhost:8000"**
 
 ## Rest API documentation
 
