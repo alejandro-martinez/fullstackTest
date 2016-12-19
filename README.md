@@ -56,7 +56,7 @@ Step 4: Run the project
 
 * [Angular v1.6.0] (https://angularjs.org/) - The web framework used
 * [NodeJS] (https://nodejs.org) - for the backend
-* [Express.JS] (http://expressjs.com/) - The web server used to create the REST Api
+* [ExpressJS] (http://expressjs.com/) - The web server used to create the REST Api
 
 ## Versioning
 
