@@ -24,7 +24,7 @@ Certain configuration in both the application and the database must be done befo
 
 Make sure you have a **running MySQL server**. Then:
 
-* ** Go to the project's root folder ** 
+* **Go to the project's root folder** 
 
  * **Open a console and run** the following command: ( replace {yourDBusername} with your DB user )
  
