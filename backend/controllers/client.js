@@ -60,24 +60,19 @@ module.exports = function( app ) {
 
 		var onClient = function( client, created ) {
 			response.created = created;
-			if ( !created ) {
-				// Update an existing client
-				client.updateAttributes( params.update ).then(function() {
-					
-					// Iterates the client_providers list to update them
-					models.sequelize.transaction(function( t ) { 
-						return models.sequelize.Promise.map( req.body.client_providers, updateClientProviders.bind(this,t,client));
-					}).then(function() {
-						sendResponse( client.get({ plain: true }) ) 
-					});
-
-				}).catch(function(err) {
-					res.status( 500 ).json({ err: models.client.getMsgError(err.name) });
+			
+			client.updateAttributes( params.update ).then(function() {
+				
+				// Iterates the client_providers list to update them
+				models.sequelize.transaction(function( t ) { 
+					return models.sequelize.Promise.map( req.body.client_providers, updateClientProviders.bind(this,t,client));
+				}).then(function() {
+					sendResponse( client.get({ plain: true }) ) 
 				});
-			}
-			else {
-				sendResponse( client.get({ plain: true }));
-			}
+
+			}).catch(function(err) {
+				res.status( 500 ).json({ err: models.client.getMsgError(err.name) });
+			});
 		}
 		
 		// Updates o create a client

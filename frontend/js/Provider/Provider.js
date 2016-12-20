@@ -55,16 +55,22 @@ angular.module('FullstackApp.Provider',[])
 		newProvider: ProviderFct.new()
 	});
 	
+	$scope.saveProvider = function( provider ) {
+		ProviderSvc.save( provider ).then(function( res ){
+			console.log(provider)
+			if (!provider.id) {
+				$scope.providers.push( res.data.model );
+			}
+			$scope.$emit('providersChange', $scope.providers);
+		}).catch( function( err ) {
+			$scope.showError( err.data );
+		});
+
+	}
+
 	// Adds a new provider
 	$scope.addProvider = function() {
-		if ( $scope.newProvider.name.length ) {
-			ProviderSvc.save( $scope.newProvider ).then(function( res ){
-				$scope.providers.push( res.data.model );
-				$scope.$emit('providersChange', $scope.providers);
-			}).catch( function( err ) {
-				$scope.showError( err.data );
-			})
-		}
+		if ( $scope.newProvider.name.length ) $scope.saveProvider( $scope.newProvider );
 	}
 
 	// Updates a provider's name
@@ -72,13 +78,10 @@ angular.module('FullstackApp.Provider',[])
 		var name = prompt("Enter the provider's name", provider.name);
 		if ( angular.isString( name ) && name.length ) {
 			provider.name = name;
-			ProviderSvc.save( provider ).then(function() {
-				$scope.$emit('providersChange', $scope.providers);
-			}).catch(function(err) {
-				$scope.showError( err.data );
-			});
+			$scope.saveProvider( provider );
 		}
 	}
+
 	// Deletes a provider
 	$scope.deleteProvider = function( provider ) {
 		if (confirm("Are you sure you want to delete the provider: ".concat(provider.name,"?"))) {
