@@ -281,7 +281,7 @@ form .inputContainer button {
 form .inputContainer div ul{
 	box-sizing:border-box;
 	margin-top: 8px;
-	padding: 7px 2px 0 20px;
+	padding: 7px 2px 0 4px;
 	max-height:250px;
 	border:1px solid #b0b0b0;
 	border-radius:4px;
@@ -409,4 +409,10 @@ form .inputContainer.clientProviders ul div {
 	form .inputContainer.clientProviders div:last-child {
 		width: 33%;
 	}
+}
+
+form .inputContainer.clientProviders input[type="checkbox"] {
+	background:red;
+	border:1px solid #000;
+	width: 20px;
 }
