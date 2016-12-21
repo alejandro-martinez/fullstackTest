@@ -115,12 +115,14 @@ angular.module('FullstackApp.Client', ['ngRoute', 'FullstackApp.Provider'])
 
 	// Creates or update a client
 	vm.saveClient = function( form ) {
+		$scope.submitted = true;
 		if ( form.$valid ) {
 			ClientSvc.save( vm.client ).then(function( res ) {
 				vm.client.id = res.data.client.id;
 				vm.toggleModal();
 				vm.refreshClientProvidersList( res.data.client.client_providers );
 				if ( res.data.created ) vm.clients.push( vm.client );
+				$scope.submitted = false;				
 				$scope.$digest();
 			}).catch(function( err ) {
 				$scope.showError( err.data.err );

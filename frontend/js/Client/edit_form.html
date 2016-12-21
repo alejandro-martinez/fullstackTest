@@ -1,14 +1,14 @@
 <h2>{{ ( vm.client.id ) ? 'Edit' : 'New' }} Client</h2>
 
 <div class="editContainer">
-	<form name="clientForm">
+	<form name="clientForm" ng-class="{'submitted': submitted}">
 		<div class="inputContainer">
 			<label>Name:</label>
 			<input type="text" required ng-model="vm.client.name" />
 		</div>
 		<div class="inputContainer">
 			<label>Email:</label>
-			<input type="email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-model="vm.client.email" />
+			<input type="email" required ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z.]{2,5}$/" ng-model="vm.client.email" />
 		</div>
 		<div class="inputContainer">
 			<label>Phone:</label>

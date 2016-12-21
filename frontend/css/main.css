@@ -109,9 +109,7 @@ input, button, table td {
 	text-shadow:.1px .1px .1px #787878;
 }
 /* INIT - MODAL WINDOW */
-.ng-modal-dialog {
-	
-}
+
 .ng-modal-dialog {
 	max-width:700px;
 	background:#F0F5F9;
@@ -138,9 +136,12 @@ input, button, table td {
 	padding:15px 20px;
 	border-bottom:1px solid #e0e0e0;
 }
-.ng-modal-dialog-content form input.ng-not-empty.ng-invalid {
+
+form.submitted input.ng-invalid
+{
 	border-color:#e74241 !important;
 }
+
 /* END - MODAL WINDOW */
 
 .button, button {
