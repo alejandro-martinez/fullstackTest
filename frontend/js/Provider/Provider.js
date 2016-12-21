@@ -57,9 +57,9 @@ angular.module('FullstackApp.Provider',[])
 	
 	$scope.saveProvider = function( provider ) {
 		ProviderSvc.save( provider ).then(function( res ){
-			console.log(provider)
 			if (!provider.id) {
 				$scope.providers.push( res.data.model );
+				$scope.newProvider.name = "";
 			}
 			$scope.$emit('providersChange', $scope.providers);
 		}).catch( function( err ) {
