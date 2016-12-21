@@ -6,6 +6,8 @@ module.exports = function( app ) {
 	app.get('/providers', function(req, res, next) {
 		models.provider.findAll().then(function( providers) {
 			res.json( providers );
+		}).catch(function (err) {
+			res.status(500).json({ err: "Failed to connect to database."});
 		});	
 	});
 

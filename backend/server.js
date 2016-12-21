@@ -4,6 +4,10 @@ var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
 
+process.on('uncaughtException', (err) => {
+  console.log("There was an error: " + err);
+});
+
 // Express config
 app.use( express.static( __dirname + '/../frontend'));
 app.use( bodyParser.json() );

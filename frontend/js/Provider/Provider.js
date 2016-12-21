@@ -31,7 +31,7 @@ angular.module('FullstackApp.Provider',[])
 					$http.get('/providers').then(function(res) {
 						That.providers = res.data;
 						resolve( res.data)
-					});
+					}).catch(reject);
 				}
 			}
 		);
@@ -97,5 +97,7 @@ angular.module('FullstackApp.Provider',[])
 	ProviderSvc.getAll().then(function( providers ) {
 		$scope.providers = providers;		
 		$scope.$emit('providersChange', providers);
-	});
+	}).catch(function( res ) {
+		$scope.showError( res.data.err );
+	})
 });
